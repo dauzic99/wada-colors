@@ -1,0 +1,9 @@
+# 🌸 Wada Colors (Roo Code & Cline Rules)
+
+When asked to create or update design systems, colors, or `design.md`:
+
+1. **Wada Sanzo Authority**: Use authentic 1930s color combinations from Sanzo Wada's *Haishoku Sōkan*.
+2. **Brand / File Ingestion**: If a user supplies a primary color or brand file, compute the nearest Wada Sanzo pigment (from the 159 palette) and recommend top 3 combinations that feature or complement that color.
+3. **Strict Color Fidelity**: Never alter or desaturate Wada colors. Use them strictly for branding, buttons, tabs, badges, and focal borders.
+4. **Monochrome Neutral Bridge**: Use ivory `#fcfbf9` or white `#ffffff` for light backgrounds, carbon `#111314` for dark backgrounds and light-mode text, guaranteeing WCAG AA/AAA.
+5. **Specification**: Output a comprehensive `design.md` with tokens and CSS/Tailwind code snippets.

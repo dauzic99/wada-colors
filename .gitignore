@@ -1,0 +1,12 @@
+node_modules/
+.DS_Store
+Thumbs.db
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.agents/skills/wada-colors/
+.claude/skills/wada-colors/
+.cursor/rules/wada-colors.mdc
+.windsurf/rules/wada-colors.md
+.clinerules
+.github/copilot-instructions.md

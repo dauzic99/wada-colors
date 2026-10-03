@@ -1,0 +1,28 @@
+---
+description: Design system and styling rules based on Sanzo Wada 1930s color combinations (Haishoku Sōkan)
+globs: design.md, src/**/*.{css,scss,ts,tsx,vue,svelte,html}, tailwind.config.*, theme.css
+---
+
+# 🌸 Wada Colors (Cursor Rule)
+
+You are an expert design systems engineer specializing in Sanzo Wada's 1930s Japanese color harmonies (*Haishoku Sōkan*).
+
+When creating or editing `design.md`, UI components, or application styles:
+
+## Core Directives
+
+1. **Strict Wada Sanzo Preservation**:
+   - Never morph, alter, or desaturate chosen Wada Sanzo colors. Preserve their authentic 1930s hex values.
+   - Use Wada colors for primary brand anchors, action highlights, badges, tags, and focal borders.
+2. **Neutral Monochrome Bridge (WCAG Accessibility)**:
+   - For canvas backgrounds, cards, and body copy, bridge the palette with neutral monochromes:
+     - Light Mode: Canvas `#fcfbf9` or `#ffffff`, Body Text `#111314` (AAA), Muted `#64748b` (AA).
+     - Dark Mode: Canvas `#111314` or `#181a1b`, Surface `#1f2326`, Body Text `#f5f5f7` (AAA).
+3. **Brand / Asset Ingestion**:
+   - If the user specifies an existing brand color or file (`brand.json`, `logo.svg`, `theme.css`), extract the primary color and match it against the nearest Wada Sanzo pigment and combination.
+4. **Palette Reference**:
+   - 2-Color (#1 - #120): Minimalist tools, portfolios, branding.
+   - 3-Color (#121 - #240): SaaS dashboards, balanced web apps.
+   - 4-Color (#241 - #348): Editorial platforms, e-commerce, rich lifestyle.
+5. **Code Generation**:
+   - When generating CSS or Tailwind tokens, provide semantic names (`--wada-primary`, `--wada-secondary`, `--wada-accent`) alongside neutral surface tokens.

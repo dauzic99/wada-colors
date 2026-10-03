@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wada Colors (和田三造 配色) — 348 Japanese 1930s Color Harmonies for AI Agents & Modern Apps</title>
+  <meta name="description" content="Explore all 348 authentic color combinations from Sanzo Wada's 1930s classic Haishoku Sōkan. Generate production-ready design.md specifications, CSS variables, and Tailwind tokens for AI agents and modern apps.">
+  <meta property="og:title" content="Wada Colors — Timeless 1930s Japanese Color System">
+  <meta property="og:description" content="348 historical color combinations from Sanzo Wada for Claude Code, Cursor, Antigravity, and modern apps.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand-group">
+        <img src="favicon.svg" alt="Wada Colors Logo" class="brand-icon">
+        <div class="brand-text">
+          <h1>WADA COLORS <span class="brand-kanji">和田三造 配色</span></h1>
+          <p class="brand-sub">348 Timeless 1930s Japanese Color Harmonies for AI Agents & Modern Apps</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="siteThemeToggle" class="btn-icon" title="Toggle site theme">🌙</button>
+        <a href="https://github.com/wada-colors/wada-colors" target="_blank" rel="noopener noreferrer" class="btn-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-wrapper">
+    <!-- Left Column: Controls & Palette Explorer -->
+    <section class="explorer-column">
+      <div class="controls-container">
+        <!-- Search and Brand Matcher -->
+        <div class="search-and-match">
+          <div class="search-input-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search by name, kanji, hex, tag (zen, showa, editorial)...">
+          </div>
+          <div class="brand-matcher-wrap" title="Enter your primary brand color to find matching Wada Sanzo harmonies">
+            <input type="color" id="brandColorPicker" class="brand-color-picker" value="#2a6f97">
+            <input type="text" id="brandHexInput" class="brand-hex-input" value="#2a6f97">
+            <button id="btnMatch" class="btn-match">Match Wada</button>
+          </div>
+        </div>
+
+        <!-- Size Tabs -->
+        <div class="filter-tabs">
+          <button class="filter-tab active" data-size="all">All Palettes (348)</button>
+          <button class="filter-tab" data-size="2">2-Color Duos (120)</button>
+          <button class="filter-tab" data-size="3">3-Color Trios (120)</button>
+          <button class="filter-tab" data-size="4">4-Color Quads (108)</button>
+        </div>
+
+        <!-- Mood Pills -->
+        <div class="mood-pills">
+          <button class="mood-pill" data-mood="zen">Zen & Wabi-Sabi</button>
+          <button class="mood-pill" data-mood="nostalgic">Nostalgic Showa</button>
+          <button class="mood-pill" data-mood="botanical">Botanical</button>
+          <button class="mood-pill" data-mood="melancholic">Melancholic</button>
+          <button class="mood-pill" data-mood="earthy">Earthy</button>
+          <button class="mood-pill" data-mood="oceanic">Oceanic</button>
+          <button class="mood-pill" data-mood="warm">Warm</button>
+          <button class="mood-pill" data-mood="cool">Cool</button>
+          <button class="mood-pill" data-mood="balanced">Balanced</button>
+        </div>
+      </div>
+
+      <div id="resultsCount" class="results-meta">Loading combinations...</div>
+
+      <!-- Palette Grid -->
+      <div id="paletteGrid" class="palette-grid">
+        <!-- Injected via JavaScript -->
+      </div>
+    </section>
+
+    <!-- Right Column: Sticky Live App Mockup & Export Station -->
+    <aside class="preview-column">
+      <!-- Live App Mockup -->
+      <div class="mockup-wrapper">
+        <div class="mockup-topbar">
+          <div class="mockup-dots">
+            <span class="mockup-dot"></span>
+            <span class="mockup-dot"></span>
+            <span class="mockup-dot"></span>
+          </div>
+          <span class="mockup-title">Live App Preview (Recoloring Engine)</span>
+          <button id="mockupModeBtn" class="mockup-mode-btn">🌙 Dark Preview</button>
+        </div>
+
+        <div id="mockupCanvas" class="mockup-canvas mode-light">
+          <!-- Mini Navbar -->
+          <div class="app-navbar">
+            <div class="app-logo">
+              <span id="appLogoBadge" class="app-logo-badge"></span>
+              <span>SanzoApp</span>
+            </div>
+            <button id="appNavBtn" class="app-nav-btn">Get Started</button>
+          </div>
+
+          <!-- Hero Section -->
+          <div class="app-hero">
+            <span id="appHeroPill" class="app-hero-pill">Wada #165 • WARM</span>
+            <h2 id="appHeroTitle" class="app-hero-title">Harmonious Design Powered by History</h2>
+            <p class="app-hero-desc">Experience authentic 1930s Japanese color combinations directly in modern user interfaces.</p>
+            <div class="app-cta-row">
+              <button id="appBtnPrimary" class="app-btn-primary">Primary Action</button>
+              <button id="appBtnSecondary" class="app-btn-secondary">Learn More</button>
+            </div>
+          </div>
+
+          <!-- Feature Cards -->
+          <div class="app-features">
+            <div id="appCard1" class="app-card">
+              <div id="appCardIcon1" class="app-card-icon"></div>
+              <h4>Disciplined Harmony</h4>
+              <p>Curated 1930s pairings with strict palette integrity.</p>
+            </div>
+            <div id="appCard2" class="app-card">
+              <div id="appCardIcon2" class="app-card-icon"></div>
+              <h4>WCAG AA/AAA</h4>
+              <p>Bridged with neutral monochromes for readability.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Export Station -->
+      <div class="export-panel">
+        <div class="export-header">
+          <h3>Token Export Station</h3>
+          <div class="export-tabs">
+            <button class="export-tab active" data-tab="css">CSS (:root)</button>
+            <button class="export-tab" data-tab="tailwind">Tailwind v4</button>
+            <button class="export-tab" data-tab="design-md">design.md</button>
+            <button class="export-tab" data-tab="prompt">Agent Prompt</button>
+          </div>
+        </div>
+
+        <pre id="codeBox" class="code-box"></pre>
+
+        <button id="btnCopyCode" class="btn-copy-code">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          Copy Code Snippet
+        </button>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Toast -->
+  <div id="toast" class="toast">Copied to clipboard!</div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

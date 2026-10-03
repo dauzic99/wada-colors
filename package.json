@@ -1,0 +1,37 @@
+{
+  "name": "wada-colors",
+  "version": "1.0.0",
+  "description": "Universal AI Agent Skill & Sanzo Wada 1930s Color Combinations (Haishoku Sōkan) for modern app design systems",
+  "main": "data/wada_combinations.json",
+  "bin": {
+    "wada-colors": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "node scripts/validate-data.js",
+    "build:refs": "node scripts/generate-markdown-refs.js",
+    "serve": "node -e \"const http=require('http'), fs=require('fs'), path=require('path'); http.createServer((req,res)=>{ let p=path.join(__dirname, 'web', req.url==='/'?'index.html':req.url.startsWith('/data/')?'..'+req.url:req.url); if(req.url.startsWith('/data/')) p=path.join(__dirname, req.url); if(!fs.existsSync(p)){res.writeHead(404);return res.end('Not Found');} const ext=path.extname(p); const ct={'': 'text/plain', '.html':'text/html', '.css':'text/css', '.js':'application/javascript', '.json':'application/json', '.svg':'image/svg+xml'}[ext]||'text/plain'; res.writeHead(200,{'Content-Type':ct}); fs.createReadStream(p).pipe(res); }).listen(3333, ()=>console.log('🌸 Wada Colors Gallery running at http://localhost:3333'));\""
+  },
+  "keywords": [
+    "wada-sanzo",
+    "haishoku-sokan",
+    "color-palette",
+    "japanese-colors",
+    "ai-agent",
+    "skills",
+    "claude-code",
+    "cursor-rules",
+    "antigravity",
+    "windsurf",
+    "roo-code",
+    "design-system",
+    "design-md",
+    "wcag",
+    "tailwind"
+  ],
+  "author": "Wada Colors Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wada-colors/wada-colors.git"
+  }
+}
