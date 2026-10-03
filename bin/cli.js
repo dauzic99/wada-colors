@@ -7,7 +7,9 @@
 
 const fs = require('fs');
 const path = require('path');
+const http = require('http');
 const readline = require('readline');
+const { runApplyTheme } = require('./theming-engine');
 
 const ROOT_DIR = path.resolve(__dirname, '..');
 const COMBOS_FILE = path.join(ROOT_DIR, 'data', 'wada_combinations.json');
@@ -653,6 +655,75 @@ function handleGenerate(args) {
   console.log(`   Based on Sanzo Wada Combination #${combo.id}: ${combo.name_jp} (${combo.name_en})\n`);
 }
 
+async function handleApply(args) {
+  let comboId = null;
+  const comboIdx = args.indexOf('--combo');
+  if (comboIdx !== -1 && args[comboIdx + 1]) {
+    comboId = parseInt(args[comboIdx + 1], 10);
+  }
+
+  const colorIdx = args.indexOf('--color');
+  if (colorIdx !== -1 && args[colorIdx + 1]) {
+    const targetHex = args[colorIdx + 1].trim();
+    if (/^#[0-9a-fA-F]{6}$/i.test(targetHex)) {
+      const targetLab = hexToLab(targetHex);
+      const rankedColors = colors.map(c => ({ ...c, deltaE: deltaE(targetLab, c.lab) })).sort((a, b) => a.deltaE - b.deltaE);
+      const topPigment = rankedColors[0];
+      const match = combos.find(c => c.colors.some(col => col.id === topPigment.id));
+      if (match) comboId = match.id;
+    }
+  }
+
+  if (!comboId || comboId < 1 || comboId > 348) {
+    comboId = 165; // Default signature palette
+  }
+
+  const combo = combos[comboId - 1];
+  const dryRun = args.includes('--dry-run');
+  const autoYes = args.includes('--yes') || args.includes('-y');
+
+  let targetDir = process.cwd();
+  const dirIdx = args.indexOf('--dir');
+  if (dirIdx !== -1 && args[dirIdx + 1]) {
+    targetDir = path.resolve(process.cwd(), args[dirIdx + 1]);
+  }
+
+  await runApplyTheme({ combo, cwd: targetDir, dryRun, autoYes });
+}
+
+function handleServe(args) {
+  let port = 3333;
+  const portIdx = args.indexOf('--port');
+  if (portIdx !== -1 && args[portIdx + 1]) {
+    port = parseInt(args[portIdx + 1], 10) || 3333;
+  }
+
+  const server = http.createServer((req, res) => {
+    let p = path.join(ROOT_DIR, 'web', req.url === '/' ? 'index.html' : req.url.startsWith('/data/') ? '..' + req.url : req.url);
+    if (req.url.startsWith('/data/')) p = path.join(ROOT_DIR, req.url);
+    if (!fs.existsSync(p)) {
+      res.writeHead(404);
+      return res.end('Not Found');
+    }
+    const ext = path.extname(p);
+    const ct = {
+      '.html': 'text/html',
+      '.css': 'text/css',
+      '.js': 'application/javascript',
+      '.json': 'application/json',
+      '.svg': 'image/svg+xml'
+    }[ext] || 'text/plain';
+    res.writeHead(200, { 'Content-Type': ct });
+    fs.createReadStream(p).pipe(res);
+  });
+
+  server.listen(port, () => {
+    console.log(`\n🌸 Wada Colors Gallery & Creative Studio running at:`);
+    console.log(`   👉 http://localhost:${port}\n`);
+    console.log(`Press Ctrl+C to stop.`);
+  });
+}
+
 function printHelp() {
   console.log(`
 🌸 Wada Colors CLI (和田三造 配色)
@@ -667,14 +738,18 @@ Usage:
   npx wada-colors match --file <brand.json | logo.svg | theme.css>
   npx wada-colors prompt --combo <id> [--domain fashion|interior|ui] [--style <name>]
   npx wada-colors generate --combo <id> [--domain ui|fashion|interior] [--out <file>]
+  npx wada-colors apply --combo <id> [--dry-run] [--yes] [--dir <path>]
+  npx wada-colors serve [--port 3333]
   npx wada-colors help
 
 Examples:
+  npx wada-colors apply --combo 165 --dry-run
+  npx wada-colors apply --combo 127 --yes
   npx wada-colors prompt --combo 165 --domain fashion --style minimalist
-  npx wada-colors prompt --combo 165 --domain interior --style japandi
+  npx wada-colors prompt --combo 121 --domain interior --style japandi
   npx wada-colors generate --combo 165 --domain fashion --out lookbook.md
-  npx wada-colors generate --combo 165 --domain interior --out interior-spec.md
-  npx wada-colors generate --combo 165 --name "ZenFlow SaaS"
+  npx wada-colors generate --combo 121 --domain interior --out interior-spec.md
+  npx wada-colors generate --combo 127 --name "ZenFlow SaaS"
 `);
 }
 
@@ -702,6 +777,12 @@ switch (cmd) {
     break;
   case 'prompt':
     handlePrompt(rest);
+    break;
+  case 'apply':
+    handleApply(rest);
+    break;
+  case 'serve':
+    handleServe(rest);
     break;
   case 'help':
   case '--help':

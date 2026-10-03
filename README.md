@@ -117,6 +117,29 @@ npx wada-colors match --file ./src/theme.css
 
 ---
 
+## 🎨 Autonomous Project Theming Engine (`apply`)
+
+Want to recolor an existing project with authentic Wada Sanzo harmonies in seconds? Wada Colors includes an autonomous project theming engine that inspects your stylesheets, injects tokens, and refactors generic color utility classes across your component files:
+
+```bash
+# Preview proposed changes and file diffs first (no files modified)
+npx wada-colors apply --combo 165 --dry-run
+
+# Automatically inject tokens and refactor component classes
+npx wada-colors apply --combo 165 --yes
+
+# Or apply to a specific subdirectory
+npx wada-colors apply --combo 127 --dir ./frontend
+```
+
+### What the Autonomous Theming Engine Does:
+1. **Framework Auto-Detection**: Detects whether you use **Tailwind CSS v4** (`@theme`), **Tailwind CSS v3** (`tailwind.config.*`), or **Vanilla CSS** (`:root`), and cleanly injects tokens into your primary stylesheet.
+2. **Component Refactoring**: Scans `.jsx`, `.tsx`, `.vue`, `.svelte`, `.astro`, `.html`, and `.php` files, identifies generic utility colors (`bg-blue-600`, `text-indigo-500`) or hardcoded hexes, and maps them to semantic Wada tokens (`bg-wada-primary`, `text-wada-secondary`).
+3. **Layout Safety**: Never touches structural layout classes (`flex`, `grid`, `p-4`, `rounded`, `shadow`, etc.) — only color tokens are transformed.
+4. **Documentation Sync**: Automatically updates or creates `design.md` to reflect the applied palette.
+
+---
+
 ## 📝 Automated Document Generation
 
 Generate ready-to-commit specification files in seconds:

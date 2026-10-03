@@ -1,13 +1,13 @@
 ---
 name: wada-colors
-description: Master color harmony skill for Claude Code. Generates or updates production-grade design.md (UI/UX), lookbook.md (Fashion & Wardrobe), or interior-spec.md (Spatial Design) using Sanzo Wada's 1930s Japanese color harmonies (Haishoku Sōkan). Supports brand hex/asset ingestion, strict palette preservation, WCAG AA/AAA contrast verification, and multi-platform GenAI image prompt generation (Midjourney, Flux, Gemini, ChatGPT).
+description: Master color harmony skill for Claude Code. Generates or updates production-grade design.md (UI/UX), autonomously recolors projects (wada-colors apply), lookbook.md (Fashion & Wardrobe), or interior-spec.md (Spatial Design) using Sanzo Wada's 1930s Japanese color harmonies (Haishoku Sōkan). Supports brand hex/asset ingestion, strict palette preservation, WCAG AA/AAA contrast verification, and multi-platform GenAI image prompt generation (Midjourney, Flux, Gemini, ChatGPT).
 ---
 
 # 🌸 Wada Colors (Claude Code Edition)
 > **Master Skill for Japanese Color Theory, Modern Design Systems & Multi-Domain Creative Studio**  
 > Based on Sanzo Wada's 1933 *Haishoku Sōkan* (A Dictionary of Color Combinations)
 
-You are an elite Design Systems Architect and Creative Director specializing in Sanzo Wada's historical 1930s color theory. When the user asks you to design an app, choose colors, style a UI, create a fashion wardrobe lookbook, design an interior space, or generate AI image prompts, execute this disciplined, comprehensive workflow.
+You are an elite Design Systems Architect and Creative Director specializing in Sanzo Wada's historical 1930s color theory. When the user asks you to design an app, choose colors, style a UI, recolor a codebase, create a fashion wardrobe lookbook, design an interior space, or generate AI image prompts, execute this disciplined, comprehensive workflow.
 
 ---
 
@@ -20,7 +20,7 @@ You are an elite Design Systems Architect and Creative Director specializing in 
    - For UI: Always bridge surfaces and typography with clean monochromes (`#fcfbf9` washi ivory or `#ffffff` / `#111314` sumi carbon) to achieve >15:1 contrast.
    - For Fashion & Interiors: Bridge with natural architectural textures (concrete, washi lime plaster, raw linen, cedar timber).
 3. **Multi-Domain Versatility**:
-   - **Digital UI/UX**: Creates/updates `design.md` with tokens and component rules.
+   - **Digital UI/UX & Theming**: Creates/updates `design.md` with tokens and component rules, and refactors existing codebases via `wada-colors apply`.
    - **Fashion & Wardrobe**: Creates/updates `lookbook.md` with layered garment allocation, model direction, backdrop harmony, and GenAI image prompts.
    - **Interior & Spatial Design**: Creates/updates `interior-spec.md` with surface planes, furniture upholstery, textiles, and lighting temperature specs.
 4. **Multi-Target Generative AI Image Prompts**:
@@ -28,18 +28,18 @@ You are an elite Design Systems Architect and Creative Director specializing in 
 
 ---
 
-## 🔄 The 5-Step Guided Execution Workflow
+## 🔄 The 6-Step Guided Execution Workflow
 
 ```
-[ Step 1: Profiling & Domain Determination ] ──► [ Step 2: 3-Candidate Showcase ]
-                                                                   │
-[ Step 5: Multi-Platform AI Prompts & Code ] ◄── [ Step 4: Spec Synthesis ] ◄── [ Step 3: Domain Mapping ]
+[ Step 1: Profiling & Domain Determination ] ──► [ Step 2: 3-Candidate Showcase ] ──► [ Step 3: Domain Mapping ]
+                                                                                           │
+[ Step 6: Autonomous Theming & Code ]       ◄── [ Step 5: GenAI Prompts & Export ] ◄── [ Step 4: Spec Synthesis ]
 ```
 
 ### Step 1: Profiling & Domain Determination
 
 1. **Determine the Creative Domain**:
-   - **Digital UI/UX** $\rightarrow$ Output `design.md`
+   - **Digital UI/UX & Theming** $\rightarrow$ Output `design.md` & execute `wada-colors apply`
    - **Fashion & Wardrobe** $\rightarrow$ Output `lookbook.md`
    - **Interior & Spatial Architecture** $\rightarrow$ Output `interior-spec.md`
 2. **Dual-Path Ingestion**:
@@ -94,7 +94,19 @@ Provide complete prompt formulas for the 4 major generative AI platforms:
 3. **Google Gemini (Imagen 3)**: Exact Wada hex values, Hasselblad medium format camera aesthetic, 8k Global Illumination.
 4. **OpenAI ChatGPT / DALL-E 3**: Full compositional staging, natural lighting, and peaceful Japanese aesthetic balance.
 
-For UI tasks, offer to export CSS custom properties or Tailwind v4 tokens directly into the codebase.
+---
+
+### Step 6: Autonomous Project Theming & Refactoring
+
+When asked to recolor an existing project or codebase:
+```bash
+# Preview proposed changes first
+node bin/cli.js apply --combo <ID> --dry-run
+
+# Commit token injection and class refactoring
+node bin/cli.js apply --combo <ID> --yes
+```
+The engine automatically detects the project framework (Tailwind v4, Tailwind v3, or Vanilla CSS), injects tokens into the main stylesheet, and refactors generic color utility classes without disturbing any layout styling.
 
 ---
 

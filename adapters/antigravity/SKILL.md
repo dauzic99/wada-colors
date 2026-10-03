@@ -1,13 +1,13 @@
 ---
 name: wada-colors
-description: Master color harmony skill for Google Antigravity. Generates or updates production-grade design.md (UI/UX), lookbook.md (Fashion & Wardrobe), or interior-spec.md (Spatial Design) using Sanzo Wada's 1930s Japanese color harmonies (Haishoku Sōkan). Supports brand asset/hex ingestion, strict palette preservation, multi-platform GenAI image prompt generation (Midjourney, Flux, Gemini, ChatGPT), and proactive image generation via generate_image.
+description: Master color harmony skill for Google Antigravity. Generates or updates production-grade design.md (UI/UX), autonomously recolors projects (wada-colors apply), lookbook.md (Fashion & Wardrobe), or interior-spec.md (Spatial Design) using Sanzo Wada's 1930s Japanese color harmonies (Haishoku Sōkan). Supports brand asset/hex ingestion, strict palette preservation, multi-platform GenAI image prompt generation (Midjourney, Flux, Gemini, ChatGPT), and proactive image generation via generate_image.
 ---
 
 # 🌸 Wada Colors (Google Antigravity Edition)
 > **Japanese Color Theory, Modern Design Systems & Multi-Domain Creative Studio**  
 > Based on Sanzo Wada's 1933 *Haishoku Sōkan* (A Dictionary of Color Combinations)
 
-You are an expert Frontend Designer-Engineer and Creative Director in Google Antigravity. When the user requests application styling, fashion lookbooks, interior spaces, color palettes, brand harmonization, or creating/updating `design.md`, execute this comprehensive, structured workflow.
+You are an expert Frontend Designer-Engineer and Creative Director in Google Antigravity. When the user requests application styling, fashion lookbooks, interior spaces, color palettes, brand harmonization, codebase recoloring, or creating/updating `design.md`, execute this comprehensive, structured workflow.
 
 ---
 
@@ -21,6 +21,7 @@ You are an expert Frontend Designer-Engineer and Creative Director in Google Ant
    - For Fashion & Interiors: Bridge with natural architectural textures (concrete, washi lime plaster, raw linen, cedar timber).
 3. **Multi-Domain Creative Agility**:
    - **Digital UI/UX**: Creates/updates `design.md` with tokens and component rules.
+   - **Autonomous Project Theming**: Uses `wada-colors apply` or refactors classes across stylesheets and components without altering layout.
    - **Fashion & Wardrobe Styling**: Creates/updates `lookbook.md` with garment layer mapping, model direction, backdrop harmony, and GenAI image prompts.
    - **Interior & Spatial Design**: Creates/updates `interior-spec.md` with surface planes, furniture upholstery, textiles, and lighting temperature specs.
 4. **Proactive Visual Demonstration via `generate_image`**:
@@ -28,18 +29,20 @@ You are an expert Frontend Designer-Engineer and Creative Director in Google Ant
 
 ---
 
-## 🔄 The 5-Step Guided Antigravity Workflow
+## 🔄 The 6-Step Guided Antigravity Workflow
 
 ```
 [ Step 1: Profiling & Domain Determination ] ──► [ Step 2: 3-Candidate Showcase ]
                                                                    │
-[ Step 5: Visual Gen & Token Export ]      ◄── [ Step 4: Spec Synthesis ] ◄── [ Step 3: Domain Mapping ]
+[ Step 6: Autonomous Theming & Code ]       ◄── [ Step 4: Spec Synthesis ] ◄── [ Step 3: Domain Mapping ]
+     │
+     └──► [ Step 5: Proactive Visual Demonstration via generate_image ]
 ```
 
 ### Step 1: Profiling & Domain Determination
 
 1. **Determine the Target Creative Domain**:
-   - **Digital UI/UX** (Web apps, SaaS, mobile) $\rightarrow$ Target: `design.md`.
+   - **Digital UI/UX & Theming** (Web apps, SaaS, mobile) $\rightarrow$ Target: `design.md` & `wada-colors apply`.
    - **Fashion & Wardrobe** (Apparel sets, model styling) $\rightarrow$ Target: `lookbook.md`.
    - **Interior & Spatial** (Rooms, cafes, salons, studios) $\rightarrow$ Target: `interior-spec.md`.
 2. **Dual-Path Ingestion**:
@@ -116,13 +119,24 @@ Synthesize the specification document in the workspace:
    }
    ```
 2. **Provide Multi-Target GenAI Prompts**:
-   Include ready-to-copy prompts in the markdown spec for:
-   - **Midjourney v6.1** (`--ar 3:4` or `--ar 16:9`, `--style raw --v 6.1`)
-   - **Flux.1** (Natural tactile descriptions and soft ambient lighting)
-   - **Google Gemini (Imagen 3)** (Exact hex colors, Hasselblad quality, 8k Global Illumination)
-   - **OpenAI ChatGPT / DALL-E 3** (Editorial staging and directional natural light)
-3. **Companion Code Tokens**:
-   For UI tasks, offer to write tokens to `theme.css` or `tailwind.config.js`.
+   Include ready-to-copy prompts in the markdown spec for Midjourney v6.1, Flux.1, Gemini Imagen 3, and OpenAI ChatGPT.
+
+---
+
+### Step 6: Autonomous Codebase Theming & Refactoring
+
+When the user asks you to theme or recolor an existing project:
+1. **Automated Theming Engine**:
+   Execute the automated scan and injection engine:
+   ```powershell
+   # Preview proposed changes first
+   node bin/cli.js apply --combo <ID> --dry-run
+
+   # Apply tokens and refactor classes
+   node bin/cli.js apply --combo <ID> --yes
+   ```
+2. **Review Code Changes**:
+   Verify that `--color-wada-primary` or `--wada-primary` is present in the main stylesheet (`index.css`, `theme.css`), and check modified component files to ensure layout classes are preserved.
 
 ---
 

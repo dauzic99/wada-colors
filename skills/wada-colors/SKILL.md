@@ -1,6 +1,6 @@
 ---
 name: wada-colors
-description: Master color harmony skill using Sanzo Wada's 1930s "A Dictionary of Color Combinations" (Haishoku Sōkan). Supports Digital UI/UX (design.md), Fashion & Wardrobe Lookbooks (lookbook.md), Spatial & Interior Architecture (interior-spec.md), and Multi-Platform Generative AI Image Prompts (Midjourney v6.1, Flux.1, Gemini Imagen 3, ChatGPT / DALL-E 3) with live image generation.
+description: Master color harmony skill using Sanzo Wada's 1930s "A Dictionary of Color Combinations" (Haishoku Sōkan). Supports Digital UI/UX (design.md), Autonomous Project Theming (wada-colors apply), Fashion & Wardrobe Lookbooks (lookbook.md), Spatial & Interior Architecture (interior-spec.md), and Multi-Platform Generative AI Image Prompts (Midjourney v6.1, Flux.1, Gemini Imagen 3, ChatGPT / DALL-E 3) with live image generation.
 ---
 
 # 🌸 Wada Colors Skill (和田三造 配色)
@@ -9,9 +9,10 @@ description: Master color harmony skill using Sanzo Wada's 1930s "A Dictionary o
 
 This skill guides AI agents in applying Sanzo Wada's authentic 1930s Japanese color harmonies across multiple creative domains:
 1. **Digital UI/UX Design System**: Production-grade `design.md` with CSS custom properties, Tailwind v4 tokens, and WCAG AA/AAA contrast.
-2. **Fashion & Wardrobe Styling**: High-fashion `lookbook.md` with garment layer color mapping, model direction, backdrop harmony, and GenAI image generation.
-3. **Interior & Spatial Architecture**: Architectural `interior-spec.md` with surface planes, furniture upholstery, textiles, and lighting temperature specs.
-4. **Multi-Target Generative AI Prompts**: Ready-to-render prompts for **Midjourney v6.1**, **Flux.1**, **Google Gemini (Imagen 3)**, and **OpenAI ChatGPT (GPT Image / DALL-E 3)**.
+2. **Autonomous Project Theming**: Automatically scan existing codebases, inject tokens into root stylesheets, and refactor color classes without breaking layout.
+3. **Fashion & Wardrobe Styling**: High-fashion `lookbook.md` with garment layer color mapping, model direction, backdrop harmony, and GenAI image generation.
+4. **Interior & Spatial Architecture**: Architectural `interior-spec.md` with surface planes, furniture upholstery, textiles, and lighting temperature specs.
+5. **Multi-Target Generative AI Prompts**: Ready-to-render prompts for **Midjourney v6.1**, **Flux.1**, **Google Gemini (Imagen 3)**, and **OpenAI ChatGPT (GPT Image / DALL-E 3)**.
 
 ---
 
@@ -23,24 +24,25 @@ This skill guides AI agents in applying Sanzo Wada's authentic 1930s Japanese co
    - For UI: Bridge with washi ivory (`#fcfbf9`) and deep carbon (`#111314`) to guarantee **WCAG AA/AAA compliance**.
    - For Fashion & Interiors: Bridge with natural linen, raw silk, weathered timber, textured washi plaster, or industrial concrete backdrops.
 3. **Multi-Domain Intelligence**:
-   Detect whether the user wants an application design system, a fashion wardrobe set, an interior architectural scheme, or generative AI image generation.
+   Detect whether the user wants an application design system, an automated codebase recolor, a fashion wardrobe set, an interior architectural scheme, or generative AI image generation.
 4. **Proactive Visual Demonstration**:
    When the AI environment supports image generation (such as Antigravity's `generate_image` tool), **proactively generate the visual asset** (e.g. fashion model in styled wardrobe or interior room) alongside the markdown specification!
 
 ---
 
-## 🔄 The 5-Step Multi-Domain Workflow
+## 🔄 The 6-Step Multi-Domain Workflow
 
 ```
-[ Step 1: Profiling & Domain Determination ] ──► [ Step 2: Curated 3-Candidate Showcase ]
-                                                                   │
-[ Step 5: AI Image Generation & Export ]   ◄── [ Step 4: Spec Synthesis ] ◄── [ Step 3: Domain Mapping ]
+[ Step 1: Profiling & Ingestion ] ──► [ Step 2: 3-Candidate Showcase ] ──► [ Step 3: Domain Mapping ]
+                                                                                   │
+[ Step 6: Autonomous Theming ]  ◄── [ Step 5: GenAI Image Prompts ] ◄── [ Step 4: Spec Synthesis ]
 ```
 
 ### Step 1: Profiling & Domain Determination
 
 1. **Determine Creative Domain**:
    - **Digital UI/UX**: Web apps, mobile apps, SaaS dashboards, developer tools $\rightarrow$ Generates `design.md`.
+   - **Autonomous Project Theming**: Recolor an existing codebase $\rightarrow$ Runs `wada-colors apply` or refactors classes.
    - **Fashion & Wardrobe**: Apparel collections, model styling, editorial lookbooks $\rightarrow$ Generates `lookbook.md`.
    - **Interior & Spatial Architecture**: Rooms, boutique cafes, residential spaces, studios $\rightarrow$ Generates `interior-spec.md`.
    - **General Visual Art / Concept**: Any custom prompt generation.
@@ -130,6 +132,29 @@ A full-length photograph featuring a [model/interior scene] showcasing a coordin
 
 ---
 
+### Step 6: Autonomous Codebase Theming & Refactoring
+
+When asked to recolor or theme an existing application:
+1. **Automated Theming Engine**:
+   Execute the automated scan and injection engine:
+   ```bash
+   # Preview proposed changes first
+   npx wada-colors apply --combo <ID> --dry-run
+
+   # Apply tokens and refactor classes
+   npx wada-colors apply --combo <ID> --yes
+   ```
+2. **Token Injection**:
+   - For Tailwind v4: Injects `@theme` with `--color-wada-primary`, `--color-wada-secondary`, `--color-wada-accent`.
+   - For Tailwind v3: Injects `theme.extend.colors.wada`.
+   - For Vanilla CSS: Injects `:root { --wada-primary: ... }`.
+3. **Semantic Class Refactoring**:
+   - Identifies generic color utility classes (e.g. `bg-blue-600`, `text-indigo-500`) or hardcoded hexes.
+   - Maps them to semantic Wada classes (`bg-wada-primary`, `text-wada-secondary`, `border-wada-accent`).
+   - Preserves all layout classes (`flex`, `grid`, `p-4`, `rounded`, `shadow`) completely untouched.
+
+---
+
 ## 🎨 Recommended Wada Combinations Across Domains
 
 ### 1. Fashion & Wardrobe Styling
@@ -157,4 +182,5 @@ A full-length photograph featuring a [model/interior scene] showcasing a coordin
 - Match Brand Color: `node bin/cli.js match --color "#HEX" --file <path>`
 - Generate GenAI Image Prompts: `node bin/cli.js prompt --combo <ID> --domain <fashion|interior|ui> --style <name>`
 - Generate Full Specification: `node bin/cli.js generate --combo <ID> --domain <fashion|interior|ui> --out <file>`
+- Autonomously Recolor Codebase: `node bin/cli.js apply --combo <ID> [--dry-run] [--yes]`
 - Launch Interactive Visualizer: `node bin/cli.js serve` (or open `web/index.html` in browser)

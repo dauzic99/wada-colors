@@ -2,7 +2,7 @@
 > **Sanzo Wada 1930s Japanese Color Harmonies, Modern Design Systems & Multi-Domain Creative Studio**  
 > Based on *Haishoku Sōkan* (A Dictionary of Color Combinations, 1933)
 
-When generating UI components, design documentation, fashion lookbooks, interior specs, or generative AI image prompts, Copilot follows these principles:
+When generating UI components, design documentation, codebase theming, fashion lookbooks, interior specs, or generative AI image prompts, Copilot follows these principles:
 
 ---
 
@@ -15,7 +15,7 @@ When generating UI components, design documentation, fashion lookbooks, interior
    - For UI: Bridge with washi ivory (`#fcfbf9` or `#ffffff`) and deep carbon (`#111314`) to ensure AAA text contrast (>15:1).
    - For Fashion & Interiors: Bridge with natural architectural textures (concrete, washi lime plaster, raw linen, cedar timber).
 3. **Multi-Domain Agility**:
-   - **Digital UI/UX**: Creates/updates `design.md` with tokens and component rules.
+   - **Digital UI/UX & Theming**: Creates/updates `design.md` with tokens and component rules, and refactors existing codebases via `wada-colors apply`.
    - **Fashion & Wardrobe Styling**: Creates/updates `lookbook.md` with garment layer mapping, model direction, backdrop harmony, and GenAI image prompts.
    - **Interior & Spatial Design**: Creates/updates `interior-spec.md` with surface planes, furniture upholstery, textiles, and lighting temperature specs.
 4. **Multi-Target Generative AI Prompts**:
@@ -43,9 +43,14 @@ When generating UI components, design documentation, fashion lookbooks, interior
 
 ---
 
-## 🔄 Synthesis Workflow
+## 🔄 Synthesis & Theming Workflow
 
-1. Determine creative domain (`design.md`, `lookbook.md`, or `interior-spec.md`).
+1. Determine creative domain (`design.md`, `lookbook.md`, `interior-spec.md`, or codebase theming).
 2. Format 3 candidate combinations with Wada #ID, Japanese names, hex codes, and domain roles.
 3. Once selected, synthesize the full specification document following canonical markdown templates.
-4. Provide copy-paste ready GenAI image prompts for Midjourney v6.1, Flux.1, Gemini Imagen 3, and OpenAI ChatGPT.
+4. If recoloring an existing app, execute:
+   ```bash
+   node bin/cli.js apply --combo <ID> --dry-run
+   node bin/cli.js apply --combo <ID> --yes
+   ```
+5. Provide copy-paste ready GenAI image prompts for Midjourney v6.1, Flux.1, Gemini Imagen 3, and OpenAI ChatGPT.
