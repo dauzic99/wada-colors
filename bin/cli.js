@@ -293,6 +293,171 @@ function handleMatch(args) {
   });
 }
 
+// Generative AI Prompt Builders
+function generateFashionPrompts(combo, style = 'minimalist') {
+  const c1 = combo.colors[0];
+  const c2 = combo.colors[1];
+  const c3 = combo.colors[2] || combo.colors[0];
+  const c4 = combo.colors[3] || combo.colors[1];
+
+  const styleProfiles = {
+    minimalist: {
+      name: 'High-End Minimalist Tailoring',
+      genre: 'Luxury Contemporary / Lemaire aesthetic',
+      c1Garment: 'structured double-breasted overcoat in heavy boiled wool',
+      c2Garment: 'ribbed cashmere knit crewneck top',
+      c3Garment: 'wide-leg pleated wool gabardine trousers',
+      c4Garment: 'minimalist leather tote bag and polished leather loafers',
+      backdrop: 'clean architectural brutalist concrete gallery in Tokyo, soft diffuse natural morning light',
+      posture: 'tall elegant fashion model standing poised with relaxed shoulders'
+    },
+    neotrad: {
+      name: 'Modern Japanese Neo-Trad',
+      genre: 'Contemporary Haori & Kimono cuts',
+      c1Garment: 'draped contemporary noragi haori jacket in heavy raw linen',
+      c2Garment: 'collarless washed silk wrap blouse',
+      c3Garment: 'tailored hakama-inspired wide pleated culottes',
+      c4Garment: 'leather tabi footwear and woven canvas satchel',
+      backdrop: 'serene Japanese architectural courtyard with weathered cedar timber and raked gravel',
+      posture: 'fashion model with graceful sculptural posture in profile'
+    },
+    streetwear: {
+      name: 'Tokyo Contemporary Streetwear',
+      genre: 'Urban Techwear & Oversized Silhouette',
+      c1Garment: 'oversized matte technical bomber jacket',
+      c2Garment: 'heavyweight ribbed hoodie',
+      c3Garment: 'relaxed modular cargo pants with subtle strap details',
+      c4Garment: 'chunky technical trail sneakers and crossbody sling bag',
+      backdrop: 'moody Shibuya alleyway at twilight, atmospheric mist and subtle neon reflections',
+      posture: 'dynamic urban streetwear model with confident forward stride'
+    },
+    showa: {
+      name: 'Classic 1930s Showa Vintage',
+      genre: 'Sanzo Wada Oscar Homage / Historical Tailoring',
+      c1Garment: 'authentic 1930s tailored wool trench coat with peak lapels',
+      c2Garment: 'vintage silk crepe neckerchief and button-down dress shirt',
+      c3Garment: 'high-waisted tailored wool trousers with deep pleats',
+      c4Garment: 'vintage oxford brogues and leather travel bag',
+      backdrop: 'nostalgic 1930s Tokyo art salon with dark wood paneling, warm incandescent amber lighting',
+      posture: 'classic editorial model posed against vintage studio backdrop'
+    }
+  };
+
+  const p = styleProfiles[style] || styleProfiles.minimalist;
+
+  const midjourney = `Editorial fashion photography, full body portrait of a model wearing ${p.name}. Outer garment in ${c1.name_en} ${c1.hex} (${p.c1Garment}), inner layer in ${c2.name_en} ${c2.hex} (${p.c2Garment}), bottoms in ${c3.name_en} ${c3.hex} (${p.c3Garment}), accents in ${c4.name_en} ${c4.hex} (${p.c4Garment}). Set against ${p.backdrop}. Shot on 85mm f/1.4 lens, soft directional diffused studio lighting, Vogue editorial aesthetic, high tactile fabric texture --ar 3:4 --style raw --v 6.1`;
+
+  const flux = `A high-fashion editorial photograph of a model in a sophisticated ${p.name} outfit styled with 1930s Japanese color theory (Wada Sanzo #${combo.id}). The model wears a ${c1.name_en} (${c1.hex}) ${p.c1Garment}, layered over a ${c2.name_en} (${c2.hex}) ${p.c2Garment}, paired with ${c3.name_en} (${c3.hex}) ${p.c3Garment}. Natural skin texture, realistic cloth drape, soft ambient lighting, ${p.backdrop}.`;
+
+  const gemini = `Photorealistic fashion portrait of a fashion model styled in an elegant ${p.name} collection based on Sanzo Wada's color harmony #${combo.id} (${combo.name_en}). Garment breakdown: outer coat in exact ${c1.name_en} ${c1.hex}, mid-layer in ${c2.name_en} ${c2.hex}, trousers in ${c3.name_en} ${c3.hex}. Background: ${p.backdrop}. Soft studio shadows, Hasselblad camera quality, 8k resolution, authentic fabric weaves.`;
+
+  const dalle = `A full-length fashion photograph featuring a model posing gracefully in a coordinated wardrobe inspired by Sanzo Wada's Japanese color palette #${combo.id}. The model is dressed in a ${c1.name_en} (${c1.hex}) ${p.c1Garment}, a ${c2.name_en} (${c2.hex}) ${p.c2Garment}, and ${c3.name_en} (${c3.hex}) ${p.c3Garment}. The background is ${p.backdrop} with soft natural light streaming from the side.`;
+
+  return { profile: p, midjourney, flux, gemini, dalle };
+}
+
+function generateInteriorPrompts(combo, style = 'japandi') {
+  const c1 = combo.colors[0];
+  const c2 = combo.colors[1];
+  const c3 = combo.colors[2] || combo.colors[0];
+  const c4 = combo.colors[3] || combo.colors[1];
+
+  const interiorProfiles = {
+    japandi: {
+      name: 'Japandi / Modern Ryokan',
+      walls: 'warm washi textured lime plaster in soft off-white',
+      c1Element: `low-slung modern lounge sofa upholstered in ${c1.name_en} (${c1.hex}) linen bouclé`,
+      c2Element: `hand-woven area rug and linen drapery in ${c2.name_en} (${c2.hex})`,
+      c3Element: `accent sculptural armchair and fluted ceramic vessels in ${c3.name_en} (${c3.hex})`,
+      c4Element: `lacquered wood coffee table with raw clay ceramics in ${c4.name_en} (${c4.hex})`,
+      lighting: 'soft diffuse morning sunlight filtering through shoji-style slatted oak blinds, warm 2700K ambient cove glow',
+      flooring: 'matte white oak hardwood flooring'
+    },
+    midcentury: {
+      name: 'Mid-Century Modern Salon',
+      walls: 'rich warm taupe plaster with dark walnut architectural paneling',
+      c1Element: `curved architectural velvet sofa in ${c1.name_en} (${c1.hex})`,
+      c2Element: `pair of tailored lounge chairs in ${c2.name_en} (${c2.hex}) wool weave`,
+      c3Element: `geometric wool tapestry and mouth-blown glass pendant in ${c3.name_en} (${c3.hex})`,
+      c4Element: `decorative ceramic vases and marble side table in ${c4.name_en} (${c4.hex})`,
+      lighting: 'warm directional gallery spotlights and sculptural brass floor lamp casting ambient shadows',
+      flooring: 'herringbone walnut parquet flooring'
+    },
+    cafe: {
+      name: 'Wabi-Sabi Boutique Cafe',
+      walls: 'hand-troweled earthy clay plaster walls with natural imperfections',
+      c1Element: `long curved banquette bench seating in ${c1.name_en} (${c1.hex}) washed canvas`,
+      c2Element: `custom ceramic pendant lamps and glazed tile backsplash in ${c2.name_en} (${c2.hex})`,
+      c3Element: `artisan linen table runners and stoneware tableware in ${c3.name_en} (${c3.hex})`,
+      c4Element: `patinated steel accents and timber bar stools in ${c4.name_en} (${c4.hex})`,
+      lighting: 'golden hour sun streaming through large floor-to-ceiling iron-framed windows',
+      flooring: 'terrazzo floor with river stone aggregate'
+    },
+    brutalist: {
+      name: 'Warm Brutalist Creative Studio',
+      walls: 'smooth board-formed architectural concrete walls with exposed grain',
+      c1Element: `monolithic deep-seated sectional sofa in ${c1.name_en} (${c1.hex}) heavy twill`,
+      c2Element: `large acoustic felt wall panel and oversized wool rug in ${c2.name_en} (${c2.hex})`,
+      c3Element: `sculptural powder-coated metal side tables and shelving in ${c3.name_en} (${c3.hex})`,
+      c4Element: `industrial task lighting and large ceramic planter in ${c4.name_en} (${c4.hex})`,
+      lighting: 'diffuse skylight illumination balanced with warm minimalist architectural LED strip lighting',
+      flooring: 'polished industrial concrete flooring with satin sealer'
+    }
+  };
+
+  const p = interiorProfiles[style] || interiorProfiles.japandi;
+
+  const midjourney = `Architectural interior photography of a luxurious ${p.name} space designed with Sanzo Wada color harmony #${combo.id} (${combo.name_en}). Features ${p.c1Element}, ${p.c2Element}, and ${p.c3Element}. Walls in ${p.walls}, flooring in ${p.flooring}. ${p.lighting}. Shot on 24mm tilt-shift architectural lens, Architectural Digest editorial quality, hyper-realistic materiality, cinematic depth --ar 16:9 --style raw --v 6.1`;
+
+  const flux = `High-end architectural interior photography of a ${p.name} living space inspired by 1930s Japanese color theory (Wada Sanzo #${combo.id}). Main centerpiece is a ${p.c1Element}, balanced with a ${p.c2Element}. Walls finished in ${p.walls}. Natural sunlight, realistic shadow falloff, tactile bouclé and linen textures, tranquil atmosphere.`;
+
+  const gemini = `Photorealistic architectural rendering of an interior room in ${p.name} style featuring Sanzo Wada's color combination #${combo.id}. Exact color allocation: primary furniture in ${c1.name_en} ${c1.hex}, textiles and drapery in ${c2.name_en} ${c2.hex}, accents in ${c3.name_en} ${c3.hex}. Realistic Global Illumination, 8k resolution, Hasselblad medium format camera aesthetic.`;
+
+  const dalle = `A wide-angle photograph of an impeccably designed ${p.name} interior space based on Sanzo Wada's palette #${combo.id}. The room features a ${p.c1Element} as the focal point, complemented by ${p.c2Element} and ${p.c3Element}. Beautiful natural light streams in, highlighting the rich textures and serene Japanese design harmony.`;
+
+  return { profile: p, midjourney, flux, gemini, dalle };
+}
+
+function handlePrompt(args) {
+  let comboId = 165;
+  const comboIdx = args.indexOf('--combo');
+  if (comboIdx !== -1 && args[comboIdx + 1]) {
+    comboId = parseInt(args[comboIdx + 1], 10);
+  }
+
+  let domain = 'fashion';
+  const domainIdx = args.indexOf('--domain');
+  if (domainIdx !== -1 && args[domainIdx + 1]) {
+    domain = args[domainIdx + 1].toLowerCase();
+  }
+
+  let style = domain === 'fashion' ? 'minimalist' : 'japandi';
+  const styleIdx = args.indexOf('--style');
+  if (styleIdx !== -1 && args[styleIdx + 1]) {
+    style = args[styleIdx + 1].toLowerCase();
+  }
+
+  const combo = combos[comboId - 1] || combos[0];
+  console.log(`\n🌸 Generative AI Image Prompts: Wada Sanzo #${combo.id} (${combo.name_jp} / ${combo.name_en})`);
+  console.log(`   Domain: ${domain.toUpperCase()} | Style: ${style}\n`);
+
+  if (domain === 'fashion') {
+    const res = generateFashionPrompts(combo, style);
+    console.log(`📸 [Midjourney v6.1]:\n${res.midjourney}\n`);
+    console.log(`⚡ [Flux.1]:\n${res.flux}\n`);
+    console.log(`🔮 [Gemini Imagen 3]:\n${res.gemini}\n`);
+    console.log(`🧠 [ChatGPT / DALL-E 3]:\n${res.dalle}\n`);
+  } else if (domain === 'interior') {
+    const res = generateInteriorPrompts(combo, style);
+    console.log(`📸 [Midjourney v6.1]:\n${res.midjourney}\n`);
+    console.log(`⚡ [Flux.1]:\n${res.flux}\n`);
+    console.log(`🔮 [Gemini Imagen 3]:\n${res.gemini}\n`);
+    console.log(`🧠 [ChatGPT / DALL-E 3]:\n${res.dalle}\n`);
+  } else {
+    console.log(`Act as an expert UI designer. Style a modern web app using Wada Sanzo palette #${combo.id} (${combo.colors.map(c => c.hex + ' ' + c.name_en).join(', ')}).`);
+  }
+}
+
 function handleGenerate(args) {
   let comboId = null;
   const comboIdx = args.indexOf('--combo');
@@ -312,25 +477,111 @@ function handleGenerate(args) {
     }
   }
 
+  let domain = 'ui';
+  const domainIdx = args.indexOf('--domain');
+  if (domainIdx !== -1 && args[domainIdx + 1]) {
+    domain = args[domainIdx + 1].toLowerCase();
+  }
+
   if (!comboId || comboId < 1 || comboId > 348) {
-    console.error('Usage: wada-colors generate --combo <id (1-348)> [--name "App Name"] [--out design.md]');
-    console.error('   or: wada-colors generate --color "#HEX" [--name "App Name"] [--out design.md]');
+    console.error('Usage: wada-colors generate --combo <id> [--domain ui|fashion|interior] [--out <file>]');
     return;
   }
 
-  let appName = 'Application';
+  const combo = combos[comboId - 1];
+
+  let style = domain === 'fashion' ? 'minimalist' : domain === 'interior' ? 'japandi' : 'modern';
+  const styleIdx = args.indexOf('--style');
+  if (styleIdx !== -1 && args[styleIdx + 1]) {
+    style = args[styleIdx + 1].toLowerCase();
+  }
+
+  let appName = domain === 'fashion' ? 'Autumn / Winter Collection' : domain === 'interior' ? 'Minimalist Living Room' : 'Application';
   const nameIdx = args.indexOf('--name');
   if (nameIdx !== -1 && args[nameIdx + 1]) {
     appName = args[nameIdx + 1].trim();
   }
 
-  let outFile = 'design.md';
+  let outFile = domain === 'fashion' ? 'lookbook.md' : domain === 'interior' ? 'interior-spec.md' : 'design.md';
   const outIdx = args.indexOf('--out');
   if (outIdx !== -1 && args[outIdx + 1]) {
     outFile = args[outIdx + 1].trim();
   }
 
-  const combo = combos[comboId - 1];
+  if (domain === 'fashion') {
+    const tplPath = path.join(ROOT_DIR, 'templates', 'fashion-lookbook-template.md');
+    let tpl = fs.readFileSync(tplPath, 'utf8');
+    const prompts = generateFashionPrompts(combo, style);
+
+    const garmentRows = combo.colors.map((col, idx) => {
+      const layer = idx === 0 ? 'Outerwear (Coat / Jacket)' : idx === 1 ? 'Mid-layer (Knit / Top)' : idx === 2 ? 'Bottoms (Trousers / Skirt)' : 'Accessories & Footwear';
+      const mat = idx === 0 ? 'Heavy boiled wool / raw silk' : idx === 1 ? 'Cashmere / ribbed cotton' : idx === 2 ? 'Wool gabardine / linen twill' : 'Polished calfskin / canvas';
+      return `| ${layer} | ${col.name_jp} (${col.name_romaji}) / ${col.name_en} | \`${col.hex}\` | ${mat} | Anchor focal silhouette |`;
+    }).join('\n');
+
+    tpl = tpl
+      .replace(/\{\{COLLECTION_NAME\}\}/g, appName)
+      .replace(/\{\{WADA_ID\}\}/g, combo.id)
+      .replace(/\{\{WADA_NAME_JP\}\}/g, combo.name_jp)
+      .replace(/\{\{WADA_NAME_ROMAJI\}\}/g, combo.name_romaji)
+      .replace(/\{\{WADA_NAME_EN\}\}/g, combo.name_en)
+      .replace(/\{\{FASHION_STYLE\}\}/g, prompts.profile.name)
+      .replace(/\{\{FASHION_GENRE\}\}/g, prompts.profile.genre)
+      .replace(/\{\{FASHION_GARMENT_ROWS\}\}/g, garmentRows)
+      .replace(/\{\{MODEL_SILHOUETTE\}\}/g, prompts.profile.posture)
+      .replace(/\{\{FOOTWEAR_SPEC\}\}/g, prompts.profile.c4Garment)
+      .replace(/\{\{JEWELRY_SPEC\}\}/g, 'Minimalist architectural jewelry in brushed silver or matte gold')
+      .replace(/\{\{BACKDROP_SPEC\}\}/g, prompts.profile.backdrop)
+      .replace(/\{\{LIGHTING_SPEC\}\}/g, 'Soft directional natural morning light with gentle studio fill')
+      .replace(/\{\{PROMPT_MIDJOURNEY\}\}/g, prompts.midjourney)
+      .replace(/\{\{PROMPT_FLUX\}\}/g, prompts.flux)
+      .replace(/\{\{PROMPT_GEMINI\}\}/g, prompts.gemini)
+      .replace(/\{\{PROMPT_DALLE\}\}/g, prompts.dalle)
+      .replace(/\{\{WADA_HEX_LIST\}\}/g, combo.colors.map(c => c.hex).join(', '));
+
+    fs.writeFileSync(path.resolve(process.cwd(), outFile), tpl, 'utf8');
+    console.log(`\n✨ Successfully generated Fashion Lookbook: ${outFile}`);
+    console.log(`   Based on Sanzo Wada Combination #${combo.id}: ${combo.name_jp} (${combo.name_en})\n`);
+    return;
+  }
+
+  if (domain === 'interior') {
+    const tplPath = path.join(ROOT_DIR, 'templates', 'interior-spec-template.md');
+    let tpl = fs.readFileSync(tplPath, 'utf8');
+    const prompts = generateInteriorPrompts(combo, style);
+
+    const elementRows = combo.colors.map((col, idx) => {
+      const elem = idx === 0 ? 'Primary Seating / Sofa Anchor' : idx === 1 ? 'Textiles & Area Rug' : idx === 2 ? 'Accent Seating & Drapery' : 'Ceramics & Lighting Decor';
+      const finish = idx === 0 ? 'Linen bouclé / velvet upholstery' : idx === 1 ? 'Hand-spun wool / natural dye' : idx === 2 ? 'Linen sheers / fluted timber' : 'Raw clay / brushed brass';
+      return `| ${elem} | ${col.name_jp} (${col.name_romaji}) / ${col.name_en} | \`${col.hex}\` | ${finish} | Spatial focal anchor |`;
+    }).join('\n');
+
+    tpl = tpl
+      .replace(/\{\{SPACE_NAME\}\}/g, appName)
+      .replace(/\{\{WADA_ID\}\}/g, combo.id)
+      .replace(/\{\{WADA_NAME_JP\}\}/g, combo.name_jp)
+      .replace(/\{\{WADA_NAME_ROMAJI\}\}/g, combo.name_romaji)
+      .replace(/\{\{WADA_NAME_EN\}\}/g, combo.name_en)
+      .replace(/\{\{SPATIAL_ARCHETYPE\}\}/g, prompts.profile.name)
+      .replace(/\{\{INTERIOR_ELEMENT_ROWS\}\}/g, elementRows)
+      .replace(/\{\{WALL_FINISH_SPEC\}\}/g, prompts.profile.walls)
+      .replace(/\{\{FLOORING_SPEC\}\}/g, prompts.profile.flooring)
+      .replace(/\{\{FURNITURE_SPEC\}\}/g, prompts.profile.c1Element)
+      .replace(/\{\{TEXTILES_SPEC\}\}/g, prompts.profile.c2Element)
+      .replace(/\{\{LIGHTING_PLAN_SPEC\}\}/g, prompts.profile.lighting)
+      .replace(/\{\{ACCENTS_SPEC\}\}/g, `${prompts.profile.c3Element}, ${prompts.profile.c4Element}`)
+      .replace(/\{\{PROMPT_MIDJOURNEY\}\}/g, prompts.midjourney)
+      .replace(/\{\{PROMPT_FLUX\}\}/g, prompts.flux)
+      .replace(/\{\{PROMPT_GEMINI\}\}/g, prompts.gemini)
+      .replace(/\{\{PROMPT_DALLE\}\}/g, prompts.dalle);
+
+    fs.writeFileSync(path.resolve(process.cwd(), outFile), tpl, 'utf8');
+    console.log(`\n✨ Successfully generated Interior Specification: ${outFile}`);
+    console.log(`   Based on Sanzo Wada Combination #${combo.id}: ${combo.name_jp} (${combo.name_en})\n`);
+    return;
+  }
+
+  // Default: UI/UX (design.md)
   const templatePath = path.join(ROOT_DIR, 'templates', 'design-md-template.md');
   let tpl = fs.readFileSync(templatePath, 'utf8');
 
@@ -414,15 +665,15 @@ Usage:
   npx wada-colors show <id (1-348)>
   npx wada-colors match --color "#HEX"
   npx wada-colors match --file <brand.json | logo.svg | theme.css>
-  npx wada-colors generate --combo <id> [--name "App Name"] [--out design.md]
-  npx wada-colors generate --color "#HEX" [--name "App Name"] [--out design.md]
+  npx wada-colors prompt --combo <id> [--domain fashion|interior|ui] [--style <name>]
+  npx wada-colors generate --combo <id> [--domain ui|fashion|interior] [--out <file>]
   npx wada-colors help
 
 Examples:
-  npx wada-colors init --agent cursor
-  npx wada-colors search "editorial"
-  npx wada-colors show 165
-  npx wada-colors match --color "#2A6F97"
+  npx wada-colors prompt --combo 165 --domain fashion --style minimalist
+  npx wada-colors prompt --combo 165 --domain interior --style japandi
+  npx wada-colors generate --combo 165 --domain fashion --out lookbook.md
+  npx wada-colors generate --combo 165 --domain interior --out interior-spec.md
   npx wada-colors generate --combo 165 --name "ZenFlow SaaS"
 `);
 }
@@ -448,6 +699,9 @@ switch (cmd) {
     break;
   case 'generate':
     handleGenerate(rest);
+    break;
+  case 'prompt':
+    handlePrompt(rest);
     break;
   case 'help':
   case '--help':

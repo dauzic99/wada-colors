@@ -83,7 +83,14 @@
 
     <!-- Right Column: Sticky Live App Mockup & Export Station -->
     <aside class="preview-column">
-      <!-- Live App Mockup -->
+      <!-- Domain Selector Bar -->
+      <div class="domain-selector-bar">
+        <button class="domain-btn active" data-domain="ui">🖥️ App UI</button>
+        <button class="domain-btn" data-domain="fashion">👘 Fashion Studio</button>
+        <button class="domain-btn" data-domain="interior">🏛️ Interior Space</button>
+      </div>
+
+      <!-- Live Mockup Wrapper -->
       <div class="mockup-wrapper">
         <div class="mockup-topbar">
           <div class="mockup-dots">
@@ -91,42 +98,133 @@
             <span class="mockup-dot"></span>
             <span class="mockup-dot"></span>
           </div>
-          <span class="mockup-title">Live App Preview (Recoloring Engine)</span>
+          <span id="mockupTitle" class="mockup-title">Live App Preview (Recoloring Engine)</span>
           <button id="mockupModeBtn" class="mockup-mode-btn">🌙 Dark Preview</button>
         </div>
 
-        <div id="mockupCanvas" class="mockup-canvas mode-light">
-          <!-- Mini Navbar -->
-          <div class="app-navbar">
-            <div class="app-logo">
-              <span id="appLogoBadge" class="app-logo-badge"></span>
-              <span>SanzoApp</span>
+        <!-- 1. App UI Mockup View -->
+        <div id="uiMockupView" class="domain-view active">
+          <div id="mockupCanvas" class="mockup-canvas mode-light">
+            <!-- Mini Navbar -->
+            <div class="app-navbar">
+              <div class="app-logo">
+                <span id="appLogoBadge" class="app-logo-badge"></span>
+                <span>SanzoApp</span>
+              </div>
+              <button id="appNavBtn" class="app-nav-btn">Get Started</button>
             </div>
-            <button id="appNavBtn" class="app-nav-btn">Get Started</button>
-          </div>
 
-          <!-- Hero Section -->
-          <div class="app-hero">
-            <span id="appHeroPill" class="app-hero-pill">Wada #165 • WARM</span>
-            <h2 id="appHeroTitle" class="app-hero-title">Harmonious Design Powered by History</h2>
-            <p class="app-hero-desc">Experience authentic 1930s Japanese color combinations directly in modern user interfaces.</p>
-            <div class="app-cta-row">
-              <button id="appBtnPrimary" class="app-btn-primary">Primary Action</button>
-              <button id="appBtnSecondary" class="app-btn-secondary">Learn More</button>
+            <!-- Hero Section -->
+            <div class="app-hero">
+              <span id="appHeroPill" class="app-hero-pill">Wada #165 • WARM</span>
+              <h2 id="appHeroTitle" class="app-hero-title">Harmonious Design Powered by History</h2>
+              <p class="app-hero-desc">Experience authentic 1930s Japanese color combinations directly in modern user interfaces.</p>
+              <div class="app-cta-row">
+                <button id="appBtnPrimary" class="app-btn-primary">Primary Action</button>
+                <button id="appBtnSecondary" class="app-btn-secondary">Learn More</button>
+              </div>
+            </div>
+
+            <!-- Feature Cards -->
+            <div class="app-features">
+              <div id="appCard1" class="app-card">
+                <div id="appCardIcon1" class="app-card-icon"></div>
+                <h4>Disciplined Harmony</h4>
+                <p>Curated 1930s pairings with strict palette integrity.</p>
+              </div>
+              <div id="appCard2" class="app-card">
+                <div id="appCardIcon2" class="app-card-icon"></div>
+                <h4>WCAG AA/AAA</h4>
+                <p>Bridged with neutral monochromes for readability.</p>
+              </div>
             </div>
           </div>
+        </div>
 
-          <!-- Feature Cards -->
-          <div class="app-features">
-            <div id="appCard1" class="app-card">
-              <div id="appCardIcon1" class="app-card-icon"></div>
-              <h4>Disciplined Harmony</h4>
-              <p>Curated 1930s pairings with strict palette integrity.</p>
+        <!-- 2. Fashion Lookbook Studio View -->
+        <div id="fashionMockupView" class="domain-view">
+          <div class="fashion-studio-card">
+            <div class="studio-subbar">
+              <span class="studio-badge">Wada Oscar Homage (1954)</span>
+              <select id="fashionStyleSelect" class="studio-select">
+                <option value="minimalist">Minimalist Tailoring</option>
+                <option value="neotrad">Modern Neo-Trad (Haori)</option>
+                <option value="streetwear">Tokyo Streetwear</option>
+                <option value="showa">1930s Showa Vintage</option>
+              </select>
             </div>
-            <div id="appCard2" class="app-card">
-              <div id="appCardIcon2" class="app-card-icon"></div>
-              <h4>WCAG AA/AAA</h4>
-              <p>Bridged with neutral monochromes for readability.</p>
+            
+            <div class="garment-layers-grid">
+              <div id="garmentCoat" class="garment-layer-item">
+                <div id="coatSwatch" class="garment-swatch"></div>
+                <div class="garment-info">
+                  <span class="garment-role">Outerwear</span>
+                  <span id="coatName" class="garment-desc">Coat in Heavy Boiled Wool</span>
+                </div>
+              </div>
+              <div id="garmentTop" class="garment-layer-item">
+                <div id="topSwatch" class="garment-swatch"></div>
+                <div class="garment-info">
+                  <span class="garment-role">Mid-Layer</span>
+                  <span id="topName" class="garment-desc">Cashmere Knit Crewneck</span>
+                </div>
+              </div>
+              <div id="garmentBottom" class="garment-layer-item">
+                <div id="bottomSwatch" class="garment-swatch"></div>
+                <div class="garment-info">
+                  <span class="garment-role">Bottoms</span>
+                  <span id="bottomName" class="garment-desc">Tailored Wool Trousers</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="fashion-meta-box">
+              <div class="meta-label">Backdrop & Lighting:</div>
+              <div id="fashionBackdropText" class="meta-val">Architectural brutalist concrete gallery, soft diffuse morning light</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Interior Design Studio View -->
+        <div id="interiorMockupView" class="domain-view">
+          <div class="interior-studio-card">
+            <div class="studio-subbar">
+              <span class="studio-badge">Spatial Architecture</span>
+              <select id="interiorStyleSelect" class="studio-select">
+                <option value="japandi">Japandi / Modern Ryokan</option>
+                <option value="midcentury">Mid-Century Modern Salon</option>
+                <option value="cafe">Wabi-Sabi Boutique Cafe</option>
+                <option value="brutalist">Warm Brutalist Studio</option>
+              </select>
+            </div>
+
+            <div class="interior-planes-grid">
+              <div id="interiorSofa" class="interior-plane-item">
+                <div id="sofaSwatch" class="plane-swatch"></div>
+                <div class="plane-info">
+                  <span class="plane-role">Focal Seating</span>
+                  <span id="sofaName" class="plane-desc">Modern Sofa in Linen Bouclé</span>
+                </div>
+              </div>
+              <div id="interiorRug" class="interior-plane-item">
+                <div id="rugSwatch" class="plane-swatch"></div>
+                <div class="plane-info">
+                  <span class="plane-role">Textiles & Rug</span>
+                  <span id="rugName" class="plane-desc">Hand-Woven Wool Rug</span>
+                </div>
+              </div>
+              <div id="interiorAccent" class="interior-plane-item">
+                <div id="accentSwatch" class="plane-swatch"></div>
+                <div class="plane-info">
+                  <span class="plane-role">Architectural Accent</span>
+                  <span id="interiorAccentName" class="plane-desc">Sculptural Chair & Vessels</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="interior-meta-box">
+              <div class="meta-label">Wall & Lighting Finish:</div>
+              <div id="interiorLightingText" class="meta-val">Washi textured lime plaster, warm 2700K ambient cove glow</div>
             </div>
           </div>
         </div>
@@ -135,12 +233,15 @@
       <!-- Export Station -->
       <div class="export-panel">
         <div class="export-header">
-          <h3>Token Export Station</h3>
+          <h3>Token & Prompt Export</h3>
           <div class="export-tabs">
-            <button class="export-tab active" data-tab="css">CSS (:root)</button>
+            <button class="export-tab active" data-tab="css">CSS</button>
             <button class="export-tab" data-tab="tailwind">Tailwind v4</button>
+            <button class="export-tab" data-tab="midjourney">Midjourney</button>
+            <button class="export-tab" data-tab="flux">Flux.1</button>
+            <button class="export-tab" data-tab="gemini">Gemini</button>
+            <button class="export-tab" data-tab="dalle">GPT Image</button>
             <button class="export-tab" data-tab="design-md">design.md</button>
-            <button class="export-tab" data-tab="prompt">Agent Prompt</button>
           </div>
         </div>
 
@@ -151,7 +252,7 @@
             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
           </svg>
-          Copy Code Snippet
+          Copy Code / AI Prompt
         </button>
       </div>
     </aside>

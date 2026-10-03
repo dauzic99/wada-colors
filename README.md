@@ -1,6 +1,6 @@
 # 🌸 Wada Colors (和田三造 配色)
-> **348 Timeless 1930s Japanese Color Harmonies for AI Agents & Modern Applications**  
-> *Transforming Sanzo Wada's classic "A Dictionary of Color Combinations" (Haishoku Sōkan) into universal AI agent skills that create and update production-grade `design.md` systems.*
+> **348 Timeless 1930s Japanese Color Harmonies for AI Agents & Generative AI**  
+> *Transforming Sanzo Wada's classic "A Dictionary of Color Combinations" (Haishoku Sōkan) into universal AI agent skills for Digital UI/UX, High-Fashion Lookbooks, Interior Architecture, and Generative AI Image Prompts.*
 
 [![CI](https://github.com/wada-colors/wada-colors/actions/workflows/ci.yml/badge.svg)](https://github.com/wada-colors/wada-colors/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -8,7 +8,8 @@
 [![Pigments](https://img.shields.io/badge/Pigments-159%20Historical-1b2d42.svg)](#historical-provenance)
 [![WCAG](https://img.shields.io/badge/Accessibility-WCAG%20AA%2FAAA-2e7d32.svg)](#strict-palette-preservation--wcag-bridge)
 [![Agents](https://img.shields.io/badge/AI%20Agents-Claude%20%7C%20Cursor%20%7C%20Antigravity%20%7C%20Windsurf%20%7C%20Roo%20%7C%20Copilot-8a2be2.svg)](#supported-agents--quick-install)
-[![Zero Build](https://img.shields.io/badge/Web%20Visualizer-Zero%20Build-0093a5.svg)](#interactive-web-visualizer)
+[![GenAI Prompts](https://img.shields.io/badge/GenAI-Midjourney%20%7C%20Flux%20%7C%20Gemini%20%7C%20GPT-ff69b4.svg)](#-multi-target-generative-ai-image-studio)
+[![Zero Build](https://img.shields.io/badge/Web%20Studio-Zero%20Build-0093a5.svg)](#interactive-web-studio)
 
 <p align="center">
   <img src="assets/banner.svg" alt="Wada Colors Banner" width="100%">
@@ -18,25 +19,23 @@
 
 ## ✨ Why Wada Colors?
 
-Modern web design has fallen into a trap of generic blue-and-purple gradients and sterile neutral templates. In 1933, Japanese artist and master color theorist **Sanzo Wada (和田三造)** published *Haishoku Sōkan* (配色総鑑) — a monumental study of **348 color combinations** blending traditional Japanese aesthetics with early Showa-era modernism.
+Modern design and generative AI often suffer from repetitive, predictable color schemes. In 1933, Japanese artist, painter, and master color theorist **Sanzo Wada (和田三造)** published *Haishoku Sōkan* (配色総鑑) — a monumental study of **348 color combinations** blending traditional Japanese pigments with Showa modernism. In 1954, Wada won the **Academy Award for Best Costume Design** for *Gate of Hell* (地獄門), proving that authentic Japanese color harmony commands timeless global acclaim.
 
-**Wada Colors** brings this timeless mastery directly into your AI agent workflows (Claude Code, Cursor, Google Antigravity, Windsurf, Roo Code, GitHub Copilot). With a single command, your agent gains the knowledge to curate, harmonize, and generate production-grade `design.md` specifications tailored to your brand.
+**Wada Colors** brings this heritage into the age of AI agents and Generative AI imagery across 3 major creative domains:
 
 ```
-       [ Sanzo Wada 1933 Combinations ]
-                       │
-       ┌───────────────┴───────────────┐
-       ▼                               ▼
-[ Greenfield Apps ]       [ Brand Asset Ingestion ]
-(Domain & Vibe Match)      (CIELAB ΔE Color Match)
-       └───────────────┬───────────────┘
-                       ▼
-       [ 5-Step Curated Agent Interview ]
-                       │
-                       ▼
-         [ Production-Grade design.md ]
-     Strict Wada Tokens • WCAG AAA Bridge
-       CSS Variables • Tailwind v4 @theme
+                  [ Sanzo Wada 1933 Color Harmonies ]
+                                   │
+       ┌───────────────────────────┼───────────────────────────┐
+       ▼                           ▼                           ▼
+[ 1. Digital UI/UX ]    [ 2. Fashion & Lookbooks ]    [ 3. Interior & Spaces ]
+• design.md System      • lookbook.md Specs           • interior-spec.md Specs
+• CSS & Tailwind v4     • Garment Layer Allocation    • Spatial Plane Allocation
+• WCAG AAA Compliance   • Model Poise & Lighting      • Materials & 2700K Glow
+       └───────────────────────────┬───────────────────────────┘
+                                   ▼
+          [ Multi-Target Generative AI Image Prompts ]
+     📸 Midjourney v6.1 • ⚡ Flux.1 • 🔮 Gemini Imagen 3 • 🧠 GPT Image
 ```
 
 ---
@@ -63,6 +62,45 @@ npx wada-colors init --agent all
 
 ---
 
+## 📸 Multi-Target Generative AI Image Studio
+
+Wada Colors translates any of the 348 historical palettes into production-ready prompts formatted for **Midjourney v6.1**, **Flux.1**, **Google Gemini (Imagen 3)**, and **OpenAI ChatGPT (GPT Image / DALL-E 3)**.
+
+### Fashion & Wardrobe Styling:
+```bash
+# Generate prompts for High-End Minimalist Tailoring
+npx wada-colors prompt --combo 165 --domain fashion --style minimalist
+
+# Generate prompts for Modern Japanese Neo-Trad (Haori)
+npx wada-colors prompt --combo 9 --domain fashion --style neotrad
+
+# Generate prompts for Tokyo Contemporary Streetwear
+npx wada-colors prompt --combo 305 --domain fashion --style streetwear
+
+# Generate prompts for Classic 1930s Showa Vintage (Oscar 1954 Homage)
+npx wada-colors prompt --combo 176 --domain fashion --style showa
+```
+
+**Sample Generated Midjourney v6.1 Prompt:**
+> `Editorial fashion photography, full body portrait of a model wearing High-End Minimalist Tailoring. Outer garment in Cameo Pink #e0b3b6 (structured double-breasted overcoat in heavy boiled wool), inner layer in Spinel Coral #f27291 (ribbed cashmere knit crewneck top), bottoms in Deep Lake Wine #6d4145 (wide-leg pleated wool gabardine trousers). Set against clean architectural brutalist concrete gallery in Tokyo, soft diffuse natural morning light. Shot on 85mm f/1.4 lens, soft directional diffused studio lighting, Vogue editorial aesthetic, high tactile fabric texture --ar 3:4 --style raw --v 6.1`
+
+### Interior & Spatial Architecture:
+```bash
+# Generate prompts for Japandi / Modern Ryokan
+npx wada-colors prompt --combo 121 --domain interior --style japandi
+
+# Generate prompts for Wabi-Sabi Boutique Cafe
+npx wada-colors prompt --combo 161 --domain interior --style cafe
+
+# Generate prompts for Warm Brutalist Creative Studio
+npx wada-colors prompt --combo 241 --domain interior --style brutalist
+```
+
+**Sample Generated Flux.1 Prompt:**
+> `High-end architectural interior photography of a Japandi / Modern Ryokan living space inspired by 1930s Japanese color theory (Wada Sanzo #121). Main centerpiece is low-slung modern lounge sofa upholstered in Green Blue (#099197) linen bouclé, balanced with hand-woven area rug and linen drapery in Silver Gray (#b6bfc1). Walls finished in warm washi textured lime plaster in soft off-white. Natural sunlight, realistic shadow falloff, tactile bouclé and linen textures, tranquil atmosphere.`
+
+---
+
 ## 🔍 Brand & Asset Color Matcher
 
 Already have a primary brand color or logo? Wada Colors uses **CIELAB Delta-E ($\Delta E$) perceptual color science** to find authentic 1930s Wada harmonies that anchor and elevate your existing identity:
@@ -77,44 +115,40 @@ npx wada-colors match --file ./logo.svg
 npx wada-colors match --file ./src/theme.css
 ```
 
-**Example Output:**
-```text
-🌸 Closest authentic Wada pigment to #2A6F97:
-   #121 群青 (Gunjō) / Olympic Blue
-   Hex: #5a82b3 | CIELAB ΔE: 8.42 (0 = identical)
+---
 
-🌟 Top Wada Sanzo Combinations anchoring your brand color:
-  [1] Combination #121: 浅葱青・生成色・群青 (Nile Blue & Ecru & Olympic Blue)
-      Size: 3-color | Temperature: balanced
-      Colors: #bce4e5 + #c2ae93 + #5a82b3
-      Tags: trio, balanced, surface-accent, tranquil, oceanic
+## 📝 Automated Document Generation
+
+Generate ready-to-commit specification files in seconds:
+
+```bash
+# Digital UI/UX Design System (design.md)
+npx wada-colors generate --combo 127 --domain ui --out design.md
+
+# Fashion Wardrobe Lookbook (lookbook.md)
+npx wada-colors generate --combo 165 --domain fashion --style minimalist --out lookbook.md
+
+# Spatial Interior Architecture Spec (interior-spec.md)
+npx wada-colors generate --combo 121 --domain interior --style japandi --out interior-spec.md
 ```
 
 ---
 
-## 🤖 The 5-Step Guided Agent Workflow
+## 🌐 Interactive Web Studio (Zero-Build)
 
-Once installed, your AI agent follows a disciplined, curated workflow whenever you ask it to create or update `design.md`:
+This repository includes a zero-build web application ready to deploy directly on **GitHub Pages**:
 
+- **Domain Switcher**: Seamlessly switch between **App UI Preview**, **Fashion Lookbook Studio**, and **Spatial Interior Studio**.
+- **Interactive UI Recoloring Engine**: Real-time simulation of live app UI elements (Navbar, hero CTA, cards, pill tags) recoloring with authentic Wada hues.
+- **Fashion Studio Swatches**: Interactive garment allocation (Overcoat, Mid-layer, Trousers) with live backdrop details and silhouette selectors.
+- **Interior Studio Planes**: Architectural surface allocation (Focal sofa, textiles/rug, accent vessels) with lighting temperature specs.
+- **Multi-Tab Code & Prompt Exporter**: Instant copy-paste for CSS custom properties (`:root`), Tailwind v4 `@theme`, **Midjourney**, **Flux.1**, **Gemini**, **GPT Image**, or markdown specs.
+
+### Running Locally:
+```bash
+npm run serve
+# Visit http://localhost:3333
 ```
-Step 1: Profiling & Ingestion  ──► Checks brand files/hex or asks 4 quick archetype questions
-                                    │
-Step 2: 3-Candidate Showcase   ──► Presents 3 curated Wada palettes with rationale & swatches
-                                    │
-Step 3: Strict Token Mapping   ──► Preserves exact Wada hex codes + neutral monochrome bridge
-                                    │
-Step 4: design.md Synthesis    ──► Writes complete production specification in project root
-                                    │
-Step 5: Code Tokens Export     ──► Writes theme.css, tailwind.config, or tokens.json
-```
-
-### Try these prompts with your AI Agent:
-
-> *"Generate a design.md for our developer tools CLI app using Wada Sanzo colors."*
-
-> *"Here is our brand color `#E07A5F`. Find a matching Wada Sanzo combination and update our design.md."*
-
-> *"Update our design system with a 3-color Wada Sanzo palette that feels like Zen Wabi-Sabi."*
 
 ---
 
@@ -135,45 +169,28 @@ Instead, the skill pairs the authentic Wada palette with an **intelligent neutra
 
 ---
 
-## 🌐 Interactive Web Visualizer & Live App Mockup
-
-This repository includes a **zero-build interactive web gallery** ready to deploy on **GitHub Pages**:
-
-- **348 Palette Grid**: Instant search by name, Japanese kanji, hex, mood, or archetype.
-- **Brand Color Matcher**: Native color picker + hex input with real-time CIELAB Delta-E ranking.
-- **Live App UI Mockup**: An interactive, responsive application interface (Navbar, Hero section, Feature cards, CTA buttons) that dynamically recolors on-the-fly as you select palettes!
-- **Interactive Light / Dark Mode**: Toggle the live mockup between light and dark modes to preview how the palette performs.
-- **One-Click Code Export**: Copy CSS custom properties (`:root`), Tailwind CSS v4 `@theme`, `design.md` snippet, or agent prompt with one click.
-
-### Running the Visualizer Locally:
-```bash
-npm run serve
-# Visit http://localhost:3333
-```
-
----
-
 ## 📚 The 348 Palettes at a Glance
 
 Sanzo Wada's dictionary is systematically divided into three palette densities:
 
 ### 1. 2-Color Duos (#1 – #120)
-*Ideal for minimalist developer tools, terminal interfaces, high-contrast branding, and dual-tone landing pages.*
+*Ideal for minimalist developer tools, terminal interfaces, high-contrast branding, and dual-tone noragi silhouettes.*
 - **#1**: English Red (`#d96629`) & Cerulian Blue (`#0093a5`) — *弁柄赤・碧天*
 - **#14**: Raw Sienna (`#bb7125`) & Deep Slate Olive (`#253122`) — *黄土色・石盤橄欖*
 - **#28**: Brick Red (`#a84222`) & Peacock Blue (`#00939b`) — *弁柄色・孔雀青*
 
 ### 2. 3-Color Trios (#121 – #240)
-*Ideal for SaaS dashboards, mobile apps, web platforms (Dominant, Secondary, Accent).*
+*Ideal for SaaS dashboards, high-fashion wardrobe layering, and residential interior spaces.*
+- **#121**: Green Blue (`#099197`), Silver Gray (`#b6bfc1`) & Warm Ivory (`#ebd3a2`) — *緑青・銀鼠・象牙色*
 - **#161**: Brown (`#7c4226`), Pinkish Cinnamon (`#eeb480`) & Helvetia Blue (`#005b8d`) — *茶色・肉桂色・露草色*
-- **#165**: Cameo Pink (`#e0b3b6`), Spinel Red (`#f27291`) & Vistoris Lake (`#6d4145`) — *紅梅色・尖晶石紅・深湖紅*
-- **#176**: Hermosa Pink (`#f9c1ce`), Dark Tyrian Blue (`#12354e`) & Warm Gray (`#a1a39a`) — *肉色・鉄紺・灰桜*
+- **#165**: Cameo Pink (`#e0b3b6`), Spinel Coral (`#f27291`) & Deep Lake Wine (`#6d4145`) — *紅梅色・尖晶石紅・深湖紅*
+- **#176**: Hermosa Pink (`#f9c1ce`), Deep Tyrian Navy (`#12354e`) & Warm Gray (`#a1a39a`) — *肉色・鉄紺・灰桜*
 
 ### 3. 4-Color Quads (#241 – #348)
-*Ideal for rich editorial publications, artisan lifestyle, e-commerce, and multi-tag categorizations.*
+*Ideal for rich editorial publications, multi-plane architecture, and modular street fashion.*
 - **#241**: Slate Color (`#34454c`), Benzol Green (`#00978d`), Cream Yellow (`#fdbf68`) & Brown (`#7c4226`)
 - **#281**: Pale Lemon Yellow (`#ffefae`), Benzol Green (`#00978d`), Cobalt Green (`#96d1aa`) & Antwarp Blue (`#007190`)
-- **#312**: Deep Indigo (`#051230`), Peach Red (`#f15a30`), Cream Yellow (`#fdbf68`) & White (`#ffffff`)
+- **#305**: Burnt Sienna (`#ae5224`), Olive Ochre (`#d6b43e`), Warm Ecru (`#c2ae93`) & Sepia (`#644b1e`)
 
 ---
 
@@ -189,8 +206,9 @@ Commands:
   npx wada-colors show <id (1-348)>
   npx wada-colors match --color "#HEX"
   npx wada-colors match --file <brand.json | logo.svg | theme.css>
-  npx wada-colors generate --combo <id> [--name "App Name"] [--out design.md]
-  npx wada-colors generate --color "#HEX" [--name "App Name"] [--out design.md]
+  npx wada-colors prompt --combo <id> [--domain fashion|interior|ui] [--style name]
+  npx wada-colors generate --combo <id> [--domain fashion|interior|ui] [--style name] [--out <file>]
+  npx wada-colors serve [--port 3333]
   npx wada-colors help
 ```
 
