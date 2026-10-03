@@ -66,8 +66,16 @@ function deltaE(lab1, lab2) {
 const ADAPTERS = {
   claude: {
     name: 'Claude Code (Anthropic)',
-    source: path.join(ROOT_DIR, 'adapters', 'claude', 'SKILL.md'),
-    dest: path.join('.claude', 'skills', 'wada-colors', 'SKILL.md')
+    files: [
+      {
+        source: path.join(ROOT_DIR, 'adapters', 'claude', 'SKILL.md'),
+        dest: path.join('.claude', 'skills', 'wada-colors', 'SKILL.md')
+      },
+      {
+        source: path.join(ROOT_DIR, 'adapters', 'claude', 'commands', 'wada.md'),
+        dest: path.join('.claude', 'commands', 'wada.md')
+      }
+    ]
   },
   cursor: {
     name: 'Cursor IDE (.cursor/rules)',
@@ -102,12 +110,14 @@ function copyAdapter(key, targetDir = process.cwd()) {
     console.error(`❌ Unknown agent target: ${key}`);
     return false;
   }
-  const destPath = path.resolve(targetDir, adapter.dest);
-  const destFolder = path.dirname(destPath);
-  if (!fs.existsSync(destFolder)) fs.mkdirSync(destFolder, { recursive: true });
-
-  fs.copyFileSync(adapter.source, destPath);
-  console.log(`✅ Installed [${adapter.name}] -> ${adapter.dest}`);
+  const files = adapter.files || [{ source: adapter.source, dest: adapter.dest }];
+  for (const f of files) {
+    const destPath = path.resolve(targetDir, f.dest);
+    const destFolder = path.dirname(destPath);
+    if (!fs.existsSync(destFolder)) fs.mkdirSync(destFolder, { recursive: true });
+    fs.copyFileSync(f.source, destPath);
+    console.log(`✅ Installed [${adapter.name}] -> ${f.dest}`);
+  }
   return true;
 }
 

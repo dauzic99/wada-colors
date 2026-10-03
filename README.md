@@ -50,9 +50,9 @@ Install the Wada Colors skill into your project using the zero-dependency CLI:
 npx wada-colors init
 
 # Or install directly for your specific agent:
-npx wada-colors init --agent claude        # .claude/skills/wada-colors/
-npx wada-colors init --agent cursor        # .cursor/rules/wada-colors.mdc
+npx wada-colors init --agent claude        # .claude/skills/ & .claude/commands/wada.md
 npx wada-colors init --agent antigravity   # .agents/skills/wada-colors/
+npx wada-colors init --agent cursor        # .cursor/rules/wada-colors.mdc
 npx wada-colors init --agent windsurf      # .windsurf/rules/wada-colors.md
 npx wada-colors init --agent roo           # .clinerules
 npx wada-colors init --agent copilot       # .github/copilot-instructions.md
@@ -60,6 +60,52 @@ npx wada-colors init --agent copilot       # .github/copilot-instructions.md
 # Or install for all agents at once:
 npx wada-colors init --agent all
 ```
+
+---
+
+## 💬 How to Use in AI Agents & IDEs (Slash Commands & Prompts)
+
+Once initialized, you can invoke Wada Colors in your preferred AI agent or IDE using native slash commands or prompt triggers:
+
+### 1. 🤖 Claude Code (`/wada` Native Slash Command)
+Installing for Claude sets up both the skill definition and the native `.claude/commands/wada.md` slash command. You can type `/wada` directly into the Claude Code terminal:
+
+| Slash Command | What It Does |
+|---|---|
+| `/wada` | Interactive launcher: choose domain (UI/UX, Fashion, Interior) or browse palettes |
+| `/wada 165` | Look up Combination #165 with Japanese name, hex swatches, token mappings & prompts |
+| `/wada match #2A6F97` | Perceptually match a brand color to the closest authentic Wada palettes via CIELAB $\Delta E$ |
+| `/wada match brand.json` | Automatically extract colors from brand files and rank nearest Wada harmonies |
+| `/wada apply 165` | Autonomously theme current project: injects tokens and refactors component classes |
+| `/wada ui minimalist` | Synthesize a complete `design.md` design system with WCAG AA/AAA compliance |
+| `/wada lookbook streetwear` | Synthesize a fashion `lookbook.md` with garment layer allocation & GenAI prompts |
+| `/wada interior japandi` | Synthesize an architectural `interior-spec.md` with 7-plane material specs |
+
+### 2. 🌌 Google Antigravity (`/wada` or Natural Prompts)
+The skill is installed in `.agents/skills/wada-colors/` (or globally in `~/.gemini/config/skills/wada-colors/`). Antigravity activates the skill automatically via progressive disclosure:
+
+- **Slash Command Fast-Paths in Chat**:
+  - `/wada 127` — Retrieve palette #127 and display tokens
+  - `/wada apply 165` — Automatically theme and refactor the current workspace
+  - `/wada match logo.svg` — Match logo colors to authentic Wada palettes
+  - `/wada lookbook` — Generate fashion lookbook with proactive `generate_image` visual render
+  - `/wada interior` — Generate interior architectural spec with live demonstration image
+- **Natural Language Prompts**:
+  - *"Style my landing page using Wada Colors combo #127"*
+  - *"Create a design.md design system using authentic 1930s Japanese color harmonies"*
+  - *"Recolor this web app with Wada Sanzo palette #165"*
+
+### 3. ⚡ Cursor IDE (`@wada-colors` Symbol)
+Installed as `.cursor/rules/wada-colors.mdc`:
+- In **Cursor Chat** or **Composer**, type `@wada-colors` to bind the rule:
+  - *"@wada-colors match #2A6F97 to the closest Wada combination and update design.md"*
+  - *"@wada-colors refactor our button and card components using combo #165"*
+  - *"@wada-colors generate a fashion lookbook for Tokyo Streetwear"*
+
+### 4. 🌊 Codeium Windsurf, Roo Code & GitHub Copilot
+- **Windsurf**: Rule automatically triggers via Cascades when editing `design.md`, `lookbook.md`, or theme stylesheets.
+- **Roo Code / Cline**: Instructs Roo via `.clinerules` to preserve authentic hexes and execute `npx wada-colors apply`.
+- **Copilot**: In Chat, ask Copilot: *"Using Wada Colors, allocate combo #127 tokens to this component."*
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: wada-colors
-description: Master color harmony skill using Sanzo Wada's 1930s "A Dictionary of Color Combinations" (Haishoku Sōkan). Supports Digital UI/UX (design.md), Autonomous Project Theming (wada-colors apply), Fashion & Wardrobe Lookbooks (lookbook.md), Spatial & Interior Architecture (interior-spec.md), and Multi-Platform Generative AI Image Prompts (Midjourney v6.1, Flux.1, Gemini Imagen 3, ChatGPT / DALL-E 3) with live image generation.
+description: Master color harmony skill using Sanzo Wada's 1930s "A Dictionary of Color Combinations" (Haishoku Sōkan). Triggers on "/wada", "wada-colors", or requests for UI/UX (design.md), Autonomous Project Theming (wada-colors apply), Fashion & Wardrobe Lookbooks (lookbook.md), Spatial & Interior Architecture (interior-spec.md), and Multi-Platform Generative AI Image Prompts with live image generation.
 ---
 
 # 🌸 Wada Colors Skill (和田三造 配色)
@@ -13,6 +13,19 @@ This skill guides AI agents in applying Sanzo Wada's authentic 1930s Japanese co
 3. **Fashion & Wardrobe Styling**: High-fashion `lookbook.md` with garment layer color mapping, model direction, backdrop harmony, and GenAI image generation.
 4. **Interior & Spatial Architecture**: Architectural `interior-spec.md` with surface planes, furniture upholstery, textiles, and lighting temperature specs.
 5. **Multi-Target Generative AI Prompts**: Ready-to-render prompts for **Midjourney v6.1**, **Flux.1**, **Google Gemini (Imagen 3)**, and **OpenAI ChatGPT (GPT Image / DALL-E 3)**.
+
+---
+
+## ⚡ Slash Command & Fast-Path Invocations
+
+When invoked via `/wada` or `wada-colors`, execute the appropriate action based on arguments:
+- **`/wada`**: Interactive domain & palette selector (prompt user for domain: UI, Fashion, or Interior).
+- **`/wada [1-348]`** (e.g. `/wada 165`): Retrieve combination #ID, present its Japanese name, romaji, hex values, and domain token allocations.
+- **`/wada match <#HEX | file>`** (e.g. `/wada match #2A6F97`): Match against authentic Wada pigments using CIELAB Delta-E perceptual math.
+- **`/wada apply [1-348]`** (e.g. `/wada apply 127`): Autonomously inject tokens into root stylesheets and refactor component classes via `npx wada-colors apply`.
+- **`/wada ui [style]`**: Generate or update production-grade `design.md` with WCAG AA/AAA tokens.
+- **`/wada lookbook [style]`**: Generate a fashion `lookbook.md` with layered garment mapping and proactive visual generation.
+- **`/wada interior [style]`**: Generate an interior `interior-spec.md` with 7-plane architectural allocations.
 
 ---
 

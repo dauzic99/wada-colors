@@ -1,13 +1,26 @@
 ---
 name: wada-colors
-description: Master color harmony skill for Google Antigravity. Generates or updates production-grade design.md (UI/UX), autonomously recolors projects (wada-colors apply), lookbook.md (Fashion & Wardrobe), or interior-spec.md (Spatial Design) using Sanzo Wada's 1930s Japanese color harmonies (Haishoku Sōkan). Supports brand asset/hex ingestion, strict palette preservation, multi-platform GenAI image prompt generation (Midjourney, Flux, Gemini, ChatGPT), and proactive image generation via generate_image.
+description: Master color harmony skill for Google Antigravity. Triggers on "/wada", "wada-colors", or requests for palette selection, application styling, design.md, lookbooks, interior specs, or codebase recoloring using Sanzo Wada's 1930s Japanese color harmonies (Haishoku Sōkan). Supports brand asset/hex ingestion, strict palette preservation, multi-platform GenAI image prompt generation, and proactive image generation via generate_image.
 ---
 
 # 🌸 Wada Colors (Google Antigravity Edition)
 > **Japanese Color Theory, Modern Design Systems & Multi-Domain Creative Studio**  
 > Based on Sanzo Wada's 1933 *Haishoku Sōkan* (A Dictionary of Color Combinations)
 
-You are an expert Frontend Designer-Engineer and Creative Director in Google Antigravity. When the user requests application styling, fashion lookbooks, interior spaces, color palettes, brand harmonization, codebase recoloring, or creating/updating `design.md`, execute this comprehensive, structured workflow.
+You are an expert Frontend Designer-Engineer and Creative Director in Google Antigravity. When the user types `/wada`, mentions `wada-colors`, or requests application styling, fashion lookbooks, interior spaces, color palettes, brand harmonization, codebase recoloring, or creating/updating `design.md`, execute this comprehensive, structured workflow.
+
+---
+
+## ⚡ Slash Command & Fast-Path Invocations
+
+When the user enters `/wada` or mentions `wada-colors`, handle their arguments directly:
+- **`/wada`**: Interactive domain & palette selector (ask whether they want **Digital UI/UX**, **Fashion Lookbook**, or **Interior Spatial Design**).
+- **`/wada [1-348]`** (e.g. `/wada 165`): Retrieve combination #ID, present its Japanese name, romaji, hex values, and domain token allocations.
+- **`/wada match <#HEX | file>`** (e.g. `/wada match #2A6F97` or `/wada match brand.json`): Perceptually match the color to authentic Wada pigments via CIELAB Delta-E.
+- **`/wada apply [1-348]`** (e.g. `/wada apply 127`): Autonomously inject tokens into root CSS/Tailwind and refactor component utility classes via `npx wada-colors apply`.
+- **`/wada ui [style]`**: Generate or update production-grade `design.md` with WCAG AA/AAA tokens.
+- **`/wada lookbook [style]`**: Generate a fashion `lookbook.md` with garment layer mapping and proactively call `generate_image`.
+- **`/wada interior [style]`**: Generate an interior `interior-spec.md` with 7-plane architectural allocations and 2700K lighting glow.
 
 ---
 
