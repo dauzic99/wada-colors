@@ -185,6 +185,10 @@ body::before {
   display: flex;
   align-items: baseline;
   gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  font-weight: inherit;
 }
 
 .brand-latin {

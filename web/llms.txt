@@ -1,0 +1,32 @@
+# Wada Colors (和田三造 配色)
+> 348 Historical 1930s Japanese Color Harmonies for AI Agents, Digital UI, Fashion Lookbooks, and Spatial Architecture
+
+## Overview
+Wada Colors is an open-source design system, AI agent skill, and interactive studio based on Sanzo Wada's 1933 landmark publication "A Dictionary of Color Combinations" (Haishoku Sōkan / 配色総鑑). Sanzo Wada (1883–1967) was an avant-garde Japanese painter, color theorist, and kimono designer who won the 1954 Academy Award for Best Costume Design for the film "Gate of Hell" (地獄門).
+
+- Website: https://dauzic99.github.io/wada-colors/
+- Repository: https://github.com/dauzic99/wada-colors
+- License: MIT License
+
+## Dataset Composition
+- 159 authentic historical Japanese pigments cataloged with Japanese Kanji, Romaji, English names, and CIELAB color math coordinates.
+- 348 curated color combinations:
+  - 120 2-Color Duos (#1 to #120): Minimalist interfaces, developer tools, dual-tone apparel.
+  - 120 3-Color Trios (#121 to #240): SaaS dashboards, fashion wardrobe layering, residential spaces.
+  - 108 4-Color Quads (#241 to #348): Rich editorial spreads, multi-plane spatial architecture.
+
+## Supported Domains
+1. Digital UI/UX: Production-grade design systems (design.md) with CSS custom properties, Tailwind CSS v4 (@theme), and WCAG AA/AAA text contrast compliance.
+2. Fashion Atelier: 7-piece wardrobe ensemble styling (Outerwear, Shirt/Knit, Bottoms, Footwear, Socks, Bag, Headwear) across 10 silhouette archetypes.
+3. Spatial Interior: 7-plane architectural material specification (Seating, Rugs, Joinery, Walls, Lighting, Ceramics, Hardware) across 10 spatial styles.
+4. Generative AI Prompts: Formulated prompt generators for Midjourney v6.1, Flux.1, Google Gemini (Imagen 3), and OpenAI ChatGPT (GPT Image / DALL-E 3).
+5. Autonomous Theming: Automated CLI engine (wada-colors apply) to scan existing codebases and inject semantic tokens without altering layout classes.
+
+## CLI Commands
+- Installation: `npx wada-colors init [--agent claude|cursor|antigravity|windsurf|roo|copilot|all]`
+- Search: `npx wada-colors search <query>`
+- Palette Detail: `npx wada-colors show <id 1-348>`
+- Brand Matching: `npx wada-colors match --color "#HEX" [--file <path>]` (CIELAB Delta-E matching)
+- AI Prompts: `npx wada-colors prompt --combo <id> [--domain fashion|interior|ui] [--style <name>]`
+- Document Generation: `npx wada-colors generate --combo <id> [--domain ui|fashion|interior] [--out <file>]`
+- Autonomous Theming: `npx wada-colors apply --combo <id> [--dry-run] [--yes]`
