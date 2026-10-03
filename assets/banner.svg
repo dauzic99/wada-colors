@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c0e12" />
+      <stop offset="50%" stop-color="#14181f" />
+      <stop offset="100%" stop-color="#0d1014" />
+    </linearGradient>
+    <radialGradient id="glow-rose" cx="20%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#e8926d" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#e8926d" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glow-blue" cx="80%" cy="70%" r="50%">
+      <stop offset="0%" stop-color="#0093a5" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#0093a5" stop-opacity="0" />
+    </radialGradient>
+    <filter id="card-shadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.5" />
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1200" height="480" fill="url(#bg-grad)" />
+  <rect width="1200" height="480" fill="url(#glow-rose)" />
+  <rect width="1200" height="480" fill="url(#glow-blue)" />
+
+  <!-- Grid Accents -->
+  <g stroke="#ffffff" stroke-opacity="0.03" stroke-width="1">
+    <line x1="0" y1="80" x2="1200" y2="80" />
+    <line x1="0" y1="160" x2="1200" y2="160" />
+    <line x1="0" y1="240" x2="1200" y2="240" />
+    <line x1="0" y1="320" x2="1200" y2="320" />
+    <line x1="0" y1="400" x2="1200" y2="400" />
+    <line x1="200" y1="0" x2="200" y2="480" />
+    <line x1="400" y1="0" x2="400" y2="480" />
+    <line x1="600" y1="0" x2="600" y2="480" />
+    <line x1="800" y1="0" x2="800" y2="480" />
+    <line x1="1000" y1="0" x2="1000" y2="480" />
+  </g>
+
+  <!-- Center Branding -->
+  <g transform="translate(600, 105)" text-anchor="middle">
+    <!-- Emblem -->
+    <circle cx="0" cy="-35" r="28" fill="#1b2d42" />
+    <circle cx="-10" cy="-40" r="14" fill="#d96629" opacity="0.9" />
+    <circle cx="10" cy="-40" r="14" fill="#0093a5" opacity="0.9" />
+    <circle cx="0" cy="-22" r="14" fill="#e8926d" opacity="0.9" />
+    <circle cx="0" cy="-34" r="5" fill="#fcfbf9" />
+
+    <text font-family="'Outfit', 'Plus Jakarta Sans', -apple-system, sans-serif" font-size="34" font-weight="800" fill="#ffffff" letter-spacing="4" y="25">
+      WADA COLORS
+    </text>
+    <text font-family="'Noto Serif JP', serif" font-size="19" font-weight="500" fill="#e8926d" y="55">
+      和田三造 配色総鑑 (1933)
+    </text>
+    <text font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-size="14" fill="#8b949e" y="85">
+      348 Timeless Japanese Color Harmonies for AI Agents &amp; Modern Applications
+    </text>
+  </g>
+
+  <!-- 3 Showcase Cards -->
+  <!-- Card 1: Duo #1 -->
+  <g transform="translate(100, 245)" filter="url(#card-shadow)">
+    <rect width="300" height="180" rx="14" fill="#151921" stroke="#252b36" stroke-width="1.5" />
+    <!-- Color Bar -->
+    <g transform="translate(20, 20)">
+      <rect x="0" y="0" width="130" height="48" rx="8 0 0 8" fill="#d96629" />
+      <rect x="130" y="0" width="130" height="48" rx="0 8 8 0" fill="#0093a5" />
+    </g>
+    <!-- Text -->
+    <text x="20" y="98" font-family="'Outfit', sans-serif" font-size="15" font-weight="700" fill="#ffffff">#001 • 弁柄赤・碧天</text>
+    <text x="20" y="118" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" fill="#8b949e">English Red &amp; Cerulian Blue</text>
+    <text x="20" y="142" font-family="monospace" font-size="11" fill="#e8926d">#d96629  #0093a5</text>
+    <rect x="20" y="152" width="70" height="18" rx="4" fill="#1d232e" />
+    <text x="32" y="165" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" fill="#8b949e">2-COLOR</text>
+  </g>
+
+  <!-- Card 2: Trio #165 -->
+  <g transform="translate(450, 245)" filter="url(#card-shadow)">
+    <rect width="300" height="180" rx="14" fill="#151921" stroke="#e8926d" stroke-width="2" />
+    <!-- Color Bar -->
+    <g transform="translate(20, 20)">
+      <rect x="0" y="0" width="86" height="48" rx="8 0 0 8" fill="#e0b3b6" />
+      <rect x="86" y="0" width="88" height="48" fill="#f27291" />
+      <rect x="174" y="0" width="86" height="48" rx="0 8 8 0" fill="#6d4145" />
+    </g>
+    <!-- Text -->
+    <text x="20" y="98" font-family="'Outfit', sans-serif" font-size="15" font-weight="700" fill="#ffffff">#165 • 紅梅色・尖晶石紅・深湖紅</text>
+    <text x="20" y="118" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" fill="#8b949e">Cameo Pink, Spinel Red &amp; Lake</text>
+    <text x="20" y="142" font-family="monospace" font-size="11" fill="#e8926d">#e0b3b6  #f27291  #6d4145</text>
+    <rect x="20" y="152" width="70" height="18" rx="4" fill="#e8926d" fill-opacity="0.2" />
+    <text x="32" y="165" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="600" fill="#e8926d">3-COLOR</text>
+  </g>
+
+  <!-- Card 3: Quad #281 -->
+  <g transform="translate(800, 245)" filter="url(#card-shadow)">
+    <rect width="300" height="180" rx="14" fill="#151921" stroke="#252b36" stroke-width="1.5" />
+    <!-- Color Bar -->
+    <g transform="translate(20, 20)">
+      <rect x="0" y="0" width="65" height="48" rx="8 0 0 8" fill="#ffefae" />
+      <rect x="65" y="0" width="65" height="48" fill="#00978d" />
+      <rect x="130" y="0" width="65" height="48" fill="#96d1aa" />
+      <rect x="195" y="0" width="65" height="48" rx="0 8 8 0" fill="#007190" />
+    </g>
+    <!-- Text -->
+    <text x="20" y="98" font-family="'Outfit', sans-serif" font-size="15" font-weight="700" fill="#ffffff">#281 • 淡檸檬黄・青碧・薄碧・藍</text>
+    <text x="20" y="118" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" fill="#8b949e">Pale Lemon, Benzol &amp; Cobalt</text>
+    <text x="20" y="142" font-family="monospace" font-size="11" fill="#e8926d">#ffefae  #00978d  #007190</text>
+    <rect x="20" y="152" width="70" height="18" rx="4" fill="#1d232e" />
+    <text x="32" y="165" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" fill="#8b949e">4-COLOR</text>
+  </g>
+</svg>

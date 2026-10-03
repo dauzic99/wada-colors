@@ -2,12 +2,17 @@
 > **348 Timeless 1930s Japanese Color Harmonies for AI Agents & Modern Applications**  
 > *Transforming Sanzo Wada's classic "A Dictionary of Color Combinations" (Haishoku Sōkan) into universal AI agent skills that create and update production-grade `design.md` systems.*
 
+[![CI](https://github.com/wada-colors/wada-colors/actions/workflows/ci.yml/badge.svg)](https://github.com/wada-colors/wada-colors/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Palettes](https://img.shields.io/badge/Palettes-348%20Combinations-e8926d.svg)](#the-348-palettes)
 [![Pigments](https://img.shields.io/badge/Pigments-159%20Historical-1b2d42.svg)](#historical-provenance)
 [![WCAG](https://img.shields.io/badge/Accessibility-WCAG%20AA%2FAAA-2e7d32.svg)](#strict-palette-preservation--wcag-bridge)
 [![Agents](https://img.shields.io/badge/AI%20Agents-Claude%20%7C%20Cursor%20%7C%20Antigravity%20%7C%20Windsurf%20%7C%20Roo%20%7C%20Copilot-8a2be2.svg)](#supported-agents--quick-install)
 [![Zero Build](https://img.shields.io/badge/Web%20Visualizer-Zero%20Build-0093a5.svg)](#interactive-web-visualizer)
+
+<p align="center">
+  <img src="assets/banner.svg" alt="Wada Colors Banner" width="100%">
+</p>
 
 ---
 
@@ -184,6 +189,8 @@ Commands:
   npx wada-colors show <id (1-348)>
   npx wada-colors match --color "#HEX"
   npx wada-colors match --file <brand.json | logo.svg | theme.css>
+  npx wada-colors generate --combo <id> [--name "App Name"] [--out design.md]
+  npx wada-colors generate --color "#HEX" [--name "App Name"] [--out design.md]
   npx wada-colors help
 ```
 

@@ -1,0 +1,30 @@
+name: CI Test Suite
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run Data Validation Test Suite
+        run: npm test
+
+      - name: Test CLI Installation Commands
+        run: |
+          node bin/cli.js --help
+          node bin/cli.js show 165
+          node bin/cli.js match --color "#2A6F97"
+          node bin/cli.js generate --combo 165 --name "Test App" --out test-design.md
+          test -f test-design.md

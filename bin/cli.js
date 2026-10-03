@@ -293,6 +293,115 @@ function handleMatch(args) {
   });
 }
 
+function handleGenerate(args) {
+  let comboId = null;
+  const comboIdx = args.indexOf('--combo');
+  if (comboIdx !== -1 && args[comboIdx + 1]) {
+    comboId = parseInt(args[comboIdx + 1], 10);
+  }
+
+  const colorIdx = args.indexOf('--color');
+  if (colorIdx !== -1 && args[colorIdx + 1]) {
+    const targetHex = args[colorIdx + 1].trim();
+    if (/^#[0-9a-fA-F]{6}$/i.test(targetHex)) {
+      const targetLab = hexToLab(targetHex);
+      const rankedColors = colors.map(c => ({ ...c, deltaE: deltaE(targetLab, c.lab) })).sort((a, b) => a.deltaE - b.deltaE);
+      const topPigment = rankedColors[0];
+      const match = combos.find(c => c.colors.some(col => col.id === topPigment.id));
+      if (match) comboId = match.id;
+    }
+  }
+
+  if (!comboId || comboId < 1 || comboId > 348) {
+    console.error('Usage: wada-colors generate --combo <id (1-348)> [--name "App Name"] [--out design.md]');
+    console.error('   or: wada-colors generate --color "#HEX" [--name "App Name"] [--out design.md]');
+    return;
+  }
+
+  let appName = 'Application';
+  const nameIdx = args.indexOf('--name');
+  if (nameIdx !== -1 && args[nameIdx + 1]) {
+    appName = args[nameIdx + 1].trim();
+  }
+
+  let outFile = 'design.md';
+  const outIdx = args.indexOf('--out');
+  if (outIdx !== -1 && args[outIdx + 1]) {
+    outFile = args[outIdx + 1].trim();
+  }
+
+  const combo = combos[comboId - 1];
+  const templatePath = path.join(ROOT_DIR, 'templates', 'design-md-template.md');
+  let tpl = fs.readFileSync(templatePath, 'utf8');
+
+  // Build rows
+  const colorRows = combo.colors.map((col, idx) => {
+    const role = idx === 0 ? 'Brand Primary / Action' : idx === 1 ? 'Secondary Accent / Badges' : idx === 2 ? 'Surface Highlight / Pills' : 'Tag Indicator';
+    return `| \`--wada-${idx + 1}\` | ${col.name_jp} (${col.name_romaji}) / ${col.name_en} | \`${col.hex}\` | RGB(${col.rgb.join(', ')}) | ${role} |`;
+  }).join('\n');
+
+  const c1 = combo.colors[0];
+  const c2 = combo.colors[1];
+  const c3 = combo.colors[2] || combo.colors[0];
+
+  const lum1 = (0.2126 * c1.rgb[0] + 0.7152 * c1.rgb[1] + 0.0722 * c1.rgb[2]) / 255;
+  const primaryBtnText = lum1 > 0.4 ? '#111314' : '#ffffff';
+
+  const contrastRows = combo.colors.map(col => {
+    const wCont = combo.contrast.against_white.find(x => x.hex === col.hex);
+    const bCont = combo.contrast.against_black.find(x => x.hex === col.hex);
+    return `| ${col.name_en} on Canvas | \`${col.hex}\` | Light / Dark Canvas | Light: ${wCont ? wCont.contrast : 'N/A'}:1 \\| Dark: ${bCont ? bCont.contrast : 'N/A'}:1 | Verified |`;
+  }).join('\n');
+
+  const cssVars = combo.colors.map((col, idx) => {
+    const role = idx === 0 ? 'primary' : idx === 1 ? 'secondary' : idx === 2 ? 'accent' : 'highlight';
+    return `  --wada-${role}: ${col.hex}; /* ${col.name_jp} / ${col.name_en} */`;
+  }).join('\n');
+
+  const tw4 = combo.colors.map((col, idx) => {
+    const role = idx === 0 ? 'primary' : idx === 1 ? 'secondary' : idx === 2 ? 'accent' : 'highlight';
+    return `  --color-wada-${role}: ${col.hex};`;
+  }).join('\n');
+
+  const tw3 = combo.colors.map((col, idx) => {
+    const role = idx === 0 ? 'primary' : idx === 1 ? 'secondary' : idx === 2 ? 'accent' : 'highlight';
+    return `          '${role}': '${col.hex}',`;
+  }).join('\n');
+
+  tpl = tpl
+    .replace(/\{\{APP_NAME\}\}/g, appName)
+    .replace(/\{\{WADA_ID\}\}/g, combo.id)
+    .replace(/\{\{WADA_NAME_JP\}\}/g, combo.name_jp)
+    .replace(/\{\{WADA_NAME_ROMAJI\}\}/g, combo.name_romaji)
+    .replace(/\{\{WADA_NAME_EN\}\}/g, combo.name_en)
+    .replace(/\{\{WADA_MOOD\}\}/g, combo.tags.join(', '))
+    .replace(/\{\{WADA_PHILOSOPHY\}\}/g, `A timeless 1930s Showa-era harmony balancing traditional Japanese elegance with modern interface hierarchy.`)
+    .replace(/\{\{WADA_COLOR_ROWS\}\}/g, colorRows)
+    .replace(/\{\{LIGHT_BG\}\}/g, '#fcfbf9')
+    .replace(/\{\{LIGHT_SURFACE\}\}/g, '#ffffff')
+    .replace(/\{\{LIGHT_BORDER\}\}/g, '#e5e7eb')
+    .replace(/\{\{LIGHT_TEXT_PRIMARY\}\}/g, '#111314')
+    .replace(/\{\{LIGHT_TEXT_MUTED\}\}/g, '#64748b')
+    .replace(/\{\{DARK_BG\}\}/g, '#111314')
+    .replace(/\{\{DARK_SURFACE\}\}/g, '#1a1e24')
+    .replace(/\{\{DARK_BORDER\}\}/g, '#2d3238')
+    .replace(/\{\{DARK_TEXT_PRIMARY\}\}/g, '#f5f5f7')
+    .replace(/\{\{DARK_TEXT_MUTED\}\}/g, '#94a3b8')
+    .replace(/\{\{CONTRAST_ROWS\}\}/g, contrastRows)
+    .replace(/\{\{COLOR_PRIMARY_HEX\}\}/g, c1.hex)
+    .replace(/\{\{PRIMARY_BTN_TEXT\}\}/g, primaryBtnText)
+    .replace(/\{\{COLOR_SECONDARY_HEX\}\}/g, c2.hex)
+    .replace(/\{\{COLOR_ACCENT_HEX\}\}/g, c3.hex)
+    .replace(/\{\{CSS_VARS_ROOT\}\}/g, cssVars)
+    .replace(/\{\{TAILWIND_V4_TOKENS\}\}/g, tw4)
+    .replace(/\{\{TAILWIND_V3_TOKENS\}\}/g, tw3);
+
+  const destPath = path.resolve(process.cwd(), outFile);
+  fs.writeFileSync(destPath, tpl, 'utf8');
+  console.log(`\n✨ Successfully generated design system: ${outFile}`);
+  console.log(`   Based on Sanzo Wada Combination #${combo.id}: ${combo.name_jp} (${combo.name_en})\n`);
+}
+
 function printHelp() {
   console.log(`
 🌸 Wada Colors CLI (和田三造 配色)
@@ -305,6 +414,8 @@ Usage:
   npx wada-colors show <id (1-348)>
   npx wada-colors match --color "#HEX"
   npx wada-colors match --file <brand.json | logo.svg | theme.css>
+  npx wada-colors generate --combo <id> [--name "App Name"] [--out design.md]
+  npx wada-colors generate --color "#HEX" [--name "App Name"] [--out design.md]
   npx wada-colors help
 
 Examples:
@@ -312,6 +423,7 @@ Examples:
   npx wada-colors search "editorial"
   npx wada-colors show 165
   npx wada-colors match --color "#2A6F97"
+  npx wada-colors generate --combo 165 --name "ZenFlow SaaS"
 `);
 }
 
@@ -333,6 +445,9 @@ switch (cmd) {
     break;
   case 'match':
     handleMatch(rest);
+    break;
+  case 'generate':
+    handleGenerate(rest);
     break;
   case 'help':
   case '--help':
