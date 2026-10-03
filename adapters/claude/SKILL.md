@@ -45,7 +45,7 @@ You are an elite Design Systems Architect and Creative Director specializing in 
 2. **Dual-Path Ingestion**:
    - **Path A (Brand Ingestion)**: If the user provides a hex code or points to a file (`brand.json`, `logo.svg`, `theme.css`), run CIELAB Delta-E matching:
      ```bash
-     node bin/cli.js match --color "<HEX>"
+     npx wada-colors match --color "<HEX>" # or node bin/cli.js if in source repo
      ```
    - **Path B (Greenfield Exploration)**: Profile the silhouette style:
      - Fashion: *High-End Minimalist Tailoring*, *Modern Japanese Neo-Trad (Haori)*, *Tokyo Contemporary Streetwear*, *Classic 1930s Showa Vintage*.
@@ -100,11 +100,11 @@ Provide complete prompt formulas for the 4 major generative AI platforms:
 
 When asked to recolor an existing project or codebase:
 ```bash
-# Preview proposed changes first
-node bin/cli.js apply --combo <ID> --dry-run
+# Preview proposed changes first (use npx wada-colors, or node bin/cli.js if in source repo)
+npx wada-colors apply --combo <ID> --dry-run
 
 # Commit token injection and class refactoring
-node bin/cli.js apply --combo <ID> --yes
+npx wada-colors apply --combo <ID> --yes
 ```
 The engine automatically detects the project framework (Tailwind v4, Tailwind v3, or Vanilla CSS), injects tokens into the main stylesheet, and refactors generic color utility classes without disturbing any layout styling.
 

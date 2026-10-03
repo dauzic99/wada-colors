@@ -21,10 +21,15 @@ jobs:
       - name: Run Data Validation Test Suite
         run: npm test
 
-      - name: Test CLI Installation Commands
+      - name: Test CLI Installation & Studio Commands
         run: |
           node bin/cli.js --help
           node bin/cli.js show 165
           node bin/cli.js match --color "#2A6F97"
+          node bin/cli.js prompt --combo 165 --domain fashion --style minimalist
+          node bin/cli.js prompt --combo 121 --domain interior --style japandi
+          node bin/cli.js apply --combo 127 --dry-run
           node bin/cli.js generate --combo 165 --name "Test App" --out test-design.md
           test -f test-design.md
+          rm -f test-design.md
+          npm run bundle:web

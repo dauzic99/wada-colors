@@ -13,7 +13,7 @@ Thank you for your interest in contributing to **Wada Colors**!
 
 1. Clone repository:
    ```bash
-   git clone https://github.com/wada-colors/wada-colors.git
+   git clone https://github.com/dauzic99/wada-colors.git
    cd wada-colors
    ```
 2. Run validation test:

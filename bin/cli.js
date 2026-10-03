@@ -295,127 +295,183 @@ function handleMatch(args) {
   });
 }
 
+function getFashionMapping(size) {
+  if (size === 2) return [0, 1, 0, 1, 0, 0, 1]; // Outerwear:0, Shirt:1, Bottoms:0, Footwear:1, Socks:0, Bag:0, Headwear:1
+  if (size === 3) return [0, 1, 2, 0, 1, 2, 1]; // Outerwear:0, Shirt:1, Bottoms:2, Footwear:0, Socks:1, Bag:2, Headwear:1
+  return [0, 1, 2, 3, 2, 3, 0];                  // Outerwear:0, Shirt:1, Bottoms:2, Footwear:3, Socks:2, Bag:3, Headwear:0
+}
+
+function getInteriorMapping(size) {
+  if (size === 2) return [0, 1, 0, 1, 1, 0, 1]; // Seating:0, Rug:1, Joinery:0, Walls:1, Lighting:1, Ceramics:0, Hardware:1
+  if (size === 3) return [0, 1, 2, 1, 0, 2, 1]; // Seating:0, Rug:1, Joinery:2, Walls:1, Lighting:0, Ceramics:2, Hardware:1
+  return [0, 1, 2, 3, 0, 3, 2];                  // Seating:0, Rug:1, Joinery:2, Walls:3, Lighting:0, Ceramics:3, Hardware:2
+}
+
 // Generative AI Prompt Builders
 function generateFashionPrompts(combo, style = 'minimalist') {
-  const c1 = combo.colors[0];
-  const c2 = combo.colors[1];
-  const c3 = combo.colors[2] || combo.colors[0];
-  const c4 = combo.colors[3] || combo.colors[1];
+  const numColors = combo.colors.length;
+  const map = getFashionMapping(numColors);
 
   const styleProfiles = {
     minimalist: {
       name: 'High-End Minimalist Tailoring',
       genre: 'Luxury Contemporary / Lemaire aesthetic',
-      c1Garment: 'structured double-breasted overcoat in heavy boiled wool',
-      c2Garment: 'ribbed cashmere knit crewneck top',
-      c3Garment: 'wide-leg pleated wool gabardine trousers',
-      c4Garment: 'minimalist leather tote bag and polished leather loafers',
       backdrop: 'clean architectural brutalist concrete gallery in Tokyo, soft diffuse natural morning light',
-      posture: 'tall elegant fashion model standing poised with relaxed shoulders'
+      items: {
+        outerwear: { name: 'Structured Double-Breasted Overcoat', material: 'heavy boiled virgin wool' },
+        shirt: { name: 'Ribbed Cashmere Knit Crewneck', material: 'ultra-soft 12-gauge Mongolian cashmere' },
+        bottoms: { name: 'Wide-Leg Pleated Trousers', material: 'fluid wool gabardine with deep pleats' },
+        footwear: { name: 'Polished Leather Loafers', material: 'smooth calfskin leather' },
+        socks: { name: 'Fine-Gauge Mercerized Socks', material: 'Egyptian cotton' },
+        bag: { name: 'Minimalist Unlined Tote', material: 'full-grain bridle leather' },
+        headwear: { name: 'Cashmere Ribbed Beanie', material: 'seamless Italian knit' }
+      }
     },
     neotrad: {
       name: 'Modern Japanese Neo-Trad',
       genre: 'Contemporary Haori & Kimono cuts',
-      c1Garment: 'draped contemporary noragi haori jacket in heavy raw linen',
-      c2Garment: 'collarless washed silk wrap blouse',
-      c3Garment: 'tailored hakama-inspired wide pleated culottes',
-      c4Garment: 'leather tabi footwear and woven canvas satchel',
       backdrop: 'serene Japanese architectural courtyard with weathered cedar timber and raked gravel',
-      posture: 'fashion model with graceful sculptural posture in profile'
+      items: {
+        outerwear: { name: 'Draped Noragi Haori Jacket', material: 'heavy slub-spun raw linen' },
+        shirt: { name: 'Collarless Wrap Blouse', material: 'washed mulberry silk' },
+        bottoms: { name: 'Hakama-Inspired Pleated Culottes', material: 'dense cotton twill' },
+        footwear: { name: 'Leather Tabi Ankle Boots', material: 'vegetable-tanned horsehide' },
+        socks: { name: 'Split-Toe Tabi Socks', material: 'woven hemp' },
+        bag: { name: 'Draped Linen Azuma Bukuro Bag', material: 'textured linen canvas' },
+        headwear: { name: 'Sculptural Woven Straw Boater Hat', material: 'Japanese rush grass' }
+      }
     },
     streetwear: {
       name: 'Tokyo Contemporary Streetwear',
       genre: 'Urban Techwear & Oversized Silhouette',
-      c1Garment: 'oversized matte technical bomber jacket',
-      c2Garment: 'heavyweight ribbed hoodie',
-      c3Garment: 'relaxed modular cargo pants with subtle strap details',
-      c4Garment: 'chunky technical trail sneakers and crossbody sling bag',
       backdrop: 'moody Shibuya alleyway at twilight, atmospheric mist and subtle neon reflections',
-      posture: 'dynamic urban streetwear model with confident forward stride'
+      items: {
+        outerwear: { name: 'Oversized Matte Technical Bomber', material: 'water-repellent micro-ripstop' },
+        shirt: { name: 'Heavyweight Drop-Shoulder Hoodie', material: '500gsm loopback French terry' },
+        bottoms: { name: 'Modular Wide Cargo Pants', material: 'tactical cordura with strap details' },
+        footwear: { name: 'Technical Trail Sneakers', material: 'layered ballistic mesh and suede' },
+        socks: { name: 'Heavy Ribbed Athletic Crew Socks', material: 'combed cotton' },
+        bag: { name: 'Crossbody Sling Bag', material: 'waterproof X-Pac sailcloth' },
+        headwear: { name: 'Technical 6-Panel Cap', material: 'water-resistant matte nylon' }
+      }
     },
     showa: {
       name: 'Classic 1930s Showa Vintage',
       genre: 'Sanzo Wada Oscar Homage / Historical Tailoring',
-      c1Garment: 'authentic 1930s tailored wool trench coat with peak lapels',
-      c2Garment: 'vintage silk crepe neckerchief and button-down dress shirt',
-      c3Garment: 'high-waisted tailored wool trousers with deep pleats',
-      c4Garment: 'vintage oxford brogues and leather travel bag',
-      backdrop: 'nostalgic 1930s Tokyo art salon with dark wood paneling, warm incandescent amber lighting',
-      posture: 'classic editorial model posed against vintage studio backdrop'
+      backdrop: 'nostalgic 1930s Tokyo art salon with dark mahogany wood paneling, warm incandescent amber lighting',
+      items: {
+        outerwear: { name: 'Authentic 1930s Peak-Lapel Trench Coat', material: 'heavy twill melton wool' },
+        shirt: { name: 'Spread-Collar Dress Shirt with Silk Scarf', material: 'vintage silk crepe' },
+        bottoms: { name: 'High-Waisted Tailored Wool Trousers', material: 'deep double front pleats' },
+        footwear: { name: 'Goodyear-Welted Oxford Brogues', material: 'hand-burnished calfskin' },
+        socks: { name: 'Silk-Blend Ribbed Dress Socks', material: 'fine spun lisle' },
+        bag: { name: 'Framed Gladstone Travel Case', material: 'saddle-stitched bridle leather' },
+        headwear: { name: 'Wide-Brimmed Felt Fedora', material: 'brushed rabbit fur felt' }
+      }
     }
   };
 
   const p = styleProfiles[style] || styleProfiles.minimalist;
 
-  const midjourney = `Editorial fashion photography, full body portrait of a model wearing ${p.name}. Outer garment in ${c1.name_en} ${c1.hex} (${p.c1Garment}), inner layer in ${c2.name_en} ${c2.hex} (${p.c2Garment}), bottoms in ${c3.name_en} ${c3.hex} (${p.c3Garment}), accents in ${c4.name_en} ${c4.hex} (${p.c4Garment}). Set against ${p.backdrop}. Shot on 85mm f/1.4 lens, soft directional diffused studio lighting, Vogue editorial aesthetic, high tactile fabric texture --ar 3:4 --style raw --v 6.1`;
+  const cOuter = combo.colors[map[0]];
+  const cShirt = combo.colors[map[1]];
+  const cBottoms = combo.colors[map[2]];
+  const cFootwear = combo.colors[map[3]];
+  const cSocks = combo.colors[map[4]];
+  const cBag = combo.colors[map[5]];
+  const cHeadwear = combo.colors[map[6]];
 
-  const flux = `A high-fashion editorial photograph of a model in a sophisticated ${p.name} outfit styled with 1930s Japanese color theory (Wada Sanzo #${combo.id}). The model wears a ${c1.name_en} (${c1.hex}) ${p.c1Garment}, layered over a ${c2.name_en} (${c2.hex}) ${p.c2Garment}, paired with ${c3.name_en} (${c3.hex}) ${p.c3Garment}. Natural skin texture, realistic cloth drape, soft ambient lighting, ${p.backdrop}.`;
+  const wardrobeBreakdown = `7-piece wardrobe breakdown: Outerwear (${p.items.outerwear.name} in ${cOuter.name_en} ${cOuter.hex}, ${p.items.outerwear.material}), layered over ${p.items.shirt.name} in ${cShirt.name_en} ${cShirt.hex} (${p.items.shirt.material}), paired with ${p.items.bottoms.name} in ${cBottoms.name_en} ${cBottoms.hex} (${p.items.bottoms.material}), ${p.items.footwear.name} in ${cFootwear.name_en} ${cFootwear.hex}, ${p.items.socks.name} in ${cSocks.hex}, accessorized with ${p.items.bag.name} in ${cBag.hex} and ${p.items.headwear.name} in ${cHeadwear.hex}`;
 
-  const gemini = `Photorealistic fashion portrait of a fashion model styled in an elegant ${p.name} collection based on Sanzo Wada's color harmony #${combo.id} (${combo.name_en}). Garment breakdown: outer coat in exact ${c1.name_en} ${c1.hex}, mid-layer in ${c2.name_en} ${c2.hex}, trousers in ${c3.name_en} ${c3.hex}. Background: ${p.backdrop}. Soft studio shadows, Hasselblad camera quality, 8k resolution, authentic fabric weaves.`;
+  const midjourney = `Editorial fashion photography, full body portrait of a model wearing a complete 7-piece ${p.name} ensemble (${p.genre}) inspired by Wada Sanzo combination #${combo.id} (${combo.name_en}). ${wardrobeBreakdown}. Set against ${p.backdrop}. Shot on 85mm f/1.4 lens, soft directional diffused studio lighting, Vogue editorial aesthetic, high tactile fabric texture --ar 3:4 --style raw --v 6.1`;
 
-  const dalle = `A full-length fashion photograph featuring a model posing gracefully in a coordinated wardrobe inspired by Sanzo Wada's Japanese color palette #${combo.id}. The model is dressed in a ${c1.name_en} (${c1.hex}) ${p.c1Garment}, a ${c2.name_en} (${c2.hex}) ${p.c2Garment}, and ${c3.name_en} (${c3.hex}) ${p.c3Garment}. The background is ${p.backdrop} with soft natural light streaming from the side.`;
+  const flux = `A high-fashion editorial photograph of a model in a complete 7-piece ${p.name} wardrobe styled with authentic 1930s Japanese color theory (Wada Sanzo #${combo.id} - ${combo.name_en}). Ensemble: ${p.items.outerwear.name} in ${cOuter.name_en} (${cOuter.hex}, ${p.items.outerwear.material}), layered over ${p.items.shirt.name} in ${cShirt.name_en} (${cShirt.hex}), with ${p.items.bottoms.name} in ${cBottoms.name_en} (${cBottoms.hex}), ${p.items.footwear.name} in ${cFootwear.name_en} (${cFootwear.hex}), ${p.items.socks.name} in ${cSocks.hex}, and accessories (${p.items.bag.name} in ${cBag.hex}, ${p.items.headwear.name} in ${cHeadwear.hex}). Natural skin texture, realistic cloth drape, soft ambient lighting, ${p.backdrop}.`;
+
+  const gemini = `Photorealistic fashion portrait of a fashion model showcasing a complete 7-piece ${p.name} collection based on Sanzo Wada's color harmony #${combo.id} (${combo.name_en}). Exact 7-piece color allocation: Outerwear (${p.items.outerwear.name}) in ${cOuter.name_en} ${cOuter.hex}, Shirt/Knit (${p.items.shirt.name}) in ${cShirt.name_en} ${cShirt.hex}, Bottoms (${p.items.bottoms.name}) in ${cBottoms.name_en} ${cBottoms.hex}, Footwear (${p.items.footwear.name}) in ${cFootwear.name_en} ${cFootwear.hex}, Legwear (${p.items.socks.name}) in ${cSocks.hex}, Leather Bag (${p.items.bag.name}) in ${cBag.hex}, Headwear (${p.items.headwear.name}) in ${cHeadwear.hex}. Setting: ${p.backdrop}. Soft studio shadows, Hasselblad camera quality, 8k resolution, authentic fabric weaves.`;
+
+  const dalle = `A full-length fashion photograph featuring a model posing gracefully in a coordinated 7-piece wardrobe inspired by Sanzo Wada's Japanese color palette #${combo.id} (${combo.name_en}). The ensemble balances ${p.items.outerwear.name} in ${cOuter.name_en} (${cOuter.hex}) over ${p.items.shirt.name} in ${cShirt.name_en} (${cShirt.hex}), ${p.items.bottoms.name} in ${cBottoms.name_en} (${cBottoms.hex}), ${p.items.footwear.name} in ${cFootwear.name_en} (${cFootwear.hex}), accented with ${p.items.bag.name} in ${cBag.hex} and ${p.items.headwear.name} in ${cHeadwear.hex}. The background is ${p.backdrop} with soft natural light streaming from the side.`;
 
   return { profile: p, midjourney, flux, gemini, dalle };
 }
 
 function generateInteriorPrompts(combo, style = 'japandi') {
-  const c1 = combo.colors[0];
-  const c2 = combo.colors[1];
-  const c3 = combo.colors[2] || combo.colors[0];
-  const c4 = combo.colors[3] || combo.colors[1];
+  const numColors = combo.colors.length;
+  const map = getInteriorMapping(numColors);
 
   const interiorProfiles = {
     japandi: {
       name: 'Japandi / Modern Ryokan',
-      walls: 'warm washi textured lime plaster in soft off-white',
-      c1Element: `low-slung modern lounge sofa upholstered in ${c1.name_en} (${c1.hex}) linen bouclé`,
-      c2Element: `hand-woven area rug and linen drapery in ${c2.name_en} (${c2.hex})`,
-      c3Element: `accent sculptural armchair and fluted ceramic vessels in ${c3.name_en} (${c3.hex})`,
-      c4Element: `lacquered wood coffee table with raw clay ceramics in ${c4.name_en} (${c4.hex})`,
       lighting: 'soft diffuse morning sunlight filtering through shoji-style slatted oak blinds, warm 2700K ambient cove glow',
-      flooring: 'matte white oak hardwood flooring'
+      items: {
+        seating: { name: 'Low-Slung Modern Lounge Sofa', material: 'textured linen bouclé upholstery' },
+        rug: { name: 'Hand-Woven Wool & Paper Yarn Rug', material: 'natural unbleached wool with subtle border' },
+        joinery: { name: 'Solid White Oak Joinery & Table', material: 'hand-rubbed matte oil finish oak' },
+        walls: { name: 'Warm Washi Textured Plaster', material: 'off-white breathable mineral lime plaster' },
+        lighting: { name: 'Akari Washi Paper Lanterns', material: 'bamboo ribbing and mulberry washi paper' },
+        ceramics: { name: 'Hand-Thrown Shino Ceramic Vessels', material: 'matte feldspathic crackle glaze stoneware' },
+        hardware: { name: 'Recessed Blackened Brass Hardware', material: 'hand-patinated architectural brass' }
+      }
     },
     midcentury: {
       name: 'Mid-Century Modern Salon',
-      walls: 'rich warm taupe plaster with dark walnut architectural paneling',
-      c1Element: `curved architectural velvet sofa in ${c1.name_en} (${c1.hex})`,
-      c2Element: `pair of tailored lounge chairs in ${c2.name_en} (${c2.hex}) wool weave`,
-      c3Element: `geometric wool tapestry and mouth-blown glass pendant in ${c3.name_en} (${c3.hex})`,
-      c4Element: `decorative ceramic vases and marble side table in ${c4.name_en} (${c4.hex})`,
       lighting: 'warm directional gallery spotlights and sculptural brass floor lamp casting ambient shadows',
-      flooring: 'herringbone walnut parquet flooring'
+      items: {
+        seating: { name: 'Curved Sculptural Salon Sofa', material: 'rich Italian mohair velvet' },
+        rug: { name: 'Hand-Tufted Geometric Carpet', material: 'high-density New Zealand wool' },
+        joinery: { name: 'Honduran Walnut Credenza', material: 'fluted dark walnut with satin sheen' },
+        walls: { name: 'Warm Taupe Mineral Plaster', material: 'textured architectural plaster with timber slats' },
+        lighting: { name: 'Fluted Amber Glass Pendants', material: 'mouth-blown amber art glass' },
+        ceramics: { name: 'Volcanic Ash Stoneware Vessels', material: 'reactive matte volcanic glaze' },
+        hardware: { name: 'Unlacquered Satin Brass Pulls', material: 'heavy solid brass with living patina' }
+      }
     },
     cafe: {
       name: 'Wabi-Sabi Boutique Cafe',
-      walls: 'hand-troweled earthy clay plaster walls with natural imperfections',
-      c1Element: `long curved banquette bench seating in ${c1.name_en} (${c1.hex}) washed canvas`,
-      c2Element: `custom ceramic pendant lamps and glazed tile backsplash in ${c2.name_en} (${c2.hex})`,
-      c3Element: `artisan linen table runners and stoneware tableware in ${c3.name_en} (${c3.hex})`,
-      c4Element: `patinated steel accents and timber bar stools in ${c4.name_en} (${c4.hex})`,
       lighting: 'golden hour sun streaming through large floor-to-ceiling iron-framed windows',
-      flooring: 'terrazzo floor with river stone aggregate'
+      items: {
+        seating: { name: 'Curved Banquette Bench Seating', material: 'washed organic linen canvas' },
+        rug: { name: 'Woven Flatweave Jute Runner', material: 'artisan hand-braided natural fiber' },
+        joinery: { name: 'Reclaimed Chestnut Timber Bar Counter', material: 'hand-hewn century-old Japanese timber' },
+        walls: { name: 'Earthy Clay Plaster Walls', material: 'hand-troweled clay with fine straw flecks' },
+        lighting: { name: 'Terracotta Downlight Pendants', material: 'unglazed terracotta with warm 2400K filament' },
+        ceramics: { name: 'Oribe and Bizen Ceramic Tableware', material: 'traditional wood-fired stoneware' },
+        hardware: { name: 'Hand-Forged Wrought Iron Hardware', material: 'blacksmith-hammered matte iron' }
+      }
     },
     brutalist: {
       name: 'Warm Brutalist Creative Studio',
-      walls: 'smooth board-formed architectural concrete walls with exposed grain',
-      c1Element: `monolithic deep-seated sectional sofa in ${c1.name_en} (${c1.hex}) heavy twill`,
-      c2Element: `large acoustic felt wall panel and oversized wool rug in ${c2.name_en} (${c2.hex})`,
-      c3Element: `sculptural powder-coated metal side tables and shelving in ${c3.name_en} (${c3.hex})`,
-      c4Element: `industrial task lighting and large ceramic planter in ${c4.name_en} (${c4.hex})`,
       lighting: 'diffuse skylight illumination balanced with warm minimalist architectural LED strip lighting',
-      flooring: 'polished industrial concrete flooring with satin sealer'
+      items: {
+        seating: { name: 'Monolithic Low Modular Sofa', material: 'heavy slubbed Belgian linen' },
+        rug: { name: 'Dense Felted Wool Acoustic Carpet', material: 'monolithic charcoal felted wool' },
+        joinery: { name: 'Smoked European Oak Plinth Table', material: 'fumed solid oak with satin finish' },
+        walls: { name: 'Board-Formed Concrete Walls', material: 'smooth architectural concrete with wood grain' },
+        lighting: { name: 'Concealed Linear Grazing Lights', material: 'low-glare 2700K recessed architectural cove' },
+        ceramics: { name: 'Sculptural Raw Basalt Stone Vessels', material: 'carved volcanic basalt stone' },
+        hardware: { name: 'Bead-Blasted Titanium Aluminum Pulls', material: 'anodized matte architectural metal' }
+      }
     }
   };
 
   const p = interiorProfiles[style] || interiorProfiles.japandi;
 
-  const midjourney = `Architectural interior photography of a luxurious ${p.name} space designed with Sanzo Wada color harmony #${combo.id} (${combo.name_en}). Features ${p.c1Element}, ${p.c2Element}, and ${p.c3Element}. Walls in ${p.walls}, flooring in ${p.flooring}. ${p.lighting}. Shot on 24mm tilt-shift architectural lens, Architectural Digest editorial quality, hyper-realistic materiality, cinematic depth --ar 16:9 --style raw --v 6.1`;
+  const cSeating = combo.colors[map[0]];
+  const cRug = combo.colors[map[1]];
+  const cJoinery = combo.colors[map[2]];
+  const cWalls = combo.colors[map[3]];
+  const cLighting = combo.colors[map[4]];
+  const cCeramics = combo.colors[map[5]];
+  const cHardware = combo.colors[map[6]];
 
-  const flux = `High-end architectural interior photography of a ${p.name} living space inspired by 1930s Japanese color theory (Wada Sanzo #${combo.id}). Main centerpiece is a ${p.c1Element}, balanced with a ${p.c2Element}. Walls finished in ${p.walls}. Natural sunlight, realistic shadow falloff, tactile bouclé and linen textures, tranquil atmosphere.`;
+  const spatialBreakdown = `7-plane architectural material specification: Primary seating volume (${p.items.seating.name} in ${cSeating.name_en} ${cSeating.hex}, ${p.items.seating.material}), floor textiles (${p.items.rug.name} in ${cRug.name_en} ${cRug.hex}, ${p.items.rug.material}), architectural joinery (${p.items.joinery.name} in ${cJoinery.name_en} ${cJoinery.hex}), wall envelope (${p.items.walls.name} in ${cWalls.hex}, ${p.items.walls.material}), ambient lighting (${p.items.lighting.name} in ${cLighting.hex}), sculptural vessels (${p.items.ceramics.name} in ${cCeramics.hex}), and hardware details (${p.items.hardware.name} in ${cHardware.hex})`;
 
-  const gemini = `Photorealistic architectural rendering of an interior room in ${p.name} style featuring Sanzo Wada's color combination #${combo.id}. Exact color allocation: primary furniture in ${c1.name_en} ${c1.hex}, textiles and drapery in ${c2.name_en} ${c2.hex}, accents in ${c3.name_en} ${c3.hex}. Realistic Global Illumination, 8k resolution, Hasselblad medium format camera aesthetic.`;
+  const midjourney = `Architectural interior photography of a luxurious ${p.name} space designed with complete 7-plane architectural harmony based on Sanzo Wada color harmony #${combo.id} (${combo.name_en}). ${spatialBreakdown}. ${p.lighting}. Shot on 24mm tilt-shift architectural lens, Architectural Digest editorial quality, hyper-realistic materiality, cinematic depth --ar 16:9 --style raw --v 6.1`;
 
-  const dalle = `A wide-angle photograph of an impeccably designed ${p.name} interior space based on Sanzo Wada's palette #${combo.id}. The room features a ${p.c1Element} as the focal point, complemented by ${p.c2Element} and ${p.c3Element}. Beautiful natural light streams in, highlighting the rich textures and serene Japanese design harmony.`;
+  const flux = `High-end architectural interior photography of a complete 7-plane ${p.name} living space inspired by 1930s Japanese color theory (Wada Sanzo #${combo.id} - ${combo.name_en}). ${spatialBreakdown}. Natural sunlight, realistic shadow falloff, rich tactile material textures, tranquil atmosphere.`;
+
+  const gemini = `Photorealistic architectural rendering of an interior room in ${p.name} style featuring Sanzo Wada's 7-plane color combination #${combo.id} (${combo.name_en}). Spatial plane allocation: Focal seating (${p.items.seating.name}) in ${cSeating.name_en} ${cSeating.hex}, Floor textiles (${p.items.rug.name}) in ${cRug.name_en} ${cRug.hex}, Joinery (${p.items.joinery.name}) in ${cJoinery.name_en} ${cJoinery.hex}, Walls in ${cWalls.hex}, Lighting in ${cLighting.hex}, Ceramics in ${cCeramics.hex}, Hardware in ${cHardware.hex}. Atmosphere: ${p.lighting}. Realistic Global Illumination, 8k resolution, Hasselblad medium format camera aesthetic.`;
+
+  const dalle = `A wide-angle photograph of an impeccably designed 7-plane ${p.name} interior space based on Sanzo Wada's palette #${combo.id} (${combo.name_en}). The room features ${p.items.seating.name} in ${cSeating.name_en} (${cSeating.hex}) as the focal point, complemented by ${p.items.rug.name} in ${cRug.name_en} (${cRug.hex}), joinery in ${cJoinery.hex}, walls in ${cWalls.hex}, and accents in ${p.items.ceramics.name} (${cCeramics.hex}). Beautiful natural light streams in, highlighting the rich textures and serene Japanese design harmony.`;
 
   return { profile: p, midjourney, flux, gemini, dalle };
 }
@@ -758,6 +814,7 @@ const [, , cmd, ...rest] = process.argv;
 
 switch (cmd) {
   case 'init':
+  case 'install':
     handleInit(rest);
     break;
   case 'list':

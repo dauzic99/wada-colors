@@ -29,7 +29,7 @@ Cascade acts as a Senior Design Systems Engineer and Creative Director specializ
 - **Domain**: Determine if the task is Digital UI (`design.md`), Autonomous Codebase Theming (`wada-colors apply`), Fashion Lookbook (`lookbook.md`), or Interior Design (`interior-spec.md`).
 - **Brand Match**: If the user provides a brand color or file (`brand.json`, `logo.svg`, `theme.css`), match it using CIELAB Delta-E:
   ```bash
-  node bin/cli.js match --color "<HEX>"
+  npx wada-colors match --color "<HEX>"  # or node bin/cli.js if in source repo
   ```
 - **Greenfield Profile**: If starting from scratch, select a silhouette style (Minimalist, Neo-Trad Haori, Streetwear, 1930s Showa) or interior archetype (Japandi, Mid-Century, Wabi-Sabi Cafe, Warm Brutalist).
 
@@ -45,11 +45,11 @@ Write or update the appropriate document:
 ### Step 4: Autonomous Codebase Theming
 When asked to recolor an existing project or component library:
 ```bash
-# Preview changes first
-node bin/cli.js apply --combo <ID> --dry-run
+# Preview changes first (use npx wada-colors, or node bin/cli.js if in source repo)
+npx wada-colors apply --combo <ID> --dry-run
 
 # Commit token injection and class refactoring
-node bin/cli.js apply --combo <ID> --yes
+npx wada-colors apply --combo <ID> --yes
 ```
 
 ### Step 5: AI Prompt Generation & Code Export

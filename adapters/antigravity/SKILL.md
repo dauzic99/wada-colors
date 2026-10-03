@@ -129,11 +129,11 @@ When the user asks you to theme or recolor an existing project:
 1. **Automated Theming Engine**:
    Execute the automated scan and injection engine:
    ```powershell
-   # Preview proposed changes first
-   node bin/cli.js apply --combo <ID> --dry-run
+   # Preview proposed changes first (use npx wada-colors, or node bin/cli.js if in source repo)
+   npx wada-colors apply --combo <ID> --dry-run
 
    # Apply tokens and refactor classes
-   node bin/cli.js apply --combo <ID> --yes
+   npx wada-colors apply --combo <ID> --yes
    ```
 2. **Review Code Changes**:
    Verify that `--color-wada-primary` or `--wada-primary` is present in the main stylesheet (`index.css`, `theme.css`), and check modified component files to ensure layout classes are preserved.

@@ -72,7 +72,7 @@ const TAILWIND_HEX_MAP = {
 const IGNORED_DIRS = new Set([
   'node_modules', '.git', 'dist', 'build', '.next', '.nuxt', '.svelte-kit',
   '.output', 'out', 'coverage', '.agents', '.gemini', '.cursor', '.windsurf',
-  'data', 'scratch'
+  'data', 'scratch', 'web'
 ]);
 
 const MARKUP_EXTENSIONS = new Set(['.html', '.jsx', '.tsx', '.vue', '.svelte', '.astro', '.php']);

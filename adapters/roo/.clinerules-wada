@@ -29,7 +29,7 @@ When acting as a Designer or asked to create/update color systems, themes, recol
    - Check if `design.md`, `lookbook.md`, or `interior-spec.md` exists.
    - If the user provides a brand color or asset (`brand.json`, `logo.svg`, `theme.css`), match it using CIELAB Delta-E:
      ```bash
-     node bin/cli.js match --color "<HEX>"
+     npx wada-colors match --color "<HEX>"  # or node bin/cli.js if in source repo
      ```
    - If greenfield, select silhouette style or spatial archetype.
 2. **Candidate Showcase**:
@@ -41,8 +41,9 @@ When acting as a Designer or asked to create/update color systems, themes, recol
 4. **Autonomous Project Theming**:
    - To theme/recolor existing code:
      ```bash
-     node bin/cli.js apply --combo <ID> --dry-run
-     node bin/cli.js apply --combo <ID> --yes
+     # Preview changes first (use npx wada-colors, or node bin/cli.js if in source repo)
+     npx wada-colors apply --combo <ID> --dry-run
+     npx wada-colors apply --combo <ID> --yes
      ```
 5. **Generative AI Prompts & Code Export**:
    - Provide copy-paste prompts for Midjourney v6.1, Flux.1, Gemini Imagen 3, and OpenAI ChatGPT.

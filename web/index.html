@@ -3,263 +3,425 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wada Colors (和田三造 配色) — 348 Japanese 1930s Color Harmonies for AI Agents & Modern Apps</title>
-  <meta name="description" content="Explore all 348 authentic color combinations from Sanzo Wada's 1930s classic Haishoku Sōkan. Generate production-ready design.md specifications, CSS variables, and Tailwind tokens for AI agents and modern apps.">
-  <meta property="og:title" content="Wada Colors — Timeless 1930s Japanese Color System">
-  <meta property="og:description" content="348 historical color combinations from Sanzo Wada for Claude Code, Cursor, Antigravity, and modern apps.">
+  <title>Wada Colors — 348 Japanese 1930s Color Harmonies (和田三造 配色総鑑)</title>
+  <meta name="description" content="Authentic 1930s Japanese color combinations from Sanzo Wada's Haishoku Sōkan. Generates design.md, CSS tokens, Tailwind v4 tokens, and GenAI prompts for modern digital applications.">
+  <meta property="og:title" content="Wada Colors — 1930s Japanese Color System">
+  <meta property="og:description" content="348 historical color harmonies from Sanzo Wada for AI agents, modern UI, fashion, and spatial interior design.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Header -->
+  <!-- Global Archival Header -->
   <header class="site-header">
     <div class="header-container">
       <div class="brand-group">
-        <img src="favicon.svg" alt="Wada Colors Logo" class="brand-icon">
-        <div class="brand-text">
-          <h1>WADA COLORS <span class="brand-kanji">和田三造 配色</span></h1>
-          <p class="brand-sub">348 Timeless 1930s Japanese Color Harmonies for AI Agents & Modern Apps</p>
-        </div>
+        <a href="#" class="brand-link">
+          <div class="brand-seal" id="headerBrandSeal">
+            <span>和田</span>
+          </div>
+          <div class="brand-titles">
+            <div class="brand-primary">
+              <span class="brand-latin">WADA COLORS</span>
+              <span class="brand-kanji">配色総鑑</span>
+            </div>
+            <p class="brand-sub">Sanzo Wada 1930s Color Harmonies for AI Agents & Modern Applications</p>
+          </div>
+        </a>
       </div>
+
       <div class="header-actions">
-        <button id="siteThemeToggle" class="btn-icon" title="Toggle site theme">🌙</button>
-        <a href="https://github.com/wada-colors/wada-colors" target="_blank" rel="noopener noreferrer" class="btn-icon">
+        <button id="siteThemeToggle" class="btn-ghost theme-toggle-btn" aria-label="Toggle site appearance" title="Toggle theme">
+          <svg class="theme-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <span class="theme-toggle-label">Theme</span>
+        </button>
+
+        <a href="https://github.com/dauzic99/wada-colors" target="_blank" rel="noopener noreferrer" class="btn-ghost github-link">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
           </svg>
-          GitHub
+          <span>GitHub</span>
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Main Content -->
+  <!-- Full-Width Archival Main Gallery -->
   <main class="main-wrapper">
-    <!-- Left Column: Controls & Palette Explorer -->
-    <section class="explorer-column">
-      <div class="controls-container">
-        <!-- Search and Brand Matcher -->
-        <div class="search-and-match">
-          <div class="search-input-wrap">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="searchInput" class="search-input" placeholder="Search by name, kanji, hex, tag (zen, showa, editorial)...">
+    <section class="gallery-section">
+      <!-- Search, Brand Matcher & Filters Toolbar -->
+      <div class="controls-container" id="mainControlsBar">
+        <!-- Row 1: Full-Width Search Input -->
+        <div class="search-input-wrap">
+          <svg class="search-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search 348 combinations by Japanese name, English, hex code, or mood...">
+        </div>
+
+        <!-- Row 2: Dedicated Balanced Brand Matcher Bar (No Awkward Tooltip Popover) -->
+        <div class="brand-matcher-row" id="brandMatcherRow">
+          <div class="brand-matcher-intro">
+            <span class="brand-matcher-heading">Brand Color Harmony Matcher</span>
+            <span class="brand-matcher-desc">Calculates perceptual CIELAB ΔE distance across all 159 pigments to discover authentic 1930s Wada harmonies.</span>
           </div>
-          <div class="brand-matcher-wrap" title="Enter your primary brand color to find matching Wada Sanzo harmonies">
-            <input type="color" id="brandColorPicker" class="brand-color-picker" value="#2a6f97">
-            <input type="text" id="brandHexInput" class="brand-hex-input" value="#2a6f97">
-            <button id="btnMatch" class="btn-match">Match Wada</button>
+
+          <div class="brand-matcher-actions">
+            <label class="color-picker-label" title="Pick brand color">
+              <input type="color" id="brandColorPicker" class="brand-color-picker" value="#2a6f97">
+              <span class="color-picker-swatch" id="brandPickerSwatch"></span>
+            </label>
+            <input type="text" id="brandHexInput" class="brand-hex-input" value="#2A6F97" spellcheck="false" maxlength="7" title="Enter brand hex code">
+            <button id="btnMatch" class="btn-match">Find Harmonies</button>
+          </div>
+
+          <div id="brandMatchBadge" class="brand-match-badge" style="display: none;">
+            <!-- Live match readout -->
           </div>
         </div>
 
-        <!-- Size Tabs -->
-        <div class="filter-tabs">
-          <button class="filter-tab active" data-size="all">All Palettes (348)</button>
-          <button class="filter-tab" data-size="2">2-Color Duos (120)</button>
-          <button class="filter-tab" data-size="3">3-Color Trios (120)</button>
-          <button class="filter-tab" data-size="4">4-Color Quads (108)</button>
+        <!-- Row 3: Filter Tabs & Count -->
+        <div class="filter-row">
+          <nav class="filter-tabs" aria-label="Filter by color count">
+            <button class="filter-tab active" data-size="all">All Combinations <span class="tab-count">348</span></button>
+            <button class="filter-tab" data-size="2">Duo <span class="tab-count">120</span></button>
+            <button class="filter-tab" data-size="3">Trio <span class="tab-count">120</span></button>
+            <button class="filter-tab" data-size="4">Quad <span class="tab-count">108</span></button>
+          </nav>
+
+          <div class="filter-actions-group">
+            <div id="resultsCount" class="results-meta">Loading combinations...</div>
+            <button id="btnResetFilters" class="btn-reset-filters" style="display: none;" title="Reset all search, size, and mood filters">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                <path d="M3 3v5h5"/>
+              </svg>
+              <span>Reset Filters</span>
+            </button>
+          </div>
         </div>
 
-        <!-- Mood Pills -->
-        <div class="mood-pills">
-          <button class="mood-pill" data-mood="zen">Zen & Wabi-Sabi</button>
-          <button class="mood-pill" data-mood="nostalgic">Nostalgic Showa</button>
-          <button class="mood-pill" data-mood="botanical">Botanical</button>
-          <button class="mood-pill" data-mood="melancholic">Melancholic</button>
-          <button class="mood-pill" data-mood="earthy">Earthy</button>
-          <button class="mood-pill" data-mood="oceanic">Oceanic</button>
-          <button class="mood-pill" data-mood="warm">Warm</button>
-          <button class="mood-pill" data-mood="cool">Cool</button>
-          <button class="mood-pill" data-mood="balanced">Balanced</button>
+        <!-- Row 4: Curated Verified Mood Horizon Rail -->
+        <div class="mood-rail" aria-label="Filter by authentic aesthetic mood">
+          <span class="mood-label">Mood</span>
+          <div class="mood-scroll-track" id="moodScrollTrack">
+            <button class="mood-pill" data-mood="wabi-sabi">Wabi-Sabi <span class="mood-count">128</span></button>
+            <button class="mood-pill" data-mood="botanical">Botanical <span class="mood-count">136</span></button>
+            <button class="mood-pill" data-mood="oceanic">Oceanic & Indigo <span class="mood-count">92</span></button>
+            <button class="mood-pill" data-mood="noble">Noble & Elegant <span class="mood-count">94</span></button>
+            <button class="mood-pill" data-mood="nostalgic">Nostalgic Showa <span class="mood-count">40</span></button>
+            <button class="mood-pill" data-mood="earthy">Earthy <span class="mood-count">128</span></button>
+            <button class="mood-pill" data-mood="warm">Warm <span class="mood-count">123</span></button>
+            <button class="mood-pill" data-mood="cool">Cool <span class="mood-count">20</span></button>
+            <button class="mood-pill" data-mood="balanced">Balanced <span class="mood-count">246</span></button>
+          </div>
         </div>
       </div>
 
-      <div id="resultsCount" class="results-meta">Loading combinations...</div>
-
-      <!-- Palette Grid -->
+      <!-- Archival Palette Grid (Full Width, Rendered via JS) -->
       <div id="paletteGrid" class="palette-grid">
-        <!-- Injected via JavaScript -->
+        <!-- Swatch-first cards injected here with hoverable individual colors -->
       </div>
     </section>
-
-    <!-- Right Column: Sticky Live App Mockup & Export Station -->
-    <aside class="preview-column">
-      <!-- Domain Selector Bar -->
-      <div class="domain-selector-bar">
-        <button class="domain-btn active" data-domain="ui">🖥️ App UI</button>
-        <button class="domain-btn" data-domain="fashion">👘 Fashion Studio</button>
-        <button class="domain-btn" data-domain="interior">🏛️ Interior Space</button>
-      </div>
-
-      <!-- Live Mockup Wrapper -->
-      <div class="mockup-wrapper">
-        <div class="mockup-topbar">
-          <div class="mockup-dots">
-            <span class="mockup-dot"></span>
-            <span class="mockup-dot"></span>
-            <span class="mockup-dot"></span>
-          </div>
-          <span id="mockupTitle" class="mockup-title">Live App Preview (Recoloring Engine)</span>
-          <button id="mockupModeBtn" class="mockup-mode-btn">🌙 Dark Preview</button>
-        </div>
-
-        <!-- 1. App UI Mockup View -->
-        <div id="uiMockupView" class="domain-view active">
-          <div id="mockupCanvas" class="mockup-canvas mode-light">
-            <!-- Mini Navbar -->
-            <div class="app-navbar">
-              <div class="app-logo">
-                <span id="appLogoBadge" class="app-logo-badge"></span>
-                <span>SanzoApp</span>
-              </div>
-              <button id="appNavBtn" class="app-nav-btn">Get Started</button>
-            </div>
-
-            <!-- Hero Section -->
-            <div class="app-hero">
-              <span id="appHeroPill" class="app-hero-pill">Wada #165 • WARM</span>
-              <h2 id="appHeroTitle" class="app-hero-title">Harmonious Design Powered by History</h2>
-              <p class="app-hero-desc">Experience authentic 1930s Japanese color combinations directly in modern user interfaces.</p>
-              <div class="app-cta-row">
-                <button id="appBtnPrimary" class="app-btn-primary">Primary Action</button>
-                <button id="appBtnSecondary" class="app-btn-secondary">Learn More</button>
-              </div>
-            </div>
-
-            <!-- Feature Cards -->
-            <div class="app-features">
-              <div id="appCard1" class="app-card">
-                <div id="appCardIcon1" class="app-card-icon"></div>
-                <h4>Disciplined Harmony</h4>
-                <p>Curated 1930s pairings with strict palette integrity.</p>
-              </div>
-              <div id="appCard2" class="app-card">
-                <div id="appCardIcon2" class="app-card-icon"></div>
-                <h4>WCAG AA/AAA</h4>
-                <p>Bridged with neutral monochromes for readability.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 2. Fashion Lookbook Studio View -->
-        <div id="fashionMockupView" class="domain-view">
-          <div class="fashion-studio-card">
-            <div class="studio-subbar">
-              <span class="studio-badge">Wada Oscar Homage (1954)</span>
-              <select id="fashionStyleSelect" class="studio-select">
-                <option value="minimalist">Minimalist Tailoring</option>
-                <option value="neotrad">Modern Neo-Trad (Haori)</option>
-                <option value="streetwear">Tokyo Streetwear</option>
-                <option value="showa">1930s Showa Vintage</option>
-              </select>
-            </div>
-            
-            <div class="garment-layers-grid">
-              <div id="garmentCoat" class="garment-layer-item">
-                <div id="coatSwatch" class="garment-swatch"></div>
-                <div class="garment-info">
-                  <span class="garment-role">Outerwear</span>
-                  <span id="coatName" class="garment-desc">Coat in Heavy Boiled Wool</span>
-                </div>
-              </div>
-              <div id="garmentTop" class="garment-layer-item">
-                <div id="topSwatch" class="garment-swatch"></div>
-                <div class="garment-info">
-                  <span class="garment-role">Mid-Layer</span>
-                  <span id="topName" class="garment-desc">Cashmere Knit Crewneck</span>
-                </div>
-              </div>
-              <div id="garmentBottom" class="garment-layer-item">
-                <div id="bottomSwatch" class="garment-swatch"></div>
-                <div class="garment-info">
-                  <span class="garment-role">Bottoms</span>
-                  <span id="bottomName" class="garment-desc">Tailored Wool Trousers</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="fashion-meta-box">
-              <div class="meta-label">Backdrop & Lighting:</div>
-              <div id="fashionBackdropText" class="meta-val">Architectural brutalist concrete gallery, soft diffuse morning light</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3. Interior Design Studio View -->
-        <div id="interiorMockupView" class="domain-view">
-          <div class="interior-studio-card">
-            <div class="studio-subbar">
-              <span class="studio-badge">Spatial Architecture</span>
-              <select id="interiorStyleSelect" class="studio-select">
-                <option value="japandi">Japandi / Modern Ryokan</option>
-                <option value="midcentury">Mid-Century Modern Salon</option>
-                <option value="cafe">Wabi-Sabi Boutique Cafe</option>
-                <option value="brutalist">Warm Brutalist Studio</option>
-              </select>
-            </div>
-
-            <div class="interior-planes-grid">
-              <div id="interiorSofa" class="interior-plane-item">
-                <div id="sofaSwatch" class="plane-swatch"></div>
-                <div class="plane-info">
-                  <span class="plane-role">Focal Seating</span>
-                  <span id="sofaName" class="plane-desc">Modern Sofa in Linen Bouclé</span>
-                </div>
-              </div>
-              <div id="interiorRug" class="interior-plane-item">
-                <div id="rugSwatch" class="plane-swatch"></div>
-                <div class="plane-info">
-                  <span class="plane-role">Textiles & Rug</span>
-                  <span id="rugName" class="plane-desc">Hand-Woven Wool Rug</span>
-                </div>
-              </div>
-              <div id="interiorAccent" class="interior-plane-item">
-                <div id="accentSwatch" class="plane-swatch"></div>
-                <div class="plane-info">
-                  <span class="plane-role">Architectural Accent</span>
-                  <span id="interiorAccentName" class="plane-desc">Sculptural Chair & Vessels</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="interior-meta-box">
-              <div class="meta-label">Wall & Lighting Finish:</div>
-              <div id="interiorLightingText" class="meta-val">Washi textured lime plaster, warm 2700K ambient cove glow</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Export Station -->
-      <div class="export-panel">
-        <div class="export-header">
-          <h3>Token & Prompt Export</h3>
-          <div class="export-tabs">
-            <button class="export-tab active" data-tab="css">CSS</button>
-            <button class="export-tab" data-tab="tailwind">Tailwind v4</button>
-            <button class="export-tab" data-tab="midjourney">Midjourney</button>
-            <button class="export-tab" data-tab="flux">Flux.1</button>
-            <button class="export-tab" data-tab="gemini">Gemini</button>
-            <button class="export-tab" data-tab="dalle">GPT Image</button>
-            <button class="export-tab" data-tab="design-md">design.md</button>
-          </div>
-        </div>
-
-        <pre id="codeBox" class="code-box"></pre>
-
-        <button id="btnCopyCode" class="btn-copy-code">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-          </svg>
-          Copy Code / AI Prompt
-        </button>
-      </div>
-    </aside>
   </main>
 
-  <!-- Toast -->
-  <div id="toast" class="toast">Copied to clipboard!</div>
+  <!-- Persistent Floating Action Dock (Displays Active Selection & Opens Modal) -->
+  <aside id="floatingDock" class="floating-dock" aria-label="Selected palette control bar">
+    <div class="dock-container">
+      <div class="dock-swatch-cluster" id="dockSwatches">
+        <!-- Rendered dynamically -->
+      </div>
+      <div class="dock-info">
+        <div class="dock-title-line">
+          <span id="dockIndexNum" class="dock-num">#165</span>
+          <span id="dockJpName" class="dock-jp">弁柄赤・碧天</span>
+        </div>
+        <span id="dockEnName" class="dock-en">English Red & Cerulian Blue</span>
+      </div>
+      <div class="dock-actions">
+        <button id="btnOpenStudio" class="btn-dock-action btn-dock-primary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+          <span>Studio Preview</span>
+        </button>
+        <button id="btnOpenExport" class="btn-dock-action btn-dock-secondary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+          <span>Export Tokens & Prompts</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- High-Craft Unified Studio & Export Modal Dialog -->
+  <div id="specimenModalOverlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalJpTitle">
+    <div class="modal-dialog" id="modalDialogCard">
+      <!-- Modal Header -->
+      <div class="modal-header" id="modalHeaderBar">
+        <div class="modal-title-cluster">
+          <div class="modal-swatch-badge" id="modalSwatchBadge">
+            <!-- Swatches -->
+          </div>
+          <div>
+            <div class="modal-meta-line">
+              <span id="modalIndex" class="modal-index">#165</span>
+              <span id="modalJpTitle" class="modal-jp">弁柄赤・碧天</span>
+            </div>
+            <div id="modalEnTitle" class="modal-en">English Red & Cerulian Blue</div>
+          </div>
+        </div>
+
+        <button id="btnCloseModal" class="btn-close-modal" aria-label="Close dialog" title="Close dialog (Esc)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Body (Unified Continuous Sheet: Studio Top + Tokens Bottom) -->
+      <div class="modal-body" id="modalBodyContainer">
+        <!-- 1. TOP SECTION: INTERACTIVE STUDIO SPECIMEN -->
+        <section class="modal-section-studio" id="modalStudioSection">
+          <div class="studio-sub-nav">
+            <div class="domain-selector-bar" id="modalDomainBar" aria-label="Preview domain selector">
+              <button class="domain-btn active" data-domain="ui">Application UI</button>
+              <button class="domain-btn" data-domain="fashion">Fashion Atelier</button>
+              <button class="domain-btn" data-domain="interior">Spatial Interior</button>
+            </div>
+
+            <!-- Redesigned Archival Canvas Theme Switcher -->
+            <div class="canvas-theme-switch" id="modalCanvasThemeSwitch" role="group" aria-label="Specimen Canvas Theme">
+              <button type="button" class="canvas-theme-btn active" data-mode="light" title="Preview on Washi Paper Canvas">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="5"></circle>
+                  <line x1="12" y1="1" x2="12" y2="3"></line>
+                  <line x1="12" y1="21" x2="12" y2="23"></line>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                  <line x1="1" y1="12" x2="3" y2="12"></line>
+                  <line x1="21" y1="12" x2="23" y2="12"></line>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <span>Washi Light</span>
+              </button>
+              <button type="button" class="canvas-theme-btn" data-mode="dark" title="Preview on Urushi Sumi Canvas">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <span>Sumi Dark</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 1.1 App UI Mockup View -->
+          <div id="uiMockupView" class="domain-view active">
+            <div id="mockupCanvas" class="mockup-canvas mode-light">
+              <div class="specimen-header">
+                <div class="specimen-brand">
+                  <span id="appLogoBadge" class="brand-monogram">三</span>
+                  <span class="brand-name">SANZO ARCHIVE</span>
+                </div>
+                <button id="appNavBtn" class="specimen-cta-sm">Inspect</button>
+              </div>
+
+              <div class="specimen-hero">
+                <div class="specimen-hero-kicker">
+                  <span id="appHeroPill" class="kicker-tag">Combination #165</span>
+                  <span class="kicker-rule"></span>
+                </div>
+                <h2 id="appHeroTitle" class="specimen-title">Harmonious Design in Pure Form</h2>
+                <p class="specimen-desc">Authentic 1930s Japanese pigment relationships structured with strict contrast compliance for modern software interfaces.</p>
+                
+                <div class="specimen-actions">
+                  <button id="appBtnPrimary" class="btn-specimen-primary">Primary Action</button>
+                  <button id="appBtnSecondary" class="btn-specimen-secondary">Documentation</button>
+                </div>
+              </div>
+
+              <div class="specimen-grid">
+                <div id="appCard1" class="specimen-card">
+                  <div class="card-caption">Chromatic Hierarchy</div>
+                  <div class="card-heading">Pigment Ratio</div>
+                  <p class="card-text">Preserves exact historical hex frequencies without synthetic digital desaturation.</p>
+                </div>
+                <div id="appCard2" class="specimen-card">
+                  <div class="card-caption">Accessibility Rating</div>
+                  <div class="card-heading">Contrast Guard</div>
+                  <p class="card-text">Dual-layer neutral monochrome bridge ensures legibility across all themes.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 1.2 Fashion Lookbook Studio View (Dynamic Tactile Swatchboards & 7-Piece Wardrobe) -->
+          <div id="fashionMockupView" class="domain-view">
+            <div class="atelier-studio-card">
+              <div class="studio-subbar">
+                <div class="studio-titles">
+                  <span id="fashionKicker" class="studio-kicker">Oscar Homage · 1954</span>
+                  <span class="studio-heading">Textile & Silhouette Atelier</span>
+                </div>
+                <div class="archival-dropdown-wrap" id="fashionDropdownWrap">
+                  <div class="archival-dropdown" id="fashionDropdown">
+                    <button type="button" class="dropdown-trigger" id="fashionDropdownTrigger" aria-haspopup="listbox" aria-expanded="false" title="Select fashion aesthetic style">
+                      <span class="dropdown-trigger-text" id="fashionDropdownLabel">01 · Minimalist Luxury Tailoring</span>
+                      <svg class="dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </button>
+                    <div class="dropdown-menu" id="fashionDropdownMenu" role="listbox" aria-label="Fashion Style Presets">
+                      <!-- 10 Curated Styles Injected Dynamically -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Dynamic Swatchboard Cards (2, 3, or 4 matching combination size) -->
+              <div class="swatchboards-grid" id="fashionSwatchboards">
+                <!-- Dynamically populated via JS -->
+              </div>
+
+              <!-- Full 7-Piece Wardrobe Layering Grid -->
+              <div class="ensemble-section" id="fashionEnsembleSection">
+                <div class="ensemble-title-row">
+                  <div class="ensemble-heading-wrap">
+                    <span class="ensemble-title">Complete 7-Piece Wardrobe Ensemble</span>
+                    <span class="ensemble-sub">Coordinated garment layers and accessories systematically allocated across Wada pigments</span>
+                  </div>
+                </div>
+                <div class="ensemble-grid" id="fashionEnsembleGrid">
+                  <!-- Dynamically populated: Outerwear, Shirt/Knit, Bottoms, Footwear, Socks, Bag, Headwear -->
+                </div>
+              </div>
+
+              <div class="atelier-meta-box">
+                <span class="meta-label">Editorial Backdrop & Illumination</span>
+                <p id="fashionBackdropText" class="meta-val">Architectural brutalist concrete gallery in Tokyo, soft diffuse natural morning light</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 1.3 Interior Spatial Studio View (Dynamic Plane Swatchboards & 7-Plane Material Spec) -->
+          <div id="interiorMockupView" class="domain-view">
+            <div class="atelier-studio-card">
+              <div class="studio-subbar">
+                <div class="studio-titles">
+                  <span id="interiorKicker" class="studio-kicker">Architectural Harmony</span>
+                  <span class="studio-heading">Spatial Materiality & Surfaces</span>
+                </div>
+                <div class="archival-dropdown-wrap" id="interiorDropdownWrap">
+                  <div class="archival-dropdown" id="interiorDropdown">
+                    <button type="button" class="dropdown-trigger" id="interiorDropdownTrigger" aria-haspopup="listbox" aria-expanded="false" title="Select interior spatial style">
+                      <span class="dropdown-trigger-text" id="interiorDropdownLabel">01 · Japandi / Modern Ryokan</span>
+                      <svg class="dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </button>
+                    <div class="dropdown-menu" id="interiorDropdownMenu" role="listbox" aria-label="Interior Spatial Presets">
+                      <!-- 10 Curated Styles Injected Dynamically -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Dynamic Spatial Plane Cards (2, 3, or 4 matching combination size) -->
+              <div class="swatchboards-grid" id="interiorSwatchboards">
+                <!-- Dynamically populated via JS -->
+              </div>
+
+              <!-- Full 7-Plane Spatial Architecture Grid -->
+              <div class="ensemble-section" id="interiorEnsembleSection">
+                <div class="ensemble-title-row">
+                  <div class="ensemble-heading-wrap">
+                    <span class="ensemble-title">Complete 7-Plane Architectural Material Spec</span>
+                    <span class="ensemble-sub">Spatial volumes, flooring, joinery, lighting, ceramics, and metal finishes</span>
+                  </div>
+                </div>
+                <div class="ensemble-grid" id="interiorEnsembleGrid">
+                  <!-- Dynamically populated: Seating, Rugs, Joinery, Walls, Lighting, Ceramics, Hardware -->
+                </div>
+              </div>
+
+              <div class="atelier-meta-box">
+                <span class="meta-label">Wall & Lighting Environment</span>
+                <p id="interiorLightingText" class="meta-val">Washi textured lime plaster, warm 2700K ambient cove glow</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section Hairline Separator -->
+        <div class="modal-section-divider">
+          <span class="divider-label">Tokens & AI Prompt Specifications</span>
+          <span class="divider-line"></span>
+        </div>
+
+        <!-- 2. BOTTOM SECTION: TOKENS & AI PROMPT EXPORT STATION -->
+        <section class="modal-section-export" id="modalExportSection">
+          <div class="export-station-full">
+            <div class="export-tabs-bar">
+              <nav class="export-tabs" role="tablist" aria-label="Export format tabs">
+                <button class="export-tab active" data-tab="css">CSS Variables</button>
+                <button class="export-tab" data-tab="tailwind">Tailwind v4 (@theme)</button>
+                <button class="export-tab" data-tab="midjourney">Midjourney v6.1</button>
+                <button class="export-tab" data-tab="flux">Flux.1 Prompt</button>
+                <button class="export-tab" data-tab="gemini">Gemini Imagen 3</button>
+                <button class="export-tab" data-tab="dalle">GPT Image / DALL-E</button>
+                <button class="export-tab" data-tab="design-md">design.md Specification</button>
+              </nav>
+            </div>
+
+            <div class="code-viewport-full">
+              <pre id="codeBox" class="code-box"></pre>
+            </div>
+
+            <div class="export-footer-full">
+              <div class="export-callout-pill">
+                <span class="callout-seal-dot"></span>
+                <span class="callout-text">Archival Specification: Formatted with strict 1930s hex preservation</span>
+              </div>
+              <div class="modal-footer-actions">
+                <button id="btnCloseModalFooter" class="btn-modal-close-footer">Close Preview</button>
+                <button id="btnCopyCode" class="btn-copy-code">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                  <span id="copyBtnText">Copy Artifact</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite">Copied to clipboard</div>
 
   <!-- Scripts -->
   <script src="data.js"></script>

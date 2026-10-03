@@ -2,14 +2,15 @@
 > **348 Timeless 1930s Japanese Color Harmonies for AI Agents & Generative AI**  
 > *Transforming Sanzo Wada's classic "A Dictionary of Color Combinations" (Haishoku Sōkan) into universal AI agent skills for Digital UI/UX, High-Fashion Lookbooks, Interior Architecture, and Generative AI Image Prompts.*
 
-[![CI](https://github.com/wada-colors/wada-colors/actions/workflows/ci.yml/badge.svg)](https://github.com/wada-colors/wada-colors/actions/workflows/ci.yml)
+[![CI](https://github.com/dauzic99/wada-colors/actions/workflows/ci.yml/badge.svg)](https://github.com/dauzic99/wada-colors/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Palettes](https://img.shields.io/badge/Palettes-348%20Combinations-e8926d.svg)](#the-348-palettes)
-[![Pigments](https://img.shields.io/badge/Pigments-159%20Historical-1b2d42.svg)](#historical-provenance)
-[![WCAG](https://img.shields.io/badge/Accessibility-WCAG%20AA%2FAAA-2e7d32.svg)](#strict-palette-preservation--wcag-bridge)
-[![Agents](https://img.shields.io/badge/AI%20Agents-Claude%20%7C%20Cursor%20%7C%20Antigravity%20%7C%20Windsurf%20%7C%20Roo%20%7C%20Copilot-8a2be2.svg)](#supported-agents--quick-install)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-dauzic99.github.io%2Fwada--colors-0093a5.svg)](https://dauzic99.github.io/wada-colors/)
+[![Palettes](https://img.shields.io/badge/Palettes-348%20Combinations-e8926d.svg)](#-the-348-palettes-at-a-glance)
+[![Pigments](https://img.shields.io/badge/Pigments-159%20Historical-1b2d42.svg)](#️-historical-provenance)
+[![WCAG](https://img.shields.io/badge/Accessibility-WCAG%20AA%2FAAA-2e7d32.svg)](#-strict-palette-preservation--wcag-bridge)
+[![Agents](https://img.shields.io/badge/AI%20Agents-Claude%20%7C%20Cursor%20%7C%20Antigravity%20%7C%20Windsurf%20%7C%20Roo%20%7C%20Copilot-8a2be2.svg)](#-quick-start-install-into-your-project)
 [![GenAI Prompts](https://img.shields.io/badge/GenAI-Midjourney%20%7C%20Flux%20%7C%20Gemini%20%7C%20GPT-ff69b4.svg)](#-multi-target-generative-ai-image-studio)
-[![Zero Build](https://img.shields.io/badge/Web%20Studio-Zero%20Build-0093a5.svg)](#interactive-web-studio)
+[![Zero Build](https://img.shields.io/badge/Web%20Studio-Zero%20Build-0093a5.svg)](#-interactive-web-studio-zero-build)
 
 <p align="center">
   <img src="assets/banner.svg" alt="Wada Colors Banner" width="100%">
@@ -159,13 +160,17 @@ npx wada-colors generate --combo 121 --domain interior --style japandi --out int
 
 ## 🌐 Interactive Web Studio (Zero-Build)
 
-This repository includes a zero-build web application ready to deploy directly on **GitHub Pages**:
+Experience all 348 Sanzo Wada palettes live in the interactive web visualizer, deployed directly to GitHub Pages:
 
-- **Domain Switcher**: Seamlessly switch between **App UI Preview**, **Fashion Lookbook Studio**, and **Spatial Interior Studio**.
-- **Interactive UI Recoloring Engine**: Real-time simulation of live app UI elements (Navbar, hero CTA, cards, pill tags) recoloring with authentic Wada hues.
-- **Fashion Studio Swatches**: Interactive garment allocation (Overcoat, Mid-layer, Trousers) with live backdrop details and silhouette selectors.
-- **Interior Studio Planes**: Architectural surface allocation (Focal sofa, textiles/rug, accent vessels) with lighting temperature specs.
-- **Multi-Tab Code & Prompt Exporter**: Instant copy-paste for CSS custom properties (`:root`), Tailwind v4 `@theme`, **Midjourney**, **Flux.1**, **Gemini**, **GPT Image**, or markdown specs.
+👉 **[Launch Live Web Studio](https://dauzic99.github.io/wada-colors/)**
+
+- **Triple-Domain Unified Studio**: Seamlessly switch between **Digital UI Preview**, **Fashion Lookbook Atelier**, and **Spatial Interior Studio** within a single unified preview modal.
+- **Fashion Lookbook Atelier**: Explore 10 curated silhouette archetypes (Minimalist Tailoring, Modern Neo-Trad Haori, Tokyo Streetwear, Showa Vintage, etc.) with dynamic garment breakdown, atmosphere descriptions, and model poise guidance.
+- **Spatial Interior Studio**: Explore 10 architectural presets (Japandi Modern Ryokan, Wabi-Sabi Cafe, Warm Brutalist Studio, Mid-Century Salon, etc.) with dynamic plane swatchboards and complete 7-plane architectural material specifications (seating, rugs, joinery, walls, lighting, ceramics, hardware).
+- **CIELAB Perceptual Brand Matcher**: Live HTML5 color picker and hex input to discover nearest Wada pigments and ranking combinations using $\Delta E$ perceptual color math.
+- **Verified Mood Horizon Filters**: Filter palettes instantly across authenticated moods (Warm, Cool, Balanced, Wabi-Sabi, Botanical, Oceanic, Noble, Nostalgic, Earthy).
+- **Bottom Floating Dock**: Instant active swatch preview with quick-launch buttons for full studio inspection and artifact export.
+- **Multi-Tab Code & AI Prompt Exporter**: Instant copy-paste for CSS custom properties (`:root`), Tailwind v4 `@theme`, **Midjourney v6.1**, **Flux.1**, **Google Gemini Imagen 3**, **ChatGPT / DALL-E 3**, and `design.md` specifications.
 
 ### Running Locally:
 ```bash
@@ -224,6 +229,7 @@ Sanzo Wada's dictionary is systematically divided into three palette densities:
 
 Commands:
   npx wada-colors init [--agent <claude|cursor|antigravity|windsurf|roo|copilot|all>]
+  npx wada-colors install [--agent <claude|cursor|antigravity|windsurf|roo|copilot|all>]
   npx wada-colors list [--size <2|3|4>]
   npx wada-colors search <keyword>
   npx wada-colors show <id (1-348)>
@@ -231,6 +237,7 @@ Commands:
   npx wada-colors match --file <brand.json | logo.svg | theme.css>
   npx wada-colors prompt --combo <id> [--domain fashion|interior|ui] [--style name]
   npx wada-colors generate --combo <id> [--domain fashion|interior|ui] [--style name] [--out <file>]
+  npx wada-colors apply --combo <id> [--dry-run] [--yes] [--dir <path>]
   npx wada-colors serve [--port 3333]
   npx wada-colors help
 ```

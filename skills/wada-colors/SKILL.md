@@ -177,10 +177,12 @@ When asked to recolor or theme an existing application:
 
 ## 💻 CLI Quick Commands
 
-- Install Skill for Agents: `node bin/cli.js init`
-- Search Harmonies: `node bin/cli.js search <keyword>`
-- Match Brand Color: `node bin/cli.js match --color "#HEX" --file <path>`
-- Generate GenAI Image Prompts: `node bin/cli.js prompt --combo <ID> --domain <fashion|interior|ui> --style <name>`
-- Generate Full Specification: `node bin/cli.js generate --combo <ID> --domain <fashion|interior|ui> --out <file>`
-- Autonomously Recolor Codebase: `node bin/cli.js apply --combo <ID> [--dry-run] [--yes]`
-- Launch Interactive Visualizer: `node bin/cli.js serve` (or open `web/index.html` in browser)
+All commands can be run via `npx wada-colors <command>` (or `node bin/cli.js <command>` when working inside the source repository):
+
+- Install Skill for Agents: `npx wada-colors init` (or `npx wada-colors init --agent <name>`)
+- Search Harmonies: `npx wada-colors search <keyword>`
+- Match Brand Color: `npx wada-colors match --color "#HEX" [--file <path>]`
+- Generate GenAI Image Prompts: `npx wada-colors prompt --combo <ID> --domain <fashion|interior|ui> --style <name>`
+- Generate Full Specification: `npx wada-colors generate --combo <ID> --domain <fashion|interior|ui> --out <file>`
+- Autonomously Recolor Codebase: `npx wada-colors apply --combo <ID> [--dry-run] [--yes]`
+- Launch Interactive Visualizer: `npx wada-colors serve` (or open `web/index.html` in browser)

@@ -50,7 +50,8 @@ When generating UI components, design documentation, codebase theming, fashion l
 3. Once selected, synthesize the full specification document following canonical markdown templates.
 4. If recoloring an existing app, execute:
    ```bash
-   node bin/cli.js apply --combo <ID> --dry-run
-   node bin/cli.js apply --combo <ID> --yes
+   # Preview changes first (use npx wada-colors, or node bin/cli.js if in source repo)
+   npx wada-colors apply --combo <ID> --dry-run
+   npx wada-colors apply --combo <ID> --yes
    ```
 5. Provide copy-paste ready GenAI image prompts for Midjourney v6.1, Flux.1, Gemini Imagen 3, and OpenAI ChatGPT.
