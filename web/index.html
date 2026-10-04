@@ -203,16 +203,18 @@
         <!-- Row 4: Curated Verified Mood Horizon Rail -->
         <div class="mood-rail" aria-label="Filter by authentic aesthetic mood">
           <span class="mood-label">Mood</span>
-          <div class="mood-scroll-track" id="moodScrollTrack">
-            <button class="mood-pill" data-mood="wabi-sabi">Wabi-Sabi <span class="mood-count">128</span></button>
-            <button class="mood-pill" data-mood="botanical">Botanical <span class="mood-count">136</span></button>
-            <button class="mood-pill" data-mood="oceanic">Oceanic & Indigo <span class="mood-count">92</span></button>
-            <button class="mood-pill" data-mood="noble">Noble & Elegant <span class="mood-count">94</span></button>
-            <button class="mood-pill" data-mood="nostalgic">Nostalgic Showa <span class="mood-count">40</span></button>
-            <button class="mood-pill" data-mood="earthy">Earthy <span class="mood-count">128</span></button>
-            <button class="mood-pill" data-mood="warm">Warm <span class="mood-count">123</span></button>
-            <button class="mood-pill" data-mood="cool">Cool <span class="mood-count">20</span></button>
-            <button class="mood-pill" data-mood="balanced">Balanced <span class="mood-count">246</span></button>
+          <div class="mood-scroll-wrapper" id="moodScrollWrapper">
+            <div class="mood-scroll-track" id="moodScrollTrack">
+              <button class="mood-pill" data-mood="wabi-sabi">Wabi-Sabi <span class="mood-count">128</span></button>
+              <button class="mood-pill" data-mood="botanical">Botanical <span class="mood-count">136</span></button>
+              <button class="mood-pill" data-mood="oceanic">Oceanic & Indigo <span class="mood-count">92</span></button>
+              <button class="mood-pill" data-mood="noble">Noble & Elegant <span class="mood-count">94</span></button>
+              <button class="mood-pill" data-mood="nostalgic">Nostalgic Showa <span class="mood-count">40</span></button>
+              <button class="mood-pill" data-mood="earthy">Earthy <span class="mood-count">128</span></button>
+              <button class="mood-pill" data-mood="warm">Warm <span class="mood-count">123</span></button>
+              <button class="mood-pill" data-mood="cool">Cool <span class="mood-count">20</span></button>
+              <button class="mood-pill" data-mood="balanced">Balanced <span class="mood-count">246</span></button>
+            </div>
           </div>
         </div>
       </div>
@@ -362,23 +364,76 @@
           <!-- 1.2 Fashion Lookbook Studio View (Dynamic Tactile Swatchboards & 7-Piece Wardrobe) -->
           <div id="fashionMockupView" class="domain-view">
             <div class="atelier-studio-card">
-              <div class="studio-subbar">
+              <div class="studio-subbar fashion-toolbar-subbar">
                 <div class="studio-titles">
-                  <span id="fashionKicker" class="studio-kicker">Oscar Homage · 1954</span>
+                  <span id="fashionKicker" class="studio-kicker">Women's Couture & Realistic Styling</span>
                   <span class="studio-heading">Textile & Silhouette Atelier</span>
                 </div>
-                <div class="archival-dropdown-wrap" id="fashionDropdownWrap">
-                  <div class="archival-dropdown" id="fashionDropdown">
-                    <button type="button" class="dropdown-trigger" id="fashionDropdownTrigger" aria-haspopup="listbox" aria-expanded="false" title="Select fashion aesthetic style">
-                      <span class="dropdown-trigger-text" id="fashionDropdownLabel">01 · Minimalist Luxury Tailoring</span>
-                      <svg class="dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                      </svg>
-                    </button>
-                    <div class="dropdown-menu" id="fashionDropdownMenu" role="listbox" aria-label="Fashion Style Presets">
-                      <!-- 10 Curated Styles Injected Dynamically -->
+                
+                <div class="fashion-controls-row">
+                  <!-- 1. Vibe Dropdown -->
+                  <div class="archival-dropdown-wrap" id="fashionDropdownWrap">
+                    <div class="archival-dropdown" id="fashionDropdown">
+                      <button type="button" class="dropdown-trigger" id="fashionDropdownTrigger" aria-haspopup="listbox" aria-expanded="false" title="Select outfit vibe and occasion">
+                        <span class="dropdown-trigger-text" id="fashionDropdownLabel">01 · Casual Walk & Coffee Hangout</span>
+                        <svg class="dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                      <div class="dropdown-menu fashion-vibe-menu" id="fashionDropdownMenu" role="listbox" aria-label="Fashion Occasion Vibe Presets">
+                        <!-- 8 Curated Vibes Injected Dynamically with Suitability Descriptions -->
+                      </div>
                     </div>
                   </div>
+
+                  <!-- 2. Background Scene Dropdown (Wardrobe, Café, Street, Studio, Garden, Hotel, Auto) -->
+                  <div class="archival-dropdown-wrap" id="fashionBgDropdownWrap">
+                    <div class="archival-dropdown archival-dropdown-compact" id="fashionBgDropdown">
+                      <button type="button" class="dropdown-trigger" id="fashionBgDropdownTrigger" aria-haspopup="listbox" aria-expanded="false" title="Select photography background setting">
+                        <span class="dropdown-trigger-icon" id="fashionBgDropdownIcon">🎯</span>
+                        <span class="dropdown-trigger-text" id="fashionBgDropdownLabel">Auto (Occasion Setting)</span>
+                        <svg class="dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                      <div class="dropdown-menu fashion-bg-menu" id="fashionBgDropdownMenu" role="listbox" aria-label="Background Scene Presets">
+                        <!-- Injected dynamically via JS -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 3. Climate Switch & Hijab Modesty Switch -->
+                  <div class="fashion-toggle-group">
+                    <div class="climate-switch" id="fashionClimateSwitch" role="group" aria-label="Climate Mode">
+                      <button type="button" class="climate-btn active" data-climate="tropical" title="Tropical climate (Indonesia, light breathable fabrics)">
+                        <span class="climate-icon">☀️</span>
+                        <span class="climate-text">Tropical (Indo)</span>
+                      </button>
+                      <button type="button" class="climate-btn" data-climate="winter" title="Four-season / winter climate (wool, layered warmth)">
+                        <span class="climate-icon">❄️</span>
+                        <span class="climate-text">Autumn / Winter</span>
+                      </button>
+                    </div>
+
+                    <button type="button" class="hijab-toggle-btn" id="fashionHijabToggle" aria-pressed="false" title="Toggle modest hijabi styling">
+                      <span class="hijab-icon">🧕</span>
+                      <span class="hijab-label">Hijabi Mode</span>
+                      <span class="hijab-badge" id="fashionHijabBadge">OFF</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Occasion & Suitability Info Banner -->
+              <div class="vibe-suitability-banner" id="fashionSuitabilityBanner">
+                <div class="suitability-tag-col">
+                  <span class="suitability-kicker">🎯 Best Occasions:</span>
+                  <span class="suitability-text" id="fashionSuitabilityText">Café visits, weekend walks, casual daytime meetups</span>
+                </div>
+                <div class="suitability-meta-pills" id="fashionSuitabilityPills">
+                  <span class="spec-meta-pill" id="climateMetaPill">☀️ Tropical Breathable Weave</span>
+                  <span class="spec-meta-pill" id="modestyMetaPill">Chic Contemporary Styling</span>
+                  <span class="spec-meta-pill" id="bgMetaPill">🎯 Auto Occasion Setting</span>
                 </div>
               </div>
 
@@ -392,8 +447,15 @@
                 <div class="ensemble-title-row">
                   <div class="ensemble-heading-wrap">
                     <span class="ensemble-title">Complete 7-Piece Wardrobe Ensemble</span>
-                    <span class="ensemble-sub">Coordinated garment layers and accessories systematically allocated across Wada pigments</span>
+                    <span class="ensemble-sub">Customize individual garment types or keep occasion defaults</span>
                   </div>
+                  <button type="button" id="btnResetEnsemblePieces" class="btn-reset-ensemble" title="Reset all customized pieces back to signature occasion defaults" style="display: none;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                      <path d="M3 3v5h5"/>
+                    </svg>
+                    <span>Reset Pieces</span>
+                  </button>
                 </div>
                 <div class="ensemble-grid" id="fashionEnsembleGrid">
                   <!-- Dynamically populated: Outerwear, Shirt/Knit, Bottoms, Footwear, Socks, Bag, Headwear -->
@@ -401,8 +463,32 @@
               </div>
 
               <div class="atelier-meta-box">
-                <span class="meta-label">Editorial Backdrop & Illumination</span>
+                <div class="atelier-meta-header">
+                  <span class="meta-label">Editorial Backdrop &amp; Illumination</span>
+                  <span class="meta-setting-tag" id="fashionBgTag">🎯 Auto (Occasion Context)</span>
+                </div>
                 <p id="fashionBackdropText" class="meta-val">Architectural brutalist concrete gallery in Tokyo, soft diffuse natural morning light</p>
+              </div>
+
+              <!-- Mandatory Lookbook Bottom Palette Widget Preview -->
+              <div class="lookbook-bottom-widget-preview" id="lookbookWidgetPreview">
+                <div class="lookbook-widget-badge-row">
+                  <span class="widget-mandate-badge">✨ Mandatory on All Created Lookbook Images</span>
+                  <span class="widget-rule-label">Integrated Lower-Third Swatch Widget</span>
+                </div>
+                <div class="lookbook-widget-card" id="lookbookWidgetCard">
+                  <div class="lookbook-widget-info">
+                    <div class="lookbook-widget-title-row">
+                      <span class="lookbook-widget-tag">WADA SANZO LOOKBOOK</span>
+                      <span class="lookbook-widget-combo-id" id="lookbookWidgetComboId">Combination #165</span>
+                    </div>
+                    <div class="lookbook-widget-combo-name" id="lookbookWidgetComboName">Cameo Pink &amp; Spinel Red &amp; Vistoris Lake</div>
+                    <div class="lookbook-widget-combo-jp" id="lookbookWidgetComboJp">紅梅色・尖晶石紅・深湖紅</div>
+                  </div>
+                  <div class="lookbook-widget-swatches" id="lookbookWidgetSwatches">
+                    <!-- Dynamic swatch blocks with hex & names -->
+                  </div>
+                </div>
               </div>
             </div>
           </div>

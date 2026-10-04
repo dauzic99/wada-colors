@@ -92,12 +92,20 @@ Once a combination is selected, map the colors systematically:
 - `c3` $\rightarrow$ Surface borders, tag highlights, subtle indicators.
 - Bridge with `#fcfbf9` washi canvas and `#111314` sumi text.
 
-#### For Fashion Lookbooks:
-- `c1` $\rightarrow$ Outerwear (Overcoat, tailored jacket, or draped haori).
-- `c2` $\rightarrow$ Mid-layer / Top (Cashmere knit, silk blouse, or hoodie).
-- `c3` $\rightarrow$ Bottoms (Tailored wool trousers, pleated hakama culottes, or relaxed cargos).
-- `c4` $\rightarrow$ Accents & Leather Goods (Footwear, neckerchief, tote bag).
-- Backdrop $\rightarrow$ Coordinated architectural environment (Tokyo concrete gallery, cedar courtyard, Shibuya twilight).
+#### For Fashion Lookbooks (Complete 7-Piece Wardrobe & Customizable Layers):
+- **Layer 01 · Outerwear**: Tailored Blazer, Cardigan, Utility/Denim Jacket, Hoodie, Trench Coat, Kimono Duster, Kebaya Outer, Vest.
+- **Layer 02 · Shirt / Top**: Combed Tee, Silk Blouse, Merino Sweater, Tunic Blouse, Camisole, Hoodie Inner, Chambray Shacket.
+- **Layer 03 · Bottoms**: Denim Jeans, Tailored Trousers, Maxi Skirt, Culottes, Modern Batik Skirt, Palazzo Pants, Column Skirt.
+- **Layer 04 · Footwear**: Court Sneakers, Penny Loafers, Block Mules, Kitten/Stiletto Heels, Chelsea Boots, Nappa/Raffia Slides.
+- **Layer 05 · Socks & Legwear**: No-Show Liners, Ribbed Crew Socks, Sheer Tights, Opaque Modest Tights, Thermal Wool Socks.
+- **Layer 06 · Bag & Leather**: Work Tote, Crescent Crossbody, Chain Shoulder Bag, Minaudière Clutch, Vanity Box, Leather Backpack.
+- **Layer 07 · Headwear / Hijab**:
+  - *Modest Hijabi*: Ultrafine Voal Square, Pashmina Shawl, Cotton Gauze, Silk-Satin, Thermal Balaclava Hijab.
+  - *Contemporary*: Architectural Barrette, Cashmere Beanie, French Beret, Baseball Cap, Straw Boater, Velvet Headband.
+- **Occasion Vibes (8 Curated Profiles)**: `casual_walk`, `office_meeting`, `romantic_date`, `evening_party`, `kondangan_wedding`, `family_arisan`, `vacation_resort`, `campus_casual`.
+- **Context-Aware Adaptation**: Automatically switches cuts and fabrics for **Tropical (Indonesia / Warm)** vs **Four Seasons (Autumn / Winter)** and **Modern Modest Hijabi** vs **Chic Contemporary**.
+- **Photography Settings**: `auto`, `wardrobe`, `cafe`, `street`, `studio`, `nature`, `hotel_lounge`.
+- **Mandatory Bottom Palette Widget**: All generated lookbook imagery and prompts MUST include an integrated bottom graphic widget / color swatch bar displaying the exact Wada Sanzo combination number, solid color blocks, and labeled hex codes so viewers instantly know the color harmony mixed in the outfit.
 
 #### For Interior & Spatial Design:
 - `c1` $\rightarrow$ Focal Seating (Lounge sofa in linen bouclé, curved velvet salon sofa, banquette).
@@ -195,7 +203,7 @@ All commands can be run via `npx wada-colors <command>` (or `node bin/cli.js <co
 - Install Skill for Agents: `npx wada-colors init` (or `npx wada-colors init --agent <name>`)
 - Search Harmonies: `npx wada-colors search <keyword>`
 - Match Brand Color: `npx wada-colors match --color "#HEX" [--file <path>]`
-- Generate GenAI Image Prompts: `npx wada-colors prompt --combo <ID> --domain <fashion|interior|ui> --style <name>`
-- Generate Full Specification: `npx wada-colors generate --combo <ID> --domain <fashion|interior|ui> --out <file>`
+- Generate GenAI Image Prompts: `npx wada-colors prompt --combo <ID> [--domain fashion|interior|ui] [--vibe <name>] [--tropical|--winter] [--hijabi] [--bg <scene>] [--outer <type>] [--bottoms <type>]`
+- Generate Full Specification: `npx wada-colors generate --combo <ID> [--domain ui|fashion|interior] [--vibe <name>] [--tropical|--winter] [--hijabi] [--bg <scene>] [--outer <type>] [--out <file>]`
 - Autonomously Recolor Codebase: `npx wada-colors apply --combo <ID> [--dry-run] [--yes]`
 - Launch Interactive Visualizer: `npx wada-colors serve` (or open `web/index.html` in browser)

@@ -10,6 +10,15 @@ const path = require('path');
 const http = require('http');
 const readline = require('readline');
 const { runApplyTheme } = require('./theming-engine');
+const {
+  fashionProfiles,
+  BACKGROUND_PRESETS,
+  GARMENT_CATALOG,
+  getFashionMapping,
+  resolveEnsembleItem,
+  getFashionSpec,
+  generateFashionPrompts
+} = require('./fashion-catalog');
 
 const ROOT_DIR = path.resolve(__dirname, '..');
 const COMBOS_FILE = path.join(ROOT_DIR, 'data', 'wada_combinations.json');
@@ -305,103 +314,10 @@ function handleMatch(args) {
   });
 }
 
-function getFashionMapping(size) {
-  if (size === 2) return [0, 1, 0, 1, 0, 0, 1]; // Outerwear:0, Shirt:1, Bottoms:0, Footwear:1, Socks:0, Bag:0, Headwear:1
-  if (size === 3) return [0, 1, 2, 0, 1, 2, 1]; // Outerwear:0, Shirt:1, Bottoms:2, Footwear:0, Socks:1, Bag:2, Headwear:1
-  return [0, 1, 2, 3, 2, 3, 0];                  // Outerwear:0, Shirt:1, Bottoms:2, Footwear:3, Socks:2, Bag:3, Headwear:0
-}
-
 function getInteriorMapping(size) {
   if (size === 2) return [0, 1, 0, 1, 1, 0, 1]; // Seating:0, Rug:1, Joinery:0, Walls:1, Lighting:1, Ceramics:0, Hardware:1
   if (size === 3) return [0, 1, 2, 1, 0, 2, 1]; // Seating:0, Rug:1, Joinery:2, Walls:1, Lighting:0, Ceramics:2, Hardware:1
   return [0, 1, 2, 3, 0, 3, 2];                  // Seating:0, Rug:1, Joinery:2, Walls:3, Lighting:0, Ceramics:3, Hardware:2
-}
-
-// Generative AI Prompt Builders
-function generateFashionPrompts(combo, style = 'minimalist') {
-  const numColors = combo.colors.length;
-  const map = getFashionMapping(numColors);
-
-  const styleProfiles = {
-    minimalist: {
-      name: 'High-End Minimalist Tailoring',
-      genre: 'Luxury Contemporary / Lemaire aesthetic',
-      backdrop: 'clean architectural brutalist concrete gallery in Tokyo, soft diffuse natural morning light',
-      items: {
-        outerwear: { name: 'Structured Double-Breasted Overcoat', material: 'heavy boiled virgin wool' },
-        shirt: { name: 'Ribbed Cashmere Knit Crewneck', material: 'ultra-soft 12-gauge Mongolian cashmere' },
-        bottoms: { name: 'Wide-Leg Pleated Trousers', material: 'fluid wool gabardine with deep pleats' },
-        footwear: { name: 'Polished Leather Loafers', material: 'smooth calfskin leather' },
-        socks: { name: 'Fine-Gauge Mercerized Socks', material: 'Egyptian cotton' },
-        bag: { name: 'Minimalist Unlined Tote', material: 'full-grain bridle leather' },
-        headwear: { name: 'Cashmere Ribbed Beanie', material: 'seamless Italian knit' }
-      }
-    },
-    neotrad: {
-      name: 'Modern Japanese Neo-Trad',
-      genre: 'Contemporary Haori & Kimono cuts',
-      backdrop: 'serene Japanese architectural courtyard with weathered cedar timber and raked gravel',
-      items: {
-        outerwear: { name: 'Draped Noragi Haori Jacket', material: 'heavy slub-spun raw linen' },
-        shirt: { name: 'Collarless Wrap Blouse', material: 'washed mulberry silk' },
-        bottoms: { name: 'Hakama-Inspired Pleated Culottes', material: 'dense cotton twill' },
-        footwear: { name: 'Leather Tabi Ankle Boots', material: 'vegetable-tanned horsehide' },
-        socks: { name: 'Split-Toe Tabi Socks', material: 'woven hemp' },
-        bag: { name: 'Draped Linen Azuma Bukuro Bag', material: 'textured linen canvas' },
-        headwear: { name: 'Sculptural Woven Straw Boater Hat', material: 'Japanese rush grass' }
-      }
-    },
-    streetwear: {
-      name: 'Tokyo Contemporary Streetwear',
-      genre: 'Urban Techwear & Oversized Silhouette',
-      backdrop: 'moody Shibuya alleyway at twilight, atmospheric mist and subtle neon reflections',
-      items: {
-        outerwear: { name: 'Oversized Matte Technical Bomber', material: 'water-repellent micro-ripstop' },
-        shirt: { name: 'Heavyweight Drop-Shoulder Hoodie', material: '500gsm loopback French terry' },
-        bottoms: { name: 'Modular Wide Cargo Pants', material: 'tactical cordura with strap details' },
-        footwear: { name: 'Technical Trail Sneakers', material: 'layered ballistic mesh and suede' },
-        socks: { name: 'Heavy Ribbed Athletic Crew Socks', material: 'combed cotton' },
-        bag: { name: 'Crossbody Sling Bag', material: 'waterproof X-Pac sailcloth' },
-        headwear: { name: 'Technical 6-Panel Cap', material: 'water-resistant matte nylon' }
-      }
-    },
-    showa: {
-      name: 'Classic 1930s Showa Vintage',
-      genre: 'Sanzo Wada Oscar Homage / Historical Tailoring',
-      backdrop: 'nostalgic 1930s Tokyo art salon with dark mahogany wood paneling, warm incandescent amber lighting',
-      items: {
-        outerwear: { name: 'Authentic 1930s Peak-Lapel Trench Coat', material: 'heavy twill melton wool' },
-        shirt: { name: 'Spread-Collar Dress Shirt with Silk Scarf', material: 'vintage silk crepe' },
-        bottoms: { name: 'High-Waisted Tailored Wool Trousers', material: 'deep double front pleats' },
-        footwear: { name: 'Goodyear-Welted Oxford Brogues', material: 'hand-burnished calfskin' },
-        socks: { name: 'Silk-Blend Ribbed Dress Socks', material: 'fine spun lisle' },
-        bag: { name: 'Framed Gladstone Travel Case', material: 'saddle-stitched bridle leather' },
-        headwear: { name: 'Wide-Brimmed Felt Fedora', material: 'brushed rabbit fur felt' }
-      }
-    }
-  };
-
-  const p = styleProfiles[style] || styleProfiles.minimalist;
-
-  const cOuter = combo.colors[map[0]];
-  const cShirt = combo.colors[map[1]];
-  const cBottoms = combo.colors[map[2]];
-  const cFootwear = combo.colors[map[3]];
-  const cSocks = combo.colors[map[4]];
-  const cBag = combo.colors[map[5]];
-  const cHeadwear = combo.colors[map[6]];
-
-  const wardrobeBreakdown = `7-piece wardrobe breakdown: Outerwear (${p.items.outerwear.name} in ${cOuter.name_en} ${cOuter.hex}, ${p.items.outerwear.material}), layered over ${p.items.shirt.name} in ${cShirt.name_en} ${cShirt.hex} (${p.items.shirt.material}), paired with ${p.items.bottoms.name} in ${cBottoms.name_en} ${cBottoms.hex} (${p.items.bottoms.material}), ${p.items.footwear.name} in ${cFootwear.name_en} ${cFootwear.hex}, ${p.items.socks.name} in ${cSocks.hex}, accessorized with ${p.items.bag.name} in ${cBag.hex} and ${p.items.headwear.name} in ${cHeadwear.hex}`;
-
-  const midjourney = `Editorial fashion photography, full body portrait of a model wearing a complete 7-piece ${p.name} ensemble (${p.genre}) inspired by Wada Sanzo combination #${combo.id} (${combo.name_en}). ${wardrobeBreakdown}. Set against ${p.backdrop}. Shot on 85mm f/1.4 lens, soft directional diffused studio lighting, Vogue editorial aesthetic, high tactile fabric texture --ar 3:4 --style raw --v 6.1`;
-
-  const flux = `A high-fashion editorial photograph of a model in a complete 7-piece ${p.name} wardrobe styled with authentic 1930s Japanese color theory (Wada Sanzo #${combo.id} - ${combo.name_en}). Ensemble: ${p.items.outerwear.name} in ${cOuter.name_en} (${cOuter.hex}, ${p.items.outerwear.material}), layered over ${p.items.shirt.name} in ${cShirt.name_en} (${cShirt.hex}), with ${p.items.bottoms.name} in ${cBottoms.name_en} (${cBottoms.hex}), ${p.items.footwear.name} in ${cFootwear.name_en} (${cFootwear.hex}), ${p.items.socks.name} in ${cSocks.hex}, and accessories (${p.items.bag.name} in ${cBag.hex}, ${p.items.headwear.name} in ${cHeadwear.hex}). Natural skin texture, realistic cloth drape, soft ambient lighting, ${p.backdrop}.`;
-
-  const gemini = `Photorealistic fashion portrait of a fashion model showcasing a complete 7-piece ${p.name} collection based on Sanzo Wada's color harmony #${combo.id} (${combo.name_en}). Exact 7-piece color allocation: Outerwear (${p.items.outerwear.name}) in ${cOuter.name_en} ${cOuter.hex}, Shirt/Knit (${p.items.shirt.name}) in ${cShirt.name_en} ${cShirt.hex}, Bottoms (${p.items.bottoms.name}) in ${cBottoms.name_en} ${cBottoms.hex}, Footwear (${p.items.footwear.name}) in ${cFootwear.name_en} ${cFootwear.hex}, Legwear (${p.items.socks.name}) in ${cSocks.hex}, Leather Bag (${p.items.bag.name}) in ${cBag.hex}, Headwear (${p.items.headwear.name}) in ${cHeadwear.hex}. Setting: ${p.backdrop}. Soft studio shadows, Hasselblad camera quality, 8k resolution, authentic fabric weaves.`;
-
-  const dalle = `A full-length fashion photograph featuring a model posing gracefully in a coordinated 7-piece wardrobe inspired by Sanzo Wada's Japanese color palette #${combo.id} (${combo.name_en}). The ensemble balances ${p.items.outerwear.name} in ${cOuter.name_en} (${cOuter.hex}) over ${p.items.shirt.name} in ${cShirt.name_en} (${cShirt.hex}), ${p.items.bottoms.name} in ${cBottoms.name_en} (${cBottoms.hex}), ${p.items.footwear.name} in ${cFootwear.name_en} (${cFootwear.hex}), accented with ${p.items.bag.name} in ${cBag.hex} and ${p.items.headwear.name} in ${cHeadwear.hex}. The background is ${p.backdrop} with soft natural light streaming from the side.`;
-
-  return { profile: p, midjourney, flux, gemini, dalle };
 }
 
 function generateInteriorPrompts(combo, style = 'japandi') {
@@ -486,6 +402,57 @@ function generateInteriorPrompts(combo, style = 'japandi') {
   return { profile: p, midjourney, flux, gemini, dalle };
 }
 
+function parseFashionArgs(args) {
+  let vibe = 'casual_walk';
+  const vibeIdx = args.indexOf('--vibe') !== -1 ? args.indexOf('--vibe') : args.indexOf('--style');
+  if (vibeIdx !== -1 && args[vibeIdx + 1]) {
+    vibe = args[vibeIdx + 1].toLowerCase();
+  }
+
+  let climate = 'tropical';
+  if (args.includes('--winter')) climate = 'winter';
+  if (args.includes('--tropical')) climate = 'tropical';
+  const climateIdx = args.indexOf('--climate');
+  if (climateIdx !== -1 && args[climateIdx + 1]) {
+    climate = args[climateIdx + 1].toLowerCase();
+  }
+
+  const isHijab = args.includes('--hijab') || args.includes('--hijabi');
+
+  let bg = 'auto';
+  const bgIdx = args.indexOf('--bg');
+  if (bgIdx !== -1 && args[bgIdx + 1]) {
+    bg = args[bgIdx + 1].toLowerCase();
+  }
+
+  const customPieces = {};
+  const aliases = {
+    outer: 'outerwear',
+    outerwear: 'outerwear',
+    top: 'shirt',
+    shirt: 'shirt',
+    bottom: 'bottoms',
+    bottoms: 'bottoms',
+    shoes: 'footwear',
+    footwear: 'footwear',
+    socks: 'socks',
+    legwear: 'socks',
+    bag: 'bag',
+    headwear: 'headwear',
+    hijab: 'headwear',
+    hat: 'headwear'
+  };
+
+  Object.entries(aliases).forEach(([flag, layer]) => {
+    const idx = args.indexOf(`--${flag}`);
+    if (idx !== -1 && args[idx + 1] && !args[idx + 1].startsWith('--')) {
+      customPieces[layer] = args[idx + 1].toLowerCase();
+    }
+  });
+
+  return { vibe, climate, isHijab, bg, customPieces };
+}
+
 function handlePrompt(args) {
   let comboId = 165;
   const comboIdx = args.indexOf('--combo');
@@ -499,23 +466,34 @@ function handlePrompt(args) {
     domain = args[domainIdx + 1].toLowerCase();
   }
 
-  let style = domain === 'fashion' ? 'minimalist' : 'japandi';
+  const combo = combos[comboId - 1] || combos[0];
+
+  if (domain === 'fashion') {
+    const { vibe, climate, isHijab, bg, customPieces } = parseFashionArgs(args);
+    const res = generateFashionPrompts(combo, vibe, climate, isHijab, bg, customPieces);
+    console.log(`\n🌸 Generative AI Image Prompts: Wada Sanzo #${combo.id} (${combo.name_jp} / ${combo.name_en})`);
+    console.log(`   Domain: FASHION | Vibe: ${res.profile.name} (${res.spec.climateLabel}) | Modesty: ${res.spec.modestyLabel}`);
+    if (Object.keys(customPieces).length > 0) {
+      console.log(`   Custom Pieces: ${Object.entries(customPieces).map(([k, v]) => `${k}=${v}`).join(', ')}`);
+    }
+    console.log(`   Photography Setting: ${res.spec.bgIcon} ${res.spec.bgName}\n`);
+    console.log(`📸 [Midjourney v6.1]:\n${res.midjourney}\n`);
+    console.log(`⚡ [Flux.1]:\n${res.flux}\n`);
+    console.log(`🔮 [Gemini Imagen 3]:\n${res.gemini}\n`);
+    console.log(`🧠 [ChatGPT / DALL-E 3]:\n${res.dalle}\n`);
+    return;
+  }
+
+  let style = domain === 'interior' ? 'japandi' : 'modern';
   const styleIdx = args.indexOf('--style');
   if (styleIdx !== -1 && args[styleIdx + 1]) {
     style = args[styleIdx + 1].toLowerCase();
   }
 
-  const combo = combos[comboId - 1] || combos[0];
   console.log(`\n🌸 Generative AI Image Prompts: Wada Sanzo #${combo.id} (${combo.name_jp} / ${combo.name_en})`);
   console.log(`   Domain: ${domain.toUpperCase()} | Style: ${style}\n`);
 
-  if (domain === 'fashion') {
-    const res = generateFashionPrompts(combo, style);
-    console.log(`📸 [Midjourney v6.1]:\n${res.midjourney}\n`);
-    console.log(`⚡ [Flux.1]:\n${res.flux}\n`);
-    console.log(`🔮 [Gemini Imagen 3]:\n${res.gemini}\n`);
-    console.log(`🧠 [ChatGPT / DALL-E 3]:\n${res.dalle}\n`);
-  } else if (domain === 'interior') {
+  if (domain === 'interior') {
     const res = generateInteriorPrompts(combo, style);
     console.log(`📸 [Midjourney v6.1]:\n${res.midjourney}\n`);
     console.log(`⚡ [Flux.1]:\n${res.flux}\n`);
@@ -558,13 +536,7 @@ function handleGenerate(args) {
 
   const combo = combos[comboId - 1];
 
-  let style = domain === 'fashion' ? 'minimalist' : domain === 'interior' ? 'japandi' : 'modern';
-  const styleIdx = args.indexOf('--style');
-  if (styleIdx !== -1 && args[styleIdx + 1]) {
-    style = args[styleIdx + 1].toLowerCase();
-  }
-
-  let appName = domain === 'fashion' ? 'Autumn / Winter Collection' : domain === 'interior' ? 'Minimalist Living Room' : 'Application';
+  let appName = domain === 'fashion' ? 'Wardrobe Lookbook' : domain === 'interior' ? 'Minimalist Living Room' : 'Application';
   const nameIdx = args.indexOf('--name');
   if (nameIdx !== -1 && args[nameIdx + 1]) {
     appName = args[nameIdx + 1].trim();
@@ -579,12 +551,25 @@ function handleGenerate(args) {
   if (domain === 'fashion') {
     const tplPath = path.join(ROOT_DIR, 'templates', 'fashion-lookbook-template.md');
     let tpl = fs.readFileSync(tplPath, 'utf8');
-    const prompts = generateFashionPrompts(combo, style);
+    const { vibe, climate, isHijab, bg, customPieces } = parseFashionArgs(args);
+    const prompts = generateFashionPrompts(combo, vibe, climate, isHijab, bg, customPieces);
 
-    const garmentRows = combo.colors.map((col, idx) => {
-      const layer = idx === 0 ? 'Outerwear (Coat / Jacket)' : idx === 1 ? 'Mid-layer (Knit / Top)' : idx === 2 ? 'Bottoms (Trousers / Skirt)' : 'Accessories & Footwear';
-      const mat = idx === 0 ? 'Heavy boiled wool / raw silk' : idx === 1 ? 'Cashmere / ribbed cotton' : idx === 2 ? 'Wool gabardine / linen twill' : 'Polished calfskin / canvas';
-      return `| ${layer} | ${col.name_jp} (${col.name_romaji}) / ${col.name_en} | \`${col.hex}\` | ${mat} | Anchor focal silhouette |`;
+    const mapping = getFashionMapping(combo.colors.length);
+    const layers = [
+      { key: 'outerwear', label: '1. Outerwear' },
+      { key: 'shirt', label: '2. Shirt / Top' },
+      { key: 'bottoms', label: '3. Bottoms' },
+      { key: 'footwear', label: '4. Footwear' },
+      { key: 'socks', label: '5. Socks & Legwear' },
+      { key: 'bag', label: '6. Bag & Leather' },
+      { key: 'headwear', label: isHijab ? '7. Hijab / Headwear' : '7. Headwear' }
+    ];
+
+    const garmentRows = layers.map((l, idx) => {
+      const colorIdx = mapping[idx];
+      const col = combo.colors[colorIdx] || combo.colors[0];
+      const it = prompts.spec.items[l.key];
+      return `| ${l.label} | ${it.name} | ${col.name_jp} (${col.name_en}) | \`${col.hex}\` | ${it.material} |`;
     }).join('\n');
 
     tpl = tpl
@@ -593,14 +578,16 @@ function handleGenerate(args) {
       .replace(/\{\{WADA_NAME_JP\}\}/g, combo.name_jp)
       .replace(/\{\{WADA_NAME_ROMAJI\}\}/g, combo.name_romaji)
       .replace(/\{\{WADA_NAME_EN\}\}/g, combo.name_en)
+      .replace(/\{\{OCCASION_VIBE\}\}/g, prompts.profile.name)
+      .replace(/\{\{VIBE_SUB\}\}/g, prompts.profile.sub)
+      .replace(/\{\{SUITABILITY\}\}/g, prompts.profile.suitability)
+      .replace(/\{\{CLIMATE_LABEL\}\}/g, prompts.spec.climateLabel)
+      .replace(/\{\{MODESTY_LABEL\}\}/g, prompts.spec.modestyLabel)
+      .replace(/\{\{BG_NAME\}\}/g, `${prompts.spec.bgIcon} ${prompts.spec.bgName}`)
       .replace(/\{\{FASHION_STYLE\}\}/g, prompts.profile.name)
       .replace(/\{\{FASHION_GENRE\}\}/g, prompts.profile.genre)
       .replace(/\{\{FASHION_GARMENT_ROWS\}\}/g, garmentRows)
-      .replace(/\{\{MODEL_SILHOUETTE\}\}/g, prompts.profile.posture)
-      .replace(/\{\{FOOTWEAR_SPEC\}\}/g, prompts.profile.c4Garment)
-      .replace(/\{\{JEWELRY_SPEC\}\}/g, 'Minimalist architectural jewelry in brushed silver or matte gold')
-      .replace(/\{\{BACKDROP_SPEC\}\}/g, prompts.profile.backdrop)
-      .replace(/\{\{LIGHTING_SPEC\}\}/g, 'Soft directional natural morning light with gentle studio fill')
+      .replace(/\{\{BACKDROP_SPEC\}\}/g, prompts.spec.backdrop)
       .replace(/\{\{PROMPT_MIDJOURNEY\}\}/g, prompts.midjourney)
       .replace(/\{\{PROMPT_FLUX\}\}/g, prompts.flux)
       .replace(/\{\{PROMPT_GEMINI\}\}/g, prompts.gemini)
@@ -802,18 +789,18 @@ Usage:
   npx wada-colors show <id (1-348)>
   npx wada-colors match --color "#HEX"
   npx wada-colors match --file <brand.json | logo.svg | theme.css>
-  npx wada-colors prompt --combo <id> [--domain fashion|interior|ui] [--style <name>]
-  npx wada-colors generate --combo <id> [--domain ui|fashion|interior] [--out <file>]
+  npx wada-colors prompt --combo <id> [--domain fashion|interior|ui] [--vibe <name>] [--tropical|--winter] [--hijabi] [--bg <scene>] [--outer <type>] [--bottoms <type>]
+  npx wada-colors generate --combo <id> [--domain ui|fashion|interior] [--vibe <name>] [--tropical|--winter] [--hijabi] [--bg <scene>] [--out <file>]
   npx wada-colors apply --combo <id> [--dry-run] [--yes] [--dir <path>]
   npx wada-colors serve [--port 3333]
   npx wada-colors help
 
 Examples:
-  npx wada-colors apply --combo 165 --dry-run
-  npx wada-colors apply --combo 127 --yes
-  npx wada-colors prompt --combo 165 --domain fashion --style minimalist
+  npx wada-colors prompt --combo 165 --domain fashion --vibe casual_walk --tropical
+  npx wada-colors prompt --combo 165 --domain fashion --outer hoodie --bottoms jeans --hijabi
+  npx wada-colors prompt --combo 176 --domain fashion --vibe kondangan_wedding --winter --hijabi
   npx wada-colors prompt --combo 121 --domain interior --style japandi
-  npx wada-colors generate --combo 165 --domain fashion --out lookbook.md
+  npx wada-colors generate --combo 165 --domain fashion --outer cardigan --out lookbook.md
   npx wada-colors generate --combo 121 --domain interior --out interior-spec.md
   npx wada-colors generate --combo 127 --name "ZenFlow SaaS"
 `);

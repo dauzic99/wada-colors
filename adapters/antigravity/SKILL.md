@@ -66,7 +66,7 @@ When the user enters `/wada` or mentions `wada-colors`, handle their arguments d
      ```
      Or match against the [Embedded Core Catalog](#-embedded-core-wada-palette-catalog).
    - **Path B (Greenfield Profiling)**: If starting fresh, select a silhouette style:
-     - Fashion: *High-End Minimalist Tailoring*, *Modern Japanese Neo-Trad (Haori)*, *Tokyo Contemporary Streetwear*, *Classic 1930s Showa Vintage*.
+     - Fashion: Select from 8 occasion vibes (*Casual Walk*, *Office Meeting*, *Romantic Date*, *Party Soirée*, *Kondangan Wedding*, *Family Arisan*, *Vacation Resort*, *Campus Casual*), set climate (**Tropical** vs **Winter**), choose modesty (**Modern Modest Hijabi** vs **Chic Contemporary**), and customize any of the 7 wardrobe layers (--outer, --shirt, --bottoms, etc.).
      - Interior: *Japandi / Modern Ryokan*, *Mid-Century Modern Salon*, *Wabi-Sabi Boutique Cafe*, *Warm Brutalist Studio*.
 
 ---
@@ -96,11 +96,10 @@ Query `data/wada_combinations.json` and present **exactly 3 curated candidates**
 - Bridge: Canvas `#fcfbf9` / `#111314`, Text `#111314` / `#f5f5f7`.
 
 #### Fashion & Wardrobe Allocation:
-- `c1`: Structured Outerwear (Overcoat, tailored blazer, draped noragi haori).
-- `c2`: Mid-Layer / Knitwear (Cashmere crewneck, washed silk wrap blouse, hoodie).
-- `c3`: Tailored Bottoms (Pleated wool trousers, wide hakama culottes, relaxed cargos).
-- `c4`: Accessories & Footwear (Leather tabi, tote bag, trail runners).
-- Backdrop & Lighting: Architectural gallery, serene cedar courtyard, or Shibuya twilight.
+- 7-Layer Garment Mapping: Outerwear (c1), Shirt/Top (c2), Bottoms (c3), Footwear (c1/c2), Socks (c2/c3), Bag (c3/c1), Headwear/Hijab (c2/c3).
+- Context-Aware Adaptation: Supports 8 occasion vibes, Tropical (Indonesia / Warm) vs Autumn/Winter, and Modern Modest Hijabi vs Chic Contemporary.
+- Mandatory Lookbook Bottom Swatch Widget: Integrated along the bottom edge of all generated images is a graphic swatch strip displaying the Wada combination ID, solid color blocks, and labeled hex codes so viewers immediately know the color mix.
+- Backdrop & Lighting: Architectural gallery, café patio, street, studio, or lush courtyard with soft natural illumination.
 
 #### Interior & Spatial Allocation:
 - `c1`: Focal Furniture (Low-slung sofa in linen bouclé, curved velvet salon couch).

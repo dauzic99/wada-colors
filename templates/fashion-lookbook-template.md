@@ -2,16 +2,20 @@
 > **Color Architecture**: Sanzo Wada (和田三造) — Combination #{{WADA_ID}}  
 > **Japanese**: {{WADA_NAME_JP}} ({{WADA_NAME_ROMAJI}})  
 > **English**: {{WADA_NAME_EN}}  
-> **Silhouette Style**: {{FASHION_STYLE}} ({{FASHION_GENRE}})  
+> **Occasion Vibe**: {{OCCASION_VIBE}} ({{VIBE_SUB}})  
+> **Suitability**: {{SUITABILITY}}  
+> **Climate**: {{CLIMATE_LABEL}}  
+> **Modesty Style**: {{MODESTY_LABEL}}  
+> **Photography Setting**: {{BG_NAME}}  
 > **Historical Inspiration**: Homage to Sanzo Wada's 1954 Academy Award-winning costume design mastery (*Gate of Hell*), translating 1930s Showa harmonies into contemporary high-fashion wardrobe sets.
 
 ---
 
-## 1. Wada Sanzo Wardrobe Color Mapping
+## 1. Wada Sanzo 7-Piece Wardrobe Color Mapping
 
-The authentic 1930s color harmony is mapped directly across the layered garments, accessories, and atmospheric backdrop:
+The authentic 1930s color harmony is mapped directly across the complete 7-piece wardrobe ensemble:
 
-| Garment Layer | Wada Pigment | Hex Code | Material & Fabric Texture | Function in Outfit |
+| Layer | Piece / Garment Type | Wada Pigment | Hex Code | Material & Construction |
 |---|---|---|---|---|
 {{FASHION_GARMENT_ROWS}}
 
@@ -19,16 +23,16 @@ The authentic 1930s color harmony is mapped directly across the layered garments
 
 ## 2. Model & Styling Direction
 
-- **Model Silhouette & Posture**: {{MODEL_SILHOUETTE}}
-- **Hair & Grooming**: Minimalist, natural editorial grooming, effortless styling.
-- **Footwear & Leather Goods**: {{FOOTWEAR_SPEC}}
-- **Jewelry & Accents**: {{JEWELRY_SPEC}}
-- **Atmospheric Environment & Backdrop**: {{BACKDROP_SPEC}}
-- **Lighting & Atmosphere**: {{LIGHTING_SPEC}}
+- **Occasion Vibe**: {{OCCASION_VIBE}} — {{SUITABILITY}}
+- **Climate & Modesty**: {{CLIMATE_LABEL}} · {{MODESTY_LABEL}}
+- **Backdrop & Setting**: {{BACKDROP_SPEC}}
+- **Lighting & Atmosphere**: Soft directional natural light with gentle editorial fill, authentic cloth drape and realistic textures.
 
 ---
 
-## 3. Generative AI Image Prompts (Copy-Paste Ready)
+## 3. Mandatory Lookbook Bottom Swatch Widget & Generative AI Prompts
+
+> **Mandatory Visual Requirement**: All created fashion lookbook images include an integrated bottom palette widget displaying the exact Wada Sanzo combination number (`#{{WADA_ID}} {{WADA_NAME_EN}}`) and labeled solid color swatch chips with hex codes (`{{WADA_HEX_LIST}}`) so viewers immediately understand the exact color combination mixed in the ensemble.
 
 ### 📸 Midjourney v6.1 Prompt
 ```text
@@ -54,5 +58,5 @@ The authentic 1930s color harmony is mapped directly across the layered garments
 
 ## 4. Collection Production Notes & Fabric Swatches
 
-- **Fabric Dyeing Reference**: Align wool and silk dyes to exact Wada Sanzo hex values `{{WADA_HEX_LIST}}`.
+- **Fabric Dyeing Reference**: Align wool, silk, and cotton dyes to exact Wada Sanzo hex values `{{WADA_HEX_LIST}}`.
 - **Textile Contrast Rule**: Natural drape and texture variations provide depth while maintaining strict chromatic fidelity to Wada's 1933 publication.
