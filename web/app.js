@@ -70,6 +70,14 @@ function getContrastColor(hex) {
   return getLuminance(r, g, b) > 0.45 ? '#111214' : '#ffffff';
 }
 
+function getReadableAccentOnSurface(accentHex, surfaceHex, isLight) {
+  const contrast = parseFloat(calculateContrastRatio(accentHex, surfaceHex));
+  if (contrast >= 3.6) {
+    return accentHex;
+  }
+  return isLight ? '#1c1916' : '#f6f4ee';
+}
+
 // Application State
 // Application State
 const state = {
@@ -82,6 +90,7 @@ const state = {
   searchQuery: '',
   brandTarget: null,
   canvasThemeMode: 'light',
+  uiDeviceMode: 'desktop',
   exportTab: 'css',
   activeDomain: 'ui',
   fashionStyle: 'casual_walk',
@@ -175,11 +184,27 @@ const exportTabs = document.querySelectorAll('.export-tab');
 const toast = document.getElementById('toast');
 const siteThemeToggle = document.getElementById('siteThemeToggle');
 
+// Viewport Device Switcher & Mockup DOM Inside Modal
+const modalDeviceBar = document.getElementById('modalDeviceBar');
+const deviceBtns = document.querySelectorAll('.device-btn');
+const desktopMockupContainer = document.getElementById('desktopMockupContainer');
+const mobileMockupContainer = document.getElementById('mobileMockupContainer');
+const mobilePhoneScreen = document.getElementById('mobilePhoneScreen');
+const mobilePhoneChassis = document.getElementById('mobilePhoneChassis');
+const desktopNavTabs = document.getElementById('desktopNavTabs');
+const mobileBottomNav = document.getElementById('mobileBottomNav');
+const desktopMockupToggle = document.getElementById('desktopMockupToggle');
+const mobileMockupToggle = document.getElementById('mobileMockupToggle');
+
+
 // App Initialization
 function init() {
   state.filtered = [...state.combinations];
   state.selectedCombo = state.combinations[164] || state.combinations[0]; // Combination #165
-  state.canvasThemeMode = document.documentElement.getAttribute('data-theme') || 'dark';
+
+  const savedTheme = localStorage.getItem('wada_theme') || document.documentElement.getAttribute('data-theme') || 'dark';
+  state.canvasThemeMode = savedTheme;
+  document.documentElement.setAttribute('data-theme', savedTheme);
 
   if (brandPickerSwatch && brandColorPicker) {
     brandPickerSwatch.style.backgroundColor = brandColorPicker.value;
@@ -190,6 +215,8 @@ function init() {
   renderGrid();
   applyDynamicTheme(state.selectedCombo);
   updateFloatingDock(state.selectedCombo);
+  syncCanvasTheme();
+  syncDeviceView();
   updateMockup();
   updateExportCode();
 }
@@ -348,6 +375,50 @@ function syncDomainView() {
       el.classList.remove('active');
     }
   });
+
+  // Only show device viewport switcher when in UI Application domain
+  if (modalDeviceBar) {
+    modalDeviceBar.style.display = state.activeDomain === 'ui' ? 'inline-flex' : 'none';
+  }
+}
+
+function syncDeviceView() {
+  if (deviceBtns) {
+    deviceBtns.forEach(btn => {
+      if (btn.dataset.device === state.uiDeviceMode) {
+        btn.classList.add('active');
+        btn.style.backgroundColor = 'var(--accent-wada)';
+        btn.style.color = 'var(--accent-wada-text)';
+      } else {
+        btn.classList.remove('active');
+        btn.style.backgroundColor = '';
+        btn.style.color = '';
+      }
+    });
+  }
+
+  if (desktopMockupContainer && mobileMockupContainer) {
+    if (state.uiDeviceMode === 'desktop') {
+      desktopMockupContainer.classList.add('active');
+      mobileMockupContainer.classList.remove('active');
+    } else {
+      desktopMockupContainer.classList.remove('active');
+      mobileMockupContainer.classList.add('active');
+    }
+  }
+}
+
+/**
+ * Synchronize theme globally across the entire website and specimen canvas
+ */
+function setGlobalTheme(mode) {
+  state.canvasThemeMode = mode;
+  document.documentElement.setAttribute('data-theme', mode);
+  try {
+    localStorage.setItem('wada_theme', mode);
+  } catch (e) {}
+  syncCanvasTheme();
+  updateMockup();
 }
 
 function syncCanvasTheme() {
@@ -366,6 +437,9 @@ function syncCanvasTheme() {
   if (mockupCanvas) {
     mockupCanvas.className = `mockup-canvas mode-${state.canvasThemeMode}`;
   }
+  if (mobilePhoneScreen) {
+    mobilePhoneScreen.className = `phone-screen mode-${state.canvasThemeMode}`;
+  }
 }
 
 /**
@@ -375,6 +449,7 @@ function openModal(focusTarget = 'studio') {
   specimenModalOverlay.classList.add('open');
   document.body.style.overflow = 'hidden'; // Prevent background scrolling
   syncDomainView();
+  syncDeviceView();
   syncCanvasTheme();
   updateMockup();
   updateExportCode();
@@ -508,14 +583,83 @@ function setupEventListeners() {
     matchBrandColor(hex);
   });
 
-  // Canvas Theme Switcher (Inside Studio Modal)
+  // Canvas Theme Switcher (Inside Studio Modal) - Synchronized with Whole Site
   canvasThemeBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      state.canvasThemeMode = btn.dataset.mode;
-      syncCanvasTheme();
-      updateMockup();
+      setGlobalTheme(btn.dataset.mode);
     });
   });
+
+  // Device Viewport Switcher (Desktop Web vs Mobile App)
+  deviceBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.uiDeviceMode = btn.dataset.device;
+      syncDeviceView();
+    });
+  });
+
+  // Interactive Desktop Navigation Tabs
+  if (desktopNavTabs) {
+    desktopNavTabs.addEventListener('click', e => {
+      const tabBtn = e.target.closest('.desktop-tab-btn');
+      if (!tabBtn) return;
+      desktopNavTabs.querySelectorAll('.desktop-tab-btn').forEach(b => {
+        b.classList.remove('active');
+        b.style.backgroundColor = '';
+        b.style.color = '';
+      });
+      tabBtn.classList.add('active');
+      if (state.selectedCombo && state.selectedCombo.colors) {
+        const c1 = state.selectedCombo.colors[0];
+        const btn1Text = getContrastColor(c1.hex);
+        tabBtn.style.backgroundColor = c1.hex;
+        tabBtn.style.color = btn1Text;
+      }
+    });
+  }
+
+  // Interactive Desktop Mockup Toggle Switch
+  if (desktopMockupToggle) {
+    desktopMockupToggle.addEventListener('click', () => {
+      const isAct = desktopMockupToggle.classList.toggle('active');
+      desktopMockupToggle.setAttribute('aria-checked', isAct);
+      if (state.selectedCombo && state.selectedCombo.colors) {
+        const c1 = state.selectedCombo.colors[0];
+        desktopMockupToggle.style.backgroundColor = isAct ? c1.hex : '';
+      }
+    });
+  }
+
+  // Interactive Mobile Mockup Toggle Switch
+  if (mobileMockupToggle) {
+    mobileMockupToggle.addEventListener('click', () => {
+      const isAct = mobileMockupToggle.classList.toggle('active');
+      mobileMockupToggle.setAttribute('aria-checked', isAct);
+      if (state.selectedCombo && state.selectedCombo.colors) {
+        const c1 = state.selectedCombo.colors[0];
+        mobileMockupToggle.style.backgroundColor = isAct ? c1.hex : '';
+      }
+    });
+  }
+
+  // Interactive Mobile Bottom Navigation Tabs
+  if (mobileBottomNav) {
+    mobileBottomNav.addEventListener('click', e => {
+      const tab = e.target.closest('.phone-nav-tab');
+      if (!tab) return;
+      mobileBottomNav.querySelectorAll('.phone-nav-tab').forEach(t => {
+        t.classList.remove('active');
+        t.style.color = '';
+      });
+      tab.classList.add('active');
+      if (state.selectedCombo && state.selectedCombo.colors) {
+        const c1 = state.selectedCombo.colors[0];
+        const isLight = state.canvasThemeMode === 'light';
+        const navBgHex = isLight ? '#ffffff' : '#191816';
+        tab.style.color = getReadableAccentOnSurface(c1.hex, navBgHex, isLight);
+      }
+    });
+  }
 
   // Fashion Atelier: Climate Switch (Tropical vs Winter)
   if (climateBtns) {
@@ -610,15 +754,12 @@ function setupEventListeners() {
     });
   });
 
-  // Site Dark/Light theme toggle
+  // Site Dark/Light theme toggle - unified with global theme
   if (siteThemeToggle) {
     siteThemeToggle.addEventListener('click', () => {
       const cur = document.documentElement.getAttribute('data-theme') || 'dark';
       const next = cur === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      state.canvasThemeMode = next;
-      syncCanvasTheme();
-      updateMockup();
+      setGlobalTheme(next);
     });
   }
 }
@@ -2774,65 +2915,159 @@ function updateInteriorStudio(combo) {
   }
 }
 
-// Update Live Interactive App Mockup with Strict Luminance-Driven Text Contrast
+// Update Live Interactive App Mockup with Desktop & Mobile Dual-View Harmonic Styling
 function updateUIMockup(combo) {
-  const c1 = combo.colors[0];
-  const c2 = combo.colors[1];
-  const c3 = combo.colors[2] || combo.colors[0];
+  if (!combo || !combo.colors || !combo.colors.length) return;
 
-  // Luminance-tested contrast text
+  const c1 = combo.colors[0];
+  const c2 = combo.colors[1] || combo.colors[0];
+  const c3 = combo.colors[2] || combo.colors[0];
+  const c4 = combo.colors[3] || combo.colors[1] || combo.colors[0];
+
+  // Luminance-tested high-contrast text for button/badge backgrounds
   const btn1Text = getContrastColor(c1.hex);
   const btn2Text = getContrastColor(c2.hex);
+  const btn3Text = getContrastColor(c3.hex);
 
-  // Background reference synced with canvas theme
+  // Sync canvas background classes
   if (mockupCanvas) {
     mockupCanvas.className = `mockup-canvas mode-${state.canvasThemeMode}`;
   }
+  if (mobilePhoneScreen) {
+    mobilePhoneScreen.className = `phone-screen mode-${state.canvasThemeMode}`;
+  }
 
-  const canvasBgHex = state.canvasThemeMode === 'light' ? '#f7f5ef' : '#0f0e0d';
+  const isLight = state.canvasThemeMode === 'light';
+  const canvasBgHex = isLight ? '#fbfaf7' : '#0f0e0d';
   const contrastWithBg = calculateContrastRatio(c1.hex, canvasBgHex);
-  const wcagRating = contrastWithBg >= 7.0 ? 'AAA' : contrastWithBg >= 4.5 ? 'AA' : 'Normal';
+  const wcagRating = contrastWithBg >= 7.0 ? 'AAA' : contrastWithBg >= 4.5 ? 'AA' : 'Pass';
 
-  // Elements
+  // ==========================================
+  // A. DESKTOP WEB APPLICATION MOCKUP
+  // ==========================================
   const appLogoBadge = document.getElementById('appLogoBadge');
-  const appNavBtn = document.getElementById('appNavBtn');
-  const appHeroPill = document.getElementById('appHeroPill');
-  const appHeroTitle = document.getElementById('appHeroTitle');
-  const appBtnPrimary = document.getElementById('appBtnPrimary');
-  const appBtnSecondary = document.getElementById('appBtnSecondary');
-  const appCard1 = document.getElementById('appCard1');
-  const appCard2 = document.getElementById('appCard2');
-
-  // Apply colors & high-contrast content
   if (appLogoBadge) {
     appLogoBadge.style.backgroundColor = c1.hex;
     appLogoBadge.style.color = btn1Text;
   }
 
+  const appNavBtn = document.getElementById('appNavBtn');
   if (appNavBtn) {
     appNavBtn.style.color = c1.hex;
     appNavBtn.style.borderColor = `${c1.hex}66`;
   }
 
+  // Desktop Navigation active tab styling
+  if (desktopNavTabs) {
+    desktopNavTabs.querySelectorAll('.desktop-tab-btn').forEach(b => {
+      if (b.classList.contains('active')) {
+        b.style.backgroundColor = c1.hex;
+        b.style.color = btn1Text;
+      } else {
+        b.style.backgroundColor = '';
+        b.style.color = '';
+      }
+    });
+  }
+
+  // Desktop KPI Metrics Cards (C1, C2, C3 chromatic hierarchy)
+  const desktopKpi1 = document.getElementById('desktopKpi1');
+  const desktopKpiTrend1 = document.getElementById('desktopKpiTrend1');
+  const desktopKpiProgress1 = document.getElementById('desktopKpiProgress1');
+  if (desktopKpi1) desktopKpi1.style.borderTop = `3px solid ${c1.hex}`;
+  if (desktopKpiTrend1) {
+    desktopKpiTrend1.style.backgroundColor = `${c1.hex}18`;
+    desktopKpiTrend1.style.color = c1.hex;
+  }
+  if (desktopKpiProgress1) desktopKpiProgress1.style.backgroundColor = c1.hex;
+
+  const desktopKpi2 = document.getElementById('desktopKpi2');
+  const desktopKpiTrend2 = document.getElementById('desktopKpiTrend2');
+  const desktopKpiProgress2 = document.getElementById('desktopKpiProgress2');
+  if (desktopKpi2) desktopKpi2.style.borderTop = `3px solid ${c2.hex}`;
+  if (desktopKpiTrend2) {
+    desktopKpiTrend2.style.backgroundColor = `${c2.hex}18`;
+    desktopKpiTrend2.style.color = c2.hex;
+  }
+  if (desktopKpiProgress2) desktopKpiProgress2.style.backgroundColor = c2.hex;
+
+  const desktopKpi3 = document.getElementById('desktopKpi3');
+  const desktopKpiTrend3 = document.getElementById('desktopKpiTrend3');
+  const desktopKpiVal3 = document.getElementById('desktopKpiVal3');
+  const desktopKpiProgress3 = document.getElementById('desktopKpiProgress3');
+  if (desktopKpi3) desktopKpi3.style.borderTop = `3px solid ${c3.hex}`;
+  if (desktopKpiTrend3) {
+    desktopKpiTrend3.style.backgroundColor = `${c3.hex}18`;
+    desktopKpiTrend3.style.color = c3.hex;
+    desktopKpiTrend3.textContent = `WCAG ${wcagRating}`;
+  }
+  if (desktopKpiVal3) desktopKpiVal3.textContent = `${contrastWithBg}:1 Ratio`;
+  if (desktopKpiProgress3) desktopKpiProgress3.style.backgroundColor = c3.hex;
+
+  // Desktop Hero Section
+  const appHeroPill = document.getElementById('appHeroPill');
   if (appHeroPill) {
     appHeroPill.textContent = `Combination #${combo.id} · ${combo.name_jp} (${combo.temperature.toUpperCase()})`;
     appHeroPill.style.color = c1.hex;
+    appHeroPill.style.backgroundColor = `${c1.hex}14`;
+    appHeroPill.style.border = `1px solid ${c1.hex}36`;
   }
 
+  const heroAccentColor = getReadableAccentOnSurface(c1.hex, canvasBgHex, isLight);
+  const appHeroTitle = document.getElementById('appHeroTitle');
   if (appHeroTitle) {
-    appHeroTitle.innerHTML = `Harmonious Design in <span style="color: ${c1.hex};">${combo.colors[0].name_en}</span>`;
+    appHeroTitle.innerHTML = `Harmonious Design in <span style="color: ${heroAccentColor};">${c1.name_en}</span>`;
   }
 
+  const appBtnPrimary = document.getElementById('appBtnPrimary');
   if (appBtnPrimary) {
     appBtnPrimary.style.backgroundColor = c1.hex;
     appBtnPrimary.style.color = btn1Text;
   }
 
+  const appBtnSecondary = document.getElementById('appBtnSecondary');
   if (appBtnSecondary) {
     appBtnSecondary.style.borderColor = `${c2.hex}88`;
-    appBtnSecondary.style.color = state.canvasThemeMode === 'light' ? '#1c1916' : '#f6f4ee';
+    appBtnSecondary.style.color = isLight ? '#1c1916' : '#f6f4ee';
   }
 
+  // Desktop Status Pills Strip
+  const statusPill1 = document.getElementById('statusPill1');
+  if (statusPill1) {
+    statusPill1.style.backgroundColor = `${c1.hex}18`;
+    statusPill1.style.color = c1.hex;
+    statusPill1.style.borderColor = `${c1.hex}36`;
+  }
+  const statusPill2 = document.getElementById('statusPill2');
+  if (statusPill2) {
+    statusPill2.style.backgroundColor = `${c2.hex}18`;
+    statusPill2.style.color = c2.hex;
+    statusPill2.style.borderColor = `${c2.hex}36`;
+  }
+  const statusPill3 = document.getElementById('statusPill3');
+  if (statusPill3) {
+    statusPill3.style.backgroundColor = `${c3.hex}18`;
+    statusPill3.style.color = c3.hex;
+    statusPill3.style.borderColor = `${c3.hex}36`;
+  }
+
+  // Desktop Sandbox Controls
+  if (desktopMockupToggle) {
+    if (desktopMockupToggle.classList.contains('active')) {
+      desktopMockupToggle.style.backgroundColor = c1.hex;
+    } else {
+      desktopMockupToggle.style.backgroundColor = '';
+    }
+  }
+
+  const desktopCheckboxCustom = document.getElementById('desktopCheckboxCustom');
+  if (desktopCheckboxCustom) {
+    desktopCheckboxCustom.style.backgroundColor = c1.hex;
+    desktopCheckboxCustom.style.borderColor = c1.hex;
+  }
+
+  // Desktop Specimen Cards (Bottom)
+  const appCard1 = document.getElementById('appCard1');
   if (appCard1) {
     appCard1.style.borderLeft = `3px solid ${c2.hex}`;
     const heading = appCard1.querySelector('.card-heading');
@@ -2841,11 +3076,102 @@ function updateUIMockup(combo) {
     }
   }
 
+  const appCard2 = document.getElementById('appCard2');
   if (appCard2) {
     appCard2.style.borderLeft = `3px solid ${c3.hex}`;
     const heading = appCard2.querySelector('.card-heading');
     if (heading) {
       heading.textContent = `WCAG ${wcagRating} (${contrastWithBg}:1)`;
+    }
+  }
+
+  // ==========================================
+  // B. MOBILE SMARTPHONE APPLICATION MOCKUP
+  // ==========================================
+  const mobileLogoBadge = document.getElementById('mobileLogoBadge');
+  if (mobileLogoBadge) {
+    mobileLogoBadge.style.backgroundColor = c1.hex;
+    mobileLogoBadge.style.color = btn1Text;
+  }
+
+  const mobileNotifPip = document.getElementById('mobileNotifPip');
+  if (mobileNotifPip) {
+    mobileNotifPip.style.backgroundColor = c4.hex || c3.hex;
+  }
+
+  const mobileHeroCard = document.getElementById('mobileHeroCard');
+  if (mobileHeroCard) {
+    mobileHeroCard.style.borderLeft = `3px solid ${c1.hex}`;
+  }
+
+  const mobileHeroKicker = document.getElementById('mobileHeroKicker');
+  if (mobileHeroKicker) {
+    mobileHeroKicker.textContent = `Combination #${combo.id} · ${combo.name_jp}`;
+    mobileHeroKicker.style.color = c1.hex;
+  }
+
+  const mobileHeroTitle = document.getElementById('mobileHeroTitle');
+  if (mobileHeroTitle) {
+    const mobileScreenBg = isLight ? '#ffffff' : '#191816';
+    const mobileHeroAccent = getReadableAccentOnSurface(c1.hex, mobileScreenBg, isLight);
+    mobileHeroTitle.innerHTML = `Harmonious Flow in <span style="color: ${mobileHeroAccent};">${c1.name_en}</span>`;
+  }
+
+  const mobileBtnPrimary = document.getElementById('mobileBtnPrimary');
+  if (mobileBtnPrimary) {
+    mobileBtnPrimary.style.backgroundColor = c1.hex;
+    mobileBtnPrimary.style.color = btn1Text;
+  }
+
+  // Mobile KPI Cards
+  const mobileKpiCard1 = document.getElementById('mobileKpiCard1');
+  const mobileKpiTrend1 = document.getElementById('mobileKpiTrend1');
+  if (mobileKpiCard1) mobileKpiCard1.style.borderLeft = `3px solid ${c2.hex}`;
+  if (mobileKpiTrend1) {
+    mobileKpiTrend1.style.backgroundColor = `${c2.hex}18`;
+    mobileKpiTrend1.style.color = c2.hex;
+  }
+
+  const mobileKpiCard2 = document.getElementById('mobileKpiCard2');
+  const mobileKpiVal2 = document.getElementById('mobileKpiVal2');
+  const mobileKpiTrend2 = document.getElementById('mobileKpiTrend2');
+  if (mobileKpiCard2) mobileKpiCard2.style.borderLeft = `3px solid ${c3.hex}`;
+  if (mobileKpiVal2) mobileKpiVal2.textContent = wcagRating;
+  if (mobileKpiTrend2) {
+    mobileKpiTrend2.style.backgroundColor = `${c3.hex}18`;
+    mobileKpiTrend2.style.color = c3.hex;
+    mobileKpiTrend2.textContent = `${contrastWithBg}:1`;
+  }
+
+  // Mobile Toggle Switch
+  if (mobileMockupToggle) {
+    if (mobileMockupToggle.classList.contains('active')) {
+      mobileMockupToggle.style.backgroundColor = c1.hex;
+    } else {
+      mobileMockupToggle.style.backgroundColor = '';
+    }
+  }
+
+  // Mobile Status Chips
+  const mobileTag1 = document.getElementById('mobileTag1');
+  if (mobileTag1) {
+    mobileTag1.style.backgroundColor = `${c1.hex}18`;
+    mobileTag1.style.color = c1.hex;
+    mobileTag1.style.borderColor = `${c1.hex}36`;
+  }
+  const mobileTag2 = document.getElementById('mobileTag2');
+  if (mobileTag2) {
+    mobileTag2.style.backgroundColor = `${c2.hex}18`;
+    mobileTag2.style.color = c2.hex;
+    mobileTag2.style.borderColor = `${c2.hex}36`;
+  }
+
+  // Mobile Bottom Nav active tab
+  if (mobileBottomNav) {
+    const activeNavTab = mobileBottomNav.querySelector('.phone-nav-tab.active');
+    if (activeNavTab) {
+      const navBgHex = isLight ? '#ffffff' : '#191816';
+      activeNavTab.style.color = getReadableAccentOnSurface(c1.hex, navBgHex, isLight);
     }
   }
 }

@@ -17,3 +17,15 @@
   - [x] `references/interior-rules.md` (7-plane allocations, lighting Kelvin, materiality)
   - [x] `references/component-tokens.md` (Tailwind v4 `@theme`, CSS vars, accessible components)
 - [x] Validate codebase and verify test suite (`npm test` 100% passing)
+
+## Initiative: Mobile Smartphone Mockup & Global Site-Wide Theme Synchronization
+- [x] Plan interactive mobile smartphone chassis & expanded component sandbox (`mobile_web_mockup_plan.md`)
+- [x] Add viewport switcher (`[ 💻 Desktop Web | 📱 Mobile App ]`) to `web/index.html`
+- [x] Implement realistic smartphone chassis with dynamic island, status bar, app bar, KPI grid, search, toggle, and bottom nav in `web/index.html`
+- [x] Expand desktop preview with KPI metrics row, focusable inputs with glow rings, toggle switches, and status pills in `web/index.html`
+- [x] Style all chassis, dynamic island, device bar, KPI metrics, and components in `web/style.css`
+- [x] Implement `setGlobalTheme(mode)` in `web/app.js` to synchronously toggle entire website (`data-theme`) and canvas between Washi Light and Sumi Dark
+- [x] Implement `syncDeviceView()` in `web/app.js` with domain-aware visibility
+- [x] Wire all micro-interactions in `web/app.js` (desktop tabs, mobile nav, interactive toggle switches)
+- [x] Run full verification suite (`node -c`, `npm test`)
+

@@ -15,6 +15,7 @@ updated: 2026-10-06
   - Fashion 7-layer engine (`bin/fashion-catalog.js`) with modesty/climate adaptation and persistent bottom color palette widget.
   - Theming AST engine (`bin/theming-engine.js`).
   - CLI dispatcher (`bin/cli.js`).
+- **Web Visualizer**: Dual-view studio (`web/`) with realistic Smartphone chassis (dynamic island, 9:41 status bar, bottom nav), expanded desktop component sandbox (KPI metrics with progress tracks, focus glow rings, interactive toggles, status pills), and synchronized site-wide theme switching between Washi Light and Sumi Dark.
 - **Graph State**: Indexed into `codebase-memory-mcp` with persistent database at `.agents/codebase-memory/graph.db.zst`.
 - **Customizations**: Consolidated into `.agents/` as the single source of truth.
 

@@ -296,9 +296,28 @@
               <button class="domain-btn" data-domain="interior">Spatial Interior</button>
             </div>
 
-            <!-- Redesigned Archival Canvas Theme Switcher -->
-            <div class="canvas-theme-switch" id="modalCanvasThemeSwitch" role="group" aria-label="Specimen Canvas Theme">
-              <button type="button" class="canvas-theme-btn active" data-mode="light" title="Preview on Washi Paper Canvas">
+            <!-- Viewport Device Switcher (Desktop Web vs Mobile App) -->
+            <div class="device-selector-bar" id="modalDeviceBar" role="group" aria-label="Device Viewport Switcher">
+              <button type="button" class="device-btn active" id="deviceBtnDesktop" data-device="desktop" title="Preview Desktop Web Application">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                <span>Desktop Web</span>
+              </button>
+              <button type="button" class="device-btn" id="deviceBtnMobile" data-device="mobile" title="Preview Mobile Smartphone Application">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                  <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                </svg>
+                <span>Mobile App</span>
+              </button>
+            </div>
+
+            <!-- Unified Site-Wide Theme Switcher (Syncs Whole Web + Specimen) -->
+            <div class="canvas-theme-switch" id="modalCanvasThemeSwitch" role="group" aria-label="Global Appearance Mode">
+              <button type="button" class="canvas-theme-btn active" data-mode="light" title="Switch entire web app to Washi Light Canvas">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="12" cy="12" r="5"></circle>
                   <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -312,7 +331,7 @@
                 </svg>
                 <span>Washi Light</span>
               </button>
-              <button type="button" class="canvas-theme-btn" data-mode="dark" title="Preview on Urushi Sumi Canvas">
+              <button type="button" class="canvas-theme-btn" data-mode="dark" title="Switch entire web app to Urushi Sumi Canvas">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                 </svg>
@@ -321,44 +340,302 @@
             </div>
           </div>
 
-          <!-- 1.1 App UI Mockup View -->
+          <!-- 1.1 App UI Mockup View (Dual Mode: Desktop Web & Mobile Smartphone) -->
           <div id="uiMockupView" class="domain-view active">
-            <div id="mockupCanvas" class="mockup-canvas mode-light">
-              <div class="specimen-header">
-                <div class="specimen-brand">
-                  <span id="appLogoBadge" class="brand-monogram">三</span>
-                  <span class="brand-name">SANZO ARCHIVE</span>
-                </div>
-                <button id="appNavBtn" class="specimen-cta-sm">Inspect</button>
-              </div>
+            
+            <!-- A. Desktop Web Application Mockup -->
+            <div id="desktopMockupContainer" class="device-canvas-container active">
+              <div id="mockupCanvas" class="mockup-canvas mode-light">
+                <!-- Desktop App Top Navigation -->
+                <div class="specimen-header">
+                  <div class="specimen-brand">
+                    <span id="appLogoBadge" class="brand-monogram">三</span>
+                    <span class="brand-name">SANZO CLOUD</span>
+                  </div>
+                  
+                  <nav class="desktop-nav-tabs" id="desktopNavTabs" aria-label="Desktop Mockup Navigation">
+                    <button type="button" class="desktop-tab-btn active" data-tab="overview">Overview</button>
+                    <button type="button" class="desktop-tab-btn" data-tab="analytics">Analytics</button>
+                    <button type="button" class="desktop-tab-btn" data-tab="reports">Reports</button>
+                    <button type="button" class="desktop-tab-btn" data-tab="settings">Settings</button>
+                  </nav>
 
-              <div class="specimen-hero">
-                <div class="specimen-hero-kicker">
-                  <span id="appHeroPill" class="kicker-tag">Combination #165</span>
-                  <span class="kicker-rule"></span>
+                  <div class="desktop-nav-actions">
+                    <button id="appNavBtn" class="specimen-cta-sm">Inspect Tokens</button>
+                  </div>
                 </div>
-                <h2 id="appHeroTitle" class="specimen-title">Harmonious Design in Pure Form</h2>
-                <p class="specimen-desc">Authentic 1930s Japanese pigment relationships structured with strict contrast compliance for modern software interfaces.</p>
-                
-                <div class="specimen-actions">
-                  <button id="appBtnPrimary" class="btn-specimen-primary">Primary Action</button>
-                  <button id="appBtnSecondary" class="btn-specimen-secondary">Documentation</button>
-                </div>
-              </div>
 
-              <div class="specimen-grid">
-                <div id="appCard1" class="specimen-card">
-                  <div class="card-caption">Chromatic Hierarchy</div>
-                  <div class="card-heading">Pigment Ratio</div>
-                  <p class="card-text">Preserves exact historical hex frequencies without synthetic digital desaturation.</p>
+                <!-- Desktop KPI Metrics Bar (Rich Color Harmonies & Progress Tracks) -->
+                <div class="kpi-metrics-row" id="desktopKpiRow">
+                  <div class="kpi-card" id="desktopKpi1">
+                    <div class="kpi-header">
+                      <span class="kpi-label">Monthly Volume</span>
+                      <span class="kpi-trend-pill" id="desktopKpiTrend1">+18.4%</span>
+                    </div>
+                    <div class="kpi-value-row">
+                      <span class="kpi-number" id="desktopKpiVal1">¥ 1,480,000</span>
+                      <span class="kpi-icon-badge" id="desktopKpiIcon1">📈</span>
+                    </div>
+                    <div class="kpi-progress-track">
+                      <div class="kpi-progress-fill" id="desktopKpiProgress1" style="width: 76%;"></div>
+                    </div>
+                  </div>
+
+                  <div class="kpi-card" id="desktopKpi2">
+                    <div class="kpi-header">
+                      <span class="kpi-label">Active Entities</span>
+                      <span class="kpi-trend-pill" id="desktopKpiTrend2">+8.2%</span>
+                    </div>
+                    <div class="kpi-value-row">
+                      <span class="kpi-number" id="desktopKpiVal2">3,420 Active</span>
+                      <span class="kpi-icon-badge" id="desktopKpiIcon2">👥</span>
+                    </div>
+                    <div class="kpi-progress-track">
+                      <div class="kpi-progress-fill" id="desktopKpiProgress2" style="width: 62%;"></div>
+                    </div>
+                  </div>
+
+                  <div class="kpi-card" id="desktopKpi3">
+                    <div class="kpi-header">
+                      <span class="kpi-label">WCAG Contrast Guard</span>
+                      <span class="kpi-trend-pill" id="desktopKpiTrend3">AAA Pass</span>
+                    </div>
+                    <div class="kpi-value-row">
+                      <span class="kpi-number" id="desktopKpiVal3">18.5:1 Ratio</span>
+                      <span class="kpi-icon-badge" id="desktopKpiIcon3">🛡️</span>
+                    </div>
+                    <div class="kpi-progress-track">
+                      <div class="kpi-progress-fill" id="desktopKpiProgress3" style="width: 95%;"></div>
+                    </div>
+                  </div>
                 </div>
-                <div id="appCard2" class="specimen-card">
-                  <div class="card-caption">Accessibility Rating</div>
-                  <div class="card-heading">Contrast Guard</div>
-                  <p class="card-text">Dual-layer neutral monochrome bridge ensures legibility across all themes.</p>
+
+                <!-- Desktop Main Content Split: Hero (Left) & Interactive Components (Right) -->
+                <div class="desktop-content-split">
+                  <!-- Left: Hero Area -->
+                  <div class="specimen-hero">
+                    <div class="specimen-hero-kicker">
+                      <span id="appHeroPill" class="kicker-tag">Combination #165</span>
+                      <span class="kicker-rule"></span>
+                    </div>
+                    <h2 id="appHeroTitle" class="specimen-title">Harmonious Design in Pure Form</h2>
+                    <p class="specimen-desc">Authentic 1930s Japanese pigment relationships structured with strict contrast compliance for modern software interfaces.</p>
+                    
+                    <div class="specimen-actions">
+                      <button id="appBtnPrimary" class="btn-specimen-primary">Primary Action</button>
+                      <button id="appBtnSecondary" class="btn-specimen-secondary">Documentation</button>
+                    </div>
+
+                    <!-- Status Badges Strip -->
+                    <div class="status-badges-strip">
+                      <span class="status-pill status-pill-primary" id="statusPill1">● Active Sprint</span>
+                      <span class="status-pill status-pill-secondary" id="statusPill2">● Production Live</span>
+                      <span class="status-pill status-pill-accent" id="statusPill3">● WCAG Verified</span>
+                    </div>
+                  </div>
+
+                  <!-- Right: Interactive Component Sandbox Panel -->
+                  <div class="component-sandbox-panel" id="desktopSandboxPanel">
+                    <div class="sandbox-header">
+                      <span class="sandbox-title">Component Testing Sandbox</span>
+                      <span class="sandbox-sub">Focus rings, toggles & interactive elements</span>
+                    </div>
+
+                    <!-- 1. Focusable Input Field -->
+                    <div class="sandbox-field-group">
+                      <label class="sandbox-label" for="desktopDemoInput">Search Wada Harmonies</label>
+                      <div class="sandbox-input-wrap">
+                        <svg class="sandbox-input-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <circle cx="11" cy="11" r="8"></circle>
+                          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" id="desktopDemoInput" class="sandbox-input" placeholder="Type here to test focus glow ring...">
+                      </div>
+                    </div>
+
+                    <!-- 2. Interactive Toggle Switch -->
+                    <div class="sandbox-toggle-row">
+                      <div class="toggle-text-block">
+                        <span class="toggle-title">Real-Time Delta-E Recalibration</span>
+                        <span class="toggle-desc">Automatically adapt luminance against active washi bridge</span>
+                      </div>
+                      <button type="button" class="mockup-toggle-btn active" id="desktopMockupToggle" role="switch" aria-checked="true">
+                        <span class="mockup-toggle-thumb"></span>
+                      </button>
+                    </div>
+
+                    <!-- 3. Micro Checkbox Control -->
+                    <label class="sandbox-checkbox-row" for="desktopDemoCheckbox">
+                      <input type="checkbox" id="desktopDemoCheckbox" class="sandbox-checkbox" checked>
+                      <span class="sandbox-checkbox-custom" id="desktopCheckboxCustom"></span>
+                      <span class="sandbox-checkbox-label">Preserve pure 1933 pigments without digital desaturation</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Desktop Specimen Cards Grid (Bottom) -->
+                <div class="specimen-grid">
+                  <div id="appCard1" class="specimen-card">
+                    <div class="card-caption">Chromatic Hierarchy</div>
+                    <div class="card-heading">Pigment Ratio</div>
+                    <p class="card-text">Preserves exact historical hex frequencies without synthetic digital desaturation.</p>
+                  </div>
+                  <div id="appCard2" class="specimen-card">
+                    <div class="card-caption">Accessibility Rating</div>
+                    <div class="card-heading">Contrast Guard</div>
+                    <p class="card-text">Dual-layer neutral monochrome bridge ensures legibility across all themes.</p>
+                  </div>
                 </div>
               </div>
             </div>
+
+            <!-- B. Mobile Smartphone Application Mockup -->
+            <div id="mobileMockupContainer" class="device-canvas-container">
+              <div class="smartphone-wrapper">
+                <div class="smartphone-chassis" id="mobilePhoneChassis">
+                  <!-- Phone Scrollable Screen (Full Display Enclosure) -->
+                  <div class="phone-screen" id="mobilePhoneScreen">
+                    <!-- Phone Status Bar -->
+                    <div class="phone-status-bar">
+                      <span class="status-time">9:41</span>
+                      <!-- Dynamic Island / Camera Notch -->
+                      <div class="dynamic-island">
+                        <span class="island-camera"></span>
+                        <span class="island-sensor"></span>
+                      </div>
+                      <div class="status-icons">
+                        <svg width="12" height="10" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M2 17h3v4H2v-4zm5-4h3v8H7v-8zm5-4h3v12h-3V9zm5-5h3v17h-3V4z"/>
+                        </svg>
+                        <svg width="12" height="10" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/>
+                        </svg>
+                        <svg width="15" height="10" viewBox="0 0 24 24" fill="currentColor">
+                          <rect x="1" y="6" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                          <rect x="3" y="8" width="12" height="8" rx="1"/>
+                          <path d="M21 10v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                      </div>
+                    </div>
+
+                    <!-- Mobile App Bar Header -->
+                    <div class="phone-app-bar">
+                      <div class="phone-bar-left">
+                        <button class="phone-icon-btn" aria-label="Back">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                          </svg>
+                        </button>
+                        <div class="phone-brand-title">
+                          <span class="phone-monogram" id="mobileLogoBadge">三</span>
+                          <span class="phone-title-text">Sanzo App</span>
+                        </div>
+                      </div>
+                      <div class="phone-bar-right">
+                        <div class="phone-notification-wrap">
+                          <button class="phone-icon-btn" aria-label="Notifications">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            </svg>
+                          </button>
+                          <span class="phone-unread-pip" id="mobileNotifPip"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Mobile Content Stream -->
+                    <div class="phone-content-stream">
+                      <!-- Mobile Hero Card -->
+                      <div class="phone-hero-card" id="mobileHeroCard">
+                        <span class="phone-hero-kicker" id="mobileHeroKicker">Combination #165</span>
+                        <h3 class="phone-hero-title" id="mobileHeroTitle">Harmonious Flow</h3>
+                        <p class="phone-hero-sub">Pure 1930s Japanese pigment allocation formatted for handheld touch experiences.</p>
+                        <button class="phone-primary-cta" id="mobileBtnPrimary">Get Started</button>
+                      </div>
+
+                      <!-- Mobile KPI Cards (2 Columns) -->
+                      <div class="phone-kpi-grid">
+                        <div class="phone-kpi-card" id="mobileKpiCard1">
+                          <span class="phone-kpi-label">Active Users</span>
+                          <div class="phone-kpi-row">
+                            <span class="phone-kpi-num" id="mobileKpiVal1">2,840</span>
+                            <span class="phone-kpi-pill" id="mobileKpiTrend1">+12%</span>
+                          </div>
+                        </div>
+                        <div class="phone-kpi-card" id="mobileKpiCard2">
+                          <span class="phone-kpi-label">Readability</span>
+                          <div class="phone-kpi-row">
+                            <span class="phone-kpi-num" id="mobileKpiVal2">AAA</span>
+                            <span class="phone-kpi-pill" id="mobileKpiTrend2">16:1</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Mobile Search Input -->
+                      <div class="phone-field-wrap">
+                        <input type="text" class="phone-input" id="mobileDemoInput" placeholder="Quick search palettes...">
+                      </div>
+
+                      <!-- Mobile Interactive Toggle -->
+                      <div class="phone-toggle-card">
+                        <div class="phone-toggle-text">
+                          <span class="phone-toggle-name">Push Alerts</span>
+                          <span class="phone-toggle-desc">WCAG threshold warnings</span>
+                        </div>
+                        <button type="button" class="mockup-toggle-btn active" id="mobileMockupToggle" role="switch" aria-checked="true">
+                          <span class="mockup-toggle-thumb"></span>
+                        </button>
+                      </div>
+
+                      <!-- Mobile Status Badges -->
+                      <div class="phone-tags-cluster">
+                        <span class="phone-tag-chip" id="mobileTag1">● Live Sync</span>
+                        <span class="phone-tag-chip" id="mobileTag2">● High Contrast</span>
+                      </div>
+                    </div>
+
+                    <!-- Mobile Bottom Tab Navigation -->
+                    <nav class="phone-bottom-nav" id="mobileBottomNav" aria-label="Mobile Bottom Tabs">
+                      <button type="button" class="phone-nav-tab active" data-tab="home">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        <span>Home</span>
+                      </button>
+                      <button type="button" class="phone-nav-tab" data-tab="analytics">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <line x1="18" y1="20" x2="18" y2="10"></line>
+                          <line x1="12" y1="20" x2="12" y2="4"></line>
+                          <line x1="6" y1="20" x2="6" y2="14"></line>
+                        </svg>
+                        <span>Stats</span>
+                      </button>
+                      <button type="button" class="phone-nav-tab" data-tab="saved">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                        <span>Saved</span>
+                      </button>
+                      <button type="button" class="phone-nav-tab" data-tab="profile">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                          <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span>Profile</span>
+                      </button>
+                    </nav>
+
+                    <!-- Phone Home Bar Pill Indicator -->
+                    <div class="phone-home-indicator">
+                      <span class="home-indicator-pill"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
 
           <!-- 1.2 Fashion Lookbook Studio View (Dynamic Tactile Swatchboards & 7-Piece Wardrobe) -->

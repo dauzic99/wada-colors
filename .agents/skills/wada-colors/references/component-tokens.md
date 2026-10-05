@@ -77,6 +77,67 @@
 </div>
 ```
 
+### E. KPI Metric Card with Trend Pill & Progress Track
+```html
+<!-- Tailwind CSS Pattern -->
+<div class="p-4 rounded-lg bg-[var(--wada-surface-card)] border-t-[3px] border-t-[var(--wada-primary)] border-[var(--wada-border-subtle)] shadow-sm flex flex-col gap-2">
+  <div class="flex justify-between items-center">
+    <span class="text-xs uppercase font-semibold text-stone-500 tracking-wider">Monthly Volume</span>
+    <span class="text-xs font-mono font-semibold px-2 py-0.5 rounded-full bg-[var(--wada-primary)]/15 text-[var(--wada-primary)]">
+      +18.4%
+    </span>
+  </div>
+  <div class="text-xl font-bold text-[var(--wada-surface-fg)]">¥ 1,480,000</div>
+  <div class="w-full h-1.5 rounded-full bg-stone-200 dark:bg-stone-800 overflow-hidden mt-1">
+    <div class="h-full rounded-full bg-[var(--wada-primary)]" style="width: 76%;"></div>
+  </div>
+</div>
+```
+
+### F. Interactive Switch Toggle
+```html
+<!-- Tailwind CSS Pattern -->
+<button 
+  type="button" 
+  role="switch" 
+  aria-checked="true" 
+  class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[var(--wada-primary)]/40 bg-[var(--wada-primary)]"
+>
+  <span class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out translate-x-5"></span>
+</button>
+```
+
+### G. Mobile Smartphone App Bar & Bottom Navigation Bar
+```html
+<!-- Mobile App Bar Pattern -->
+<header class="flex items-center justify-between px-4 py-3 border-b border-[var(--wada-border-subtle)] bg-[var(--wada-surface-card)]">
+  <div class="flex items-center gap-2.5">
+    <span class="w-6 h-6 rounded flex items-center justify-center font-bold text-xs bg-[var(--wada-primary)] text-white">三</span>
+    <span class="font-bold text-sm tracking-tight text-[var(--wada-surface-fg)]">Sanzo Mobile</span>
+  </div>
+  <div class="relative">
+    <button class="p-1.5 rounded-full text-stone-500 hover:text-stone-900">🔔</button>
+    <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-[var(--wada-accent)]"></span>
+  </div>
+</header>
+
+<!-- Mobile Bottom Navigation Pattern -->
+<nav class="flex items-center justify-around py-2.5 border-t border-[var(--wada-border-subtle)] bg-[var(--wada-surface-card)] text-xs">
+  <button class="flex flex-col items-center gap-1 font-semibold text-[var(--wada-primary)]">
+    <span>🏠</span>
+    <span>Home</span>
+  </button>
+  <button class="flex flex-col items-center gap-1 text-stone-400 hover:text-stone-600">
+    <span>📊</span>
+    <span>Stats</span>
+  </button>
+  <button class="flex flex-col items-center gap-1 text-stone-400 hover:text-stone-600">
+    <span>🔖</span>
+    <span>Saved</span>
+  </button>
+</nav>
+```
+
 ---
 
 ## 3. Tailwind CSS v4 Configuration (`@theme`)
@@ -93,3 +154,4 @@
   --color-wada-surface-card: var(--wada-surface-card);
 }
 ```
+
