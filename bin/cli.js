@@ -601,6 +601,11 @@ function handleGenerate(args) {
   }
 
   if (domain === 'interior') {
+    let style = 'japandi';
+    const styleIdx = args.indexOf('--style');
+    if (styleIdx !== -1 && args[styleIdx + 1]) {
+      style = args[styleIdx + 1].toLowerCase();
+    }
     const tplPath = path.join(ROOT_DIR, 'templates', 'interior-spec-template.md');
     let tpl = fs.readFileSync(tplPath, 'utf8');
     const prompts = generateInteriorPrompts(combo, style);
