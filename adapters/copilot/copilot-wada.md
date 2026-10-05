@@ -47,11 +47,11 @@ When generating UI components, design documentation, codebase theming, fashion l
 
 1. Determine creative domain (`design.md`, `lookbook.md`, `interior-spec.md`, or codebase theming).
 2. Format 3 candidate combinations with Wada #ID, Japanese names, hex codes, and domain roles.
-3. Once selected, synthesize the full specification document following canonical markdown templates.
+3. Once selected, synthesize the full specification document following canonical markdown templates (mapping 7 wardrobe layers for fashion lookbooks).
 4. If recoloring an existing app, execute:
    ```bash
    # Preview changes first (use npx wada-colors, or node bin/cli.js if in source repo)
    npx wada-colors apply --combo <ID> --dry-run
    npx wada-colors apply --combo <ID> --yes
    ```
-5. Provide copy-paste ready GenAI image prompts for Midjourney v6.1, Flux.1, Gemini Imagen 3, and OpenAI ChatGPT.
+5. Provide copy-paste ready GenAI image prompts for Midjourney v6.1, Flux.1, Gemini Imagen 3, and OpenAI ChatGPT (with mandatory lower-third lookbook swatch widget).

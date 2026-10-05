@@ -61,7 +61,7 @@ When invoked via `/wada` or when custom command `.claude/commands/wada.md` runs:
      npx wada-colors match --color "<HEX>" # or node bin/cli.js if in source repo
      ```
    - **Path B (Greenfield Exploration)**: Profile the silhouette style:
-     - Fashion: *High-End Minimalist Tailoring*, *Modern Japanese Neo-Trad (Haori)*, *Tokyo Contemporary Streetwear*, *Classic 1930s Showa Vintage*.
+     - Fashion: Select from 8 occasion vibes (*Casual Walk*, *Office Meeting*, *Romantic Date*, *Party Soirée*, *Kondangan Wedding*, *Family Arisan*, *Vacation Resort*, *Campus Casual*), set climate (**Tropical** vs **Winter**), choose modesty (**Modern Modest Hijabi** vs **Chic Contemporary**), and customize any of the 7 wardrobe layers (`--outer`, `--shirt`, `--bottoms`, etc.).
      - Interior: *Japandi / Modern Ryokan*, *Mid-Century Modern Salon*, *Wabi-Sabi Boutique Cafe*, *Warm Brutalist Studio*.
 
 ---
@@ -85,7 +85,7 @@ Present exactly 3 curated Wada combinations formatted with Japanese titles, colo
 ### Step 3: Domain-Specific Color Mapping
 
 - **Digital UI/UX**: `--wada-primary` (c1) for primary CTA buttons; `--wada-secondary` (c2) for badges/tabs; `--wada-accent` (c3) for borders and highlights.
-- **Fashion & Wardrobe**: Outerwear (c1), Mid-Layer / Knitwear (c2), Bottoms / Trousers (c3), Footwear & Accents (c4).
+- **Fashion & Wardrobe**: 7-Layer Garment Mapping (Outerwear c1, Shirt/Top c2, Bottoms c3, Footwear c1/c2, Socks c2/c3, Bag c3/c1, Headwear/Hijab c2/c3). All generated lookbook imagery and prompts MUST include an integrated bottom graphic widget / color swatch bar displaying the exact Wada Sanzo combination number, solid color blocks, and labeled hex codes.
 - **Interior & Spatial Design**: Focal Seating (c1), Textiles & Area Rug (c2), Accent Chairs & Vessels (c3), Architectural Joinery (c4).
 
 ---

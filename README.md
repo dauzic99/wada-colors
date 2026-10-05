@@ -115,21 +115,18 @@ Wada Colors translates any of the 348 historical palettes into production-ready 
 
 ### Fashion & Wardrobe Styling:
 ```bash
-# Generate prompts for High-End Minimalist Tailoring
-npx wada-colors prompt --combo 165 --domain fashion --style minimalist
+# Generate prompts for Casual Walk & Coffee Hangout (Tropical Indonesia)
+npx wada-colors prompt --combo 165 --domain fashion --vibe casual_walk --tropical
 
-# Generate prompts for Modern Japanese Neo-Trad (Haori)
-npx wada-colors prompt --combo 9 --domain fashion --style neotrad
+# Generate prompts with customized pieces and Modest Hijabi styling
+npx wada-colors prompt --combo 165 --domain fashion --outer hoodie --bottoms jeans --hijabi
 
-# Generate prompts for Tokyo Contemporary Streetwear
-npx wada-colors prompt --combo 305 --domain fashion --style streetwear
-
-# Generate prompts for Classic 1930s Showa Vintage (Oscar 1954 Homage)
-npx wada-colors prompt --combo 176 --domain fashion --style showa
+# Generate prompts for Kondangan / Wedding in Autumn/Winter
+npx wada-colors prompt --combo 176 --domain fashion --vibe kondangan_wedding --winter --hijabi
 ```
 
-**Sample Generated Midjourney v6.1 Prompt:**
-> `Editorial fashion photography, full body portrait of a model wearing High-End Minimalist Tailoring. Outer garment in Cameo Pink #e0b3b6 (structured double-breasted overcoat in heavy boiled wool), inner layer in Spinel Coral #f27291 (ribbed cashmere knit crewneck top), bottoms in Deep Lake Wine #6d4145 (wide-leg pleated wool gabardine trousers). Set against clean architectural brutalist concrete gallery in Tokyo, soft diffuse natural morning light. Shot on 85mm f/1.4 lens, soft directional diffused studio lighting, Vogue editorial aesthetic, high tactile fabric texture --ar 3:4 --style raw --v 6.1`
+**Sample Generated Midjourney v6.1 Prompt (with Mandatory Lower-Third Swatch Widget):**
+> `Ultra-realistic editorial fashion photography, full body portrait of an elegant 26-year-old modern Indonesian Muslimah model wearing an authentic 7-piece Casual Walk & Coffee Hangout ensemble (Relaxed Smart-Casual / Effortless Street) inspired by Wada Sanzo combination #165 (Cameo Pink & Spinel Red & Vistoris Lake). Styled for Tropical (Indonesia / Warm), tailored modesty. 7-piece wardrobe breakdown: Outerwear (Relaxed Longline Tunic Hoodie in Cameo Pink #e0b3b6), layered over Long-Sleeve Modest Inner Top in Spinel Red #f27291, paired with Wide-Leg Baggy Mom Jeans in Vistoris Lake #6d4145, Modern Low Block Mules in Cameo Pink #e0b3b6, Breathable Wudhu-Friendly Socks in #f27291, accessorized with Slouchy Crescent Crossbody Bag in #6d4145, and Hijab / Headwear (Premium Voal Draped Hijab in Spinel Red #f27291). Setting: Sunlit modern open-air aesthetic café patio in Jakarta with lush tropical monstera foliage. Shot on 85mm f/1.4 lens, natural dewy skin texture, authentic fabric folds, directional soft studio lighting, Vogue editorial aesthetic, hyper-realistic materiality. Mandatory integrated bottom palette widget: Along the bottom edge of the image is an elegant minimalist graphic swatch bar displaying the Wada Sanzo combination #165 palette (Cameo Pink & Spinel Red & Vistoris Lake), featuring distinct solid rectangular color sample swatches for each pigment neatly labeled with color names and exact hex codes in clean sans-serif typography, fashion lookbook footer presentation --ar 3:4 --style raw --v 6.1`
 
 ### Interior & Spatial Architecture:
 ```bash
@@ -196,7 +193,7 @@ Generate ready-to-commit specification files in seconds:
 npx wada-colors generate --combo 127 --domain ui --out design.md
 
 # Fashion Wardrobe Lookbook (lookbook.md)
-npx wada-colors generate --combo 165 --domain fashion --style minimalist --out lookbook.md
+npx wada-colors generate --combo 165 --domain fashion --vibe casual_walk --tropical --hijabi --outer hoodie --out lookbook.md
 
 # Spatial Interior Architecture Spec (interior-spec.md)
 npx wada-colors generate --combo 121 --domain interior --style japandi --out interior-spec.md
@@ -211,7 +208,7 @@ Experience all 348 Sanzo Wada palettes live in the interactive web visualizer, d
 👉 **[Launch Live Web Studio](https://dauzic99.github.io/wada-colors/)**
 
 - **Triple-Domain Unified Studio**: Seamlessly switch between **Digital UI Preview**, **Fashion Lookbook Atelier**, and **Spatial Interior Studio** within a single unified preview modal.
-- **Fashion Lookbook Atelier**: Explore 10 curated silhouette archetypes (Minimalist Tailoring, Modern Neo-Trad Haori, Tokyo Streetwear, Showa Vintage, etc.) with dynamic garment breakdown, atmosphere descriptions, and model poise guidance.
+- **Fashion Lookbook Atelier**: Explore 8 curated occasion vibes (Casual Walk, Office Meeting, Romantic Date, Kondangan Wedding, etc.) with dynamic 7-layer customizable wardrobe pieces, Tropical vs Autumn/Winter climate adaptation, Modern Modest Hijabi toggle, and mandatory integrated lower-third palette widget.
 - **Spatial Interior Studio**: Explore 10 architectural presets (Japandi Modern Ryokan, Wabi-Sabi Cafe, Warm Brutalist Studio, Mid-Century Salon, etc.) with dynamic plane swatchboards and complete 7-plane architectural material specifications (seating, rugs, joinery, walls, lighting, ceramics, hardware).
 - **CIELAB Perceptual Brand Matcher**: Live HTML5 color picker and hex input to discover nearest Wada pigments and ranking combinations using $\Delta E$ perceptual color math.
 - **Verified Mood Horizon Filters**: Filter palettes instantly across authenticated moods (Warm, Cool, Balanced, Wabi-Sabi, Botanical, Oceanic, Noble, Nostalgic, Earthy).

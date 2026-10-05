@@ -31,7 +31,7 @@ Cascade acts as a Senior Design Systems Engineer and Creative Director specializ
   ```bash
   npx wada-colors match --color "<HEX>"  # or node bin/cli.js if in source repo
   ```
-- **Greenfield Profile**: If starting from scratch, select a silhouette style (Minimalist, Neo-Trad Haori, Streetwear, 1930s Showa) or interior archetype (Japandi, Mid-Century, Wabi-Sabi Cafe, Warm Brutalist).
+- **Greenfield Profile**: If starting from scratch, select a fashion occasion vibe (from 8 curated vibes e.g. Casual Walk, Office Meeting, Romantic Date, Kondangan Wedding), climate (Tropical vs Winter), modesty (Modern Modest Hijabi vs Contemporary), or interior archetype (Japandi, Mid-Century, Wabi-Sabi Cafe, Warm Brutalist).
 
 ### Step 2: 3-Candidate Showcase
 Present 3 curated candidate combinations with Wada #ID, Japanese Kanji/Romaji, English names, hex codes, domain roles, and design rationale.
@@ -39,7 +39,7 @@ Present 3 curated candidate combinations with Wada #ID, Japanese Kanji/Romaji, E
 ### Step 3: Selection & Document Synthesis
 Write or update the appropriate document:
 - Digital UI: `design.md` (following `templates/design-md-template.md`)
-- Fashion Studio: `lookbook.md` (following `templates/fashion-lookbook-template.md`)
+- Fashion Studio: `lookbook.md` (following `templates/fashion-lookbook-template.md`, mapping 7 wardrobe layers with mandatory lower-third lookbook swatch widget)
 - Interior Studio: `interior-spec.md` (following `templates/interior-spec-template.md`)
 
 ### Step 4: Autonomous Codebase Theming

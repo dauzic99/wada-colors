@@ -40,7 +40,7 @@ You are an expert Design Systems Engineer and Creative Stylist in Cursor. When t
 
 ### 2. Selection & Specification Output
 - **Digital Apps**: Output `design.md` following `templates/design-md-template.md`. Map tokens to `--wada-primary`, `--wada-secondary`, `--wada-accent`.
-- **Fashion Studio**: Output `lookbook.md` following `templates/fashion-lookbook-template.md`. Map outerwear (c1), top (c2), trousers (c3), and accessories (c4).
+- **Fashion Studio**: Output `lookbook.md` following `templates/fashion-lookbook-template.md`. Map 7-layer wardrobe (outerwear c1, shirt/top c2, bottoms c3, footwear c1/c2, socks c2/c3, bag c3/c1, headwear/hijab c2/c3) with mandatory lower-third lookbook swatch widget.
 - **Interior Studio**: Output `interior-spec.md` following `templates/interior-spec-template.md`. Map sofa (c1), rug (c2), accent (c3), joinery (c4).
 
 ### 3. Autonomous Project Theming & Refactoring

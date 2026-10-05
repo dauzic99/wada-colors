@@ -31,12 +31,12 @@ When acting as a Designer or asked to create/update color systems, themes, recol
      ```bash
      npx wada-colors match --color "<HEX>"  # or node bin/cli.js if in source repo
      ```
-   - If greenfield, select silhouette style or spatial archetype.
+   - If greenfield, select fashion occasion vibe (from 8 curated vibes), climate (Tropical vs Winter), modesty (Hijabi vs Contemporary), or spatial archetype.
 2. **Candidate Showcase**:
    - Present 3 candidate combinations with Wada #ID, Japanese Kanji/Romaji, English names, hex codes, domain roles, and design rationale.
 3. **Output Specification Document**:
    - Digital UI: `design.md` (following `templates/design-md-template.md`)
-   - Fashion Studio: `lookbook.md` (following `templates/fashion-lookbook-template.md`)
+   - Fashion Studio: `lookbook.md` (following `templates/fashion-lookbook-template.md`, mapping 7 wardrobe layers with mandatory lower-third lookbook swatch widget)
    - Interior Studio: `interior-spec.md` (following `templates/interior-spec-template.md`)
 4. **Autonomous Project Theming**:
    - To theme/recolor existing code:
