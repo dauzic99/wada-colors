@@ -207,3 +207,15 @@ All commands can be run via `npx wada-colors <command>` (or `node bin/cli.js <co
 - Generate Full Specification: `npx wada-colors generate --combo <ID> [--domain ui|fashion|interior] [--vibe <name>] [--tropical|--winter] [--hijabi] [--bg <scene>] [--outer <type>] [--out <file>]`
 - Autonomously Recolor Codebase: `npx wada-colors apply --combo <ID> [--dry-run] [--yes]`
 - Launch Interactive Visualizer: `npx wada-colors serve` (or open `web/index.html` in browser)
+
+---
+
+## 📚 Deep Reference Guides
+
+For granular technical specifications, consult the reference documents in `references/`:
+- **[contrast-rules.md](file:///d:/work/wada_color/.agents/skills/wada-colors/references/contrast-rules.md)**: WCAG AA/AAA relative luminance math, washi ivory / sumi carbon monochrome bridging, and button text inversion.
+- **[component-tokens.md](file:///d:/work/wada_color/.agents/skills/wada-colors/references/component-tokens.md)**: Production-ready CSS custom properties, Tailwind v4 `@theme`, and component patterns (buttons, pills, inputs, elevated cards).
+- **[fashion-rules.md](file:///d:/work/wada_color/.agents/skills/wada-colors/references/fashion-rules.md)**: 7-layer garment taxonomy, 8 occasion vibes, tropical vs. four seasons adaptations, modern modest hijabi guidelines, and bottom color palette widget specs.
+- **[interior-rules.md](file:///d:/work/wada_color/.agents/skills/wada-colors/references/interior-rules.md)**: 7-plane architectural allocations, 2700K vs. 3500K lighting temperatures, and tactile material pairings (washi plaster, bouclé, hinoki timber).
+- **[mood-matrix.md](file:///d:/work/wada_color/.agents/skills/wada-colors/references/mood-matrix.md)**: Fast lookup by aesthetic mood and application archetype (developer tools, SaaS dashboards, wabi-sabi cafes, editorial luxury, fintech).
+- **[palette-directory.md](file:///d:/work/wada_color/.agents/skills/wada-colors/references/palette-directory.md)**: Complete index of all 348 historical 2-color, 3-color, and 4-color combinations.

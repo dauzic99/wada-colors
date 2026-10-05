@@ -18,7 +18,6 @@ lookbook.md
 interior-spec.md
 
 # Agent Installation Targets (when testing CLI locally in repo)
-.agents/skills/wada-colors/
 .claude/skills/wada-colors/
 .cursor/rules/wada-colors.mdc
 .windsurf/rules/wada-colors.md

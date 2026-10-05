@@ -1,0 +1,11 @@
+{
+    "schema_version": 2,
+    "commit": "095e84b8235b2d9090e6ecb7ceffa0c020ce858b",
+    "indexed_at": "2026-10-05T16:23:12Z",
+    "project": "D-work-wada_color",
+    "nodes": 755,
+    "edges": 1033,
+    "original_size": 2162688,
+    "compressed_size": 319328,
+    "compression_level": 9
+}

@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "codebase-memory-mcp": {
+      "command": "C:/Users/User/.local/bin/codebase-memory-mcp.exe"
+    },
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp@latest"
+      ]
+    }
+  }
+}
